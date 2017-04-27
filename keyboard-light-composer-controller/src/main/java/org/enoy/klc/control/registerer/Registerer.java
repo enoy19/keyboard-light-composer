@@ -1,5 +1,6 @@
 package org.enoy.klc.control.registerer;
 
+import java.lang.reflect.Modifier;
 import java.util.Set;
 
 import org.enoy.klc.common.Register;
@@ -13,8 +14,11 @@ public class Registerer {
 		Set<Class<? extends T>> classes = getSubTypesOf(clazz);
 
 		for (Class<? extends T> objectClass : classes) {
-			T object = objectClass.newInstance();
-			register.register(object);
+			boolean classAbstract = Modifier.isAbstract(objectClass.getModifiers());
+			if(!classAbstract){
+				T object = objectClass.newInstance();
+				register.register(object);
+			}
 		}
 
 	}
