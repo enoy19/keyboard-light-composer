@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<fx:root alignment="CENTER_LEFT" type="HBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0">
+         <children>
+            <Label fx:id="labelPropertyName" text="[Property]">
+               <padding>
+                  <Insets right="2.0" />
+               </padding>
+               <tooltip>
+                  <Tooltip fx:id="tooltipPropertyDescription" text="[PropertyDescription]" />
+               </tooltip>
+            </Label>
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0">
+               <children>
+                  <Button fx:id="buttonValueStrategySelector" mnemonicParsing="false" onAction="#openValueStrategySelector" text="">
+                     <styleClass>
+                        <String fx:value="fa" />
+                        <String fx:value="flat-btn" />
+                        <String fx:value="sm-font-size" />
+                        <String fx:value="no-padding" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+            <Label text=":">
+               <padding>
+                  <Insets left="2.0" right="5.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <StackPane>
+         <children>
+            <HBox alignment="CENTER_LEFT" StackPane.alignment="CENTER_LEFT">
+               <children>
+                  <Label fx:id="labelValueStrategyName" text="[ValueStrategyName]" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="buttonValueStrategyProperties" ellipsisString="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openValueStrategyProperties" text="" textOverrun="CLIP">
+                     <styleClass>
+                        <String fx:value="fa" />
+                        <String fx:value="flat-btn" />
+                        <String fx:value="sm-font-size" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+            <Pane fx:id="panePropertyValueEditor" />
+         </children>
+      </StackPane>
+   </children>
+</fx:root>
