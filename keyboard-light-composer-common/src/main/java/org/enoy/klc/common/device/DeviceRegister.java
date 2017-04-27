@@ -13,5 +13,9 @@ public class DeviceRegister extends Register<Device> {
 	public static DeviceRegister getInstance() {
 		return instance == null ? instance = new DeviceRegister() : instance;
 	}
+	
+	public void shutdown(){
+		getRegisteredObjects().forEach(d->d.shutdown());
+	}
 
 }
