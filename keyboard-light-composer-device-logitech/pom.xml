@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.enoy</groupId>
+		<artifactId>keyboard-light-composer</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<artifactId>keyboard-light-composer-device-logitech</artifactId>
+	<name>Device Provider for Logitech Keyboards</name>
+
+	<dependencies>
+		<dependency>
+			<!-- you have to create a lib directory in this project and put the logiled 
+				jni jar in it. you can get the jar from the official logitech site -->
+			<groupId>logitech</groupId>
+			<artifactId>light.sdk</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/logiled.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.enoy</groupId>
+			<artifactId>keyboard-light-composer-controller</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+	</dependencies>
+
+</project>
