@@ -22,20 +22,36 @@ public class KeyboardLightComposer {
 		Registerer.registerClasses(Effect.class, EffectsRegister.getInstance());
 
 		DefaultRenderer renderer = new DefaultRenderer();
-		renderer.setDevice(DeviceRegister.getInstance()
-				.getRegisteredObjectsAsList().get(0));
+		Device device = DeviceRegister.getInstance().getRegisteredObjectsAsList().get(0);
 
-		EffectLayer solidColorLayer = new EffectLayer(
-				EffectsRegister.getInstance().getRegisteredObjectsAsList()
-						.get(0).newInstance());
+		renderer.setDevice(device);
+
+		Effect effect = EffectsRegister.getInstance().getRegisteredObjectsAsList().get(0).newInstance();
+		EffectLayer solidColorLayer = new EffectLayer(effect);
+
+		solidColorLayer.getEffectLayerInformation().getWidth().setValue(5);
+		solidColorLayer.getEffectLayerInformation().getHeight().setValue(3);
 		
-		solidColorLayer.getEffectLayerInformation().getWidth().setValue(21);
-		solidColorLayer.getEffectLayerInformation().getHeight().setValue(6);
-		solidColorLayer.getEffectLayerInformation().getScaleY().setValue(1f);
-		solidColorLayer.getEffectLayerInformation().getScaleY().setValue(0.9f);
-	
-		renderer.render(Arrays.asList(solidColorLayer));
+		solidColorLayer.getEffectLayerInformation().getX().setValue(3);
+		solidColorLayer.getEffectLayerInformation().getY().setValue(3);
 
+		device.init();
+		
+		renderer.render(Arrays.asList(solidColorLayer));
+		
+		sleep();
+		
+		device.shutdown();
+
+	}
+
+	private static void sleep() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private static void loadPlugins() {
