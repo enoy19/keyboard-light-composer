@@ -31,10 +31,10 @@ public class StringKlcProperty extends StringKlcReadOnlyProperty implements KlcW
 		super.setValueStrategy(valueStrategy);
 	}
 	
-	@Override
-	public void setValueStrategyAllowed(boolean valueStrategyAllowed) {
-		super.setValueStrategyAllowed(valueStrategyAllowed);
-	}
+	// @Override
+	// public void setValueStrategyAllowed(boolean valueStrategyAllowed) {
+	// super.setValueStrategyAllowed(valueStrategyAllowed);
+	// }
 	
 	@Override
 	public void setDefaultValue(String defaultValue) {

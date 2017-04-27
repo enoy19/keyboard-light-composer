@@ -31,10 +31,10 @@ public class LongKlcProperty extends LongKlcReadOnlyProperty implements KlcWrita
 		super.setValueStrategy(valueStrategy);
 	}
 	
-	@Override
-	public void setValueStrategyAllowed(boolean valueStrategyAllowed) {
-		super.setValueStrategyAllowed(valueStrategyAllowed);
-	}
+	// @Override
+	// public void setValueStrategyAllowed(boolean valueStrategyAllowed) {
+	// super.setValueStrategyAllowed(valueStrategyAllowed);
+	// }
 	
 	@Override
 	public void setDefaultValue(Long defaultValue) {

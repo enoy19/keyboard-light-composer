@@ -31,10 +31,10 @@ public class IntegerKlcProperty extends IntegerKlcReadOnlyProperty implements Kl
 		super.setValueStrategy(valueStrategy);
 	}
 	
-	@Override
-	public void setValueStrategyAllowed(boolean valueStrategyAllowed) {
-		super.setValueStrategyAllowed(valueStrategyAllowed);
-	}
+	// @Override
+	// public void setValueStrategyAllowed(boolean valueStrategyAllowed) {
+	// super.setValueStrategyAllowed(valueStrategyAllowed);
+	// }
 	
 	@Override
 	public void setDefaultValue(Integer defaultValue) {

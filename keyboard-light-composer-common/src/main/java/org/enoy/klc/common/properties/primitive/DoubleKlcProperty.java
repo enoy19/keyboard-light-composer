@@ -33,10 +33,10 @@ public class DoubleKlcProperty extends DoubleKlcReadOnlyProperty
 		super.setValueStrategy(valueStrategy);
 	}
 
-	@Override
-	public void setValueStrategyAllowed(boolean valueStrategyAllowed) {
-		super.setValueStrategyAllowed(valueStrategyAllowed);
-	}
+	// @Override
+	// public void setValueStrategyAllowed(boolean valueStrategyAllowed) {
+	// super.setValueStrategyAllowed(valueStrategyAllowed);
+	// }
 	
 	@Override
 	public void setDefaultValue(Double defaultValue) {

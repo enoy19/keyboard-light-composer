@@ -5,7 +5,7 @@ public class KlcReadOnlyProperty<T> implements KlcPropertyBase<T> {
 	private Class<T> propertyType;
 	protected String name;
 	protected String description;
-	protected boolean valueStrategyAllowed;
+	private final boolean valueStrategyAllowed;
 	protected KlcPropertyValue<T> propertyValue;
 	protected T defaultValue;
 
@@ -44,9 +44,9 @@ public class KlcReadOnlyProperty<T> implements KlcPropertyBase<T> {
 		return valueStrategyAllowed;
 	}
 
-	protected void setValueStrategyAllowed(boolean valueStrategyAllowed) {
-		this.valueStrategyAllowed = valueStrategyAllowed;
-	}
+	// protected void setValueStrategyAllowed(boolean valueStrategyAllowed) {
+	// this.valueStrategyAllowed = valueStrategyAllowed;
+	// }
 
 	@Override
 	public T getValue() {

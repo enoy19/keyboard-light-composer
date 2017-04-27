@@ -33,10 +33,10 @@ public class FloatKlcProperty extends FloatKlcReadOnlyProperty
 		super.setValueStrategy(valueStrategy);
 	}
 
-	@Override
-	public void setValueStrategyAllowed(boolean valueStrategyAllowed) {
-		super.setValueStrategyAllowed(valueStrategyAllowed);
-	}
+	// @Override
+	// public void setValueStrategyAllowed(boolean valueStrategyAllowed) {
+	// super.setValueStrategyAllowed(valueStrategyAllowed);
+	// }
 
 	@Override
 	public void setDefaultValue(Float defaultValue) {
