@@ -14,7 +14,7 @@ public class SolidColorEffect implements Effect, KlcPropertyContainer {
 
 	public SolidColorEffect() {
 		this.color = new KlcProperty<Color>(Color.class, "Color",
-				"The color of this effect", true, new Color(1, 0, 0, 1));
+				"The color of this effect", true, new Color(0, 1, 0, 1));
 	}
 
 	@Override
