@@ -52,23 +52,23 @@ public class Light {
 	}
 
 	public byte getRedByte() {
-		return floatZeroToOneToByte(getRed());
+		return toUnsignedByte(getRed());
 	}
 
 	public byte getGreenByte() {
-		return floatZeroToOneToByte(getGreen());
+		return toUnsignedByte(getGreen());
 	}
 
 	public byte getBlueByte() {
-		return floatZeroToOneToByte(getBlue());
+		return toUnsignedByte(getBlue());
 	}
 
 	public byte getAlphaByte() {
-		return floatZeroToOneToByte(getAlpha());
+		return toUnsignedByte(getAlpha());
 	}
 
-	private byte floatZeroToOneToByte(float value) {
-		return (byte) (value * 255f - 128f);
+	private byte toUnsignedByte(float value) {
+		return (byte) ((0xFF) & (short)(value * 255));
 	}
 
 	public Color getColor() {

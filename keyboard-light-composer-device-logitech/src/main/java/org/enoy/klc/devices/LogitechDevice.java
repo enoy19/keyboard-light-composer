@@ -1,12 +1,14 @@
 package org.enoy.klc.devices;
 
-import org.enoy.klc.common.device.Device;
+import org.enoy.klc.common.device.DeviceImpl;
 import org.enoy.klc.common.device.DeviceInformation;
 import org.enoy.klc.common.effects.lights.DeviceLightMatrix;
 import org.enoy.klc.common.effects.lights.Light;
 import org.enoy.klc.common.effects.lights.LightRow;
 
-public class LogitechDevice implements Device {
+import com.logitech.gaming.LogiLED;
+
+public class LogitechDevice extends DeviceImpl {
 
 	private static final int DEVICE_WIDTH = 21;
 	private static final int DEVICE_HEIGHT = 6;
@@ -14,8 +16,7 @@ public class LogitechDevice implements Device {
 	private DeviceInformation deviceInformation;
 
 	public LogitechDevice() {
-		deviceInformation = new DeviceInformation("Logitech Device",
-				DEVICE_WIDTH, DEVICE_HEIGHT);
+		deviceInformation = new DeviceInformation("Logitech Device", DEVICE_WIDTH, DEVICE_HEIGHT);
 	}
 
 	@Override
@@ -40,21 +41,26 @@ public class LogitechDevice implements Device {
 			}
 		}
 
-		int counter = 0;
-		int lightCounter = 0;
-		for (byte b : bitmap) {
-			counter++;
-			
-			System.out.print(b+" ");
-			if (counter % 4 == 0) {
-				System.out.println();
-				lightCounter++;
-			}
+		for (int i = 0; i < bitmap.length; i += 4) {
+			byte blue = bitmap[i];
+			byte green = bitmap[i + 1];
+			byte red = bitmap[i + 2];
+			byte alpha = bitmap[i + 3];
+			System.out.println(blue + " " + green + " " + red + " " + alpha);
 		}
-		System.out.println("LIGHTS: "+lightCounter);
 
-		// LogiLED.LogiLedSetLightingFromBitmap(bitmap);
+		LogiLED.LogiLedSetLightingFromBitmap(bitmap);
 
+	}
+
+	@Override
+	protected void internalInit() {
+		LogiLED.LogiLedInit();
+	}
+
+	@Override
+	protected void internalShutdown() {
+		LogiLED.LogiLedShutdown();
 	}
 
 }
