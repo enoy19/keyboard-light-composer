@@ -7,5 +7,5 @@ So I wanted to create a Desktop application (JavaFx) that provides an easy frame
   * Effects that are customizable using properties
   * Properties should be bindable to any kind of custom provider (e.g. get a double value from CPU usage)
   * Effectlayers and Effectgroups (folders)
-  * * Effect layers should be mappable on the keyboard as you like
+    * Effect layers should be mappable on the keyboard as you like
   * Online effect repository
