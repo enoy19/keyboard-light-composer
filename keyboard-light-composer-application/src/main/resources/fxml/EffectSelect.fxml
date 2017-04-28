@@ -9,13 +9,24 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" type="VBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" type="VBox" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enoy.klc.app.components.EffectSelect">
    <children>
       <HBox alignment="CENTER_LEFT" minHeight="40.0" spacing="10.0" VBox.vgrow="NEVER">
          <children>
             <Label text="%effects.select" />
-            <TextField fx:id="textFieldSearch" promptText="%search" HBox.hgrow="ALWAYS" />
+            <StackPane HBox.hgrow="ALWAYS">
+               <children>
+                  <TextField fx:id="textFieldSearch" alignment="BOTTOM_LEFT" promptText="%search" />
+                  <Label styleClass="fa" text="" textFill="#00000040" StackPane.alignment="CENTER_RIGHT">
+                     <StackPane.margin>
+                        <Insets right="10.0" />
+                     </StackPane.margin>
+                     <padding>
+                        <Insets top="-1.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </StackPane>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
