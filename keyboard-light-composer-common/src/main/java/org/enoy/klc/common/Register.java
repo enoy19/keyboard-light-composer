@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class Register<T> {
 
@@ -16,11 +17,15 @@ public class Register<T> {
 	public Iterable<T> getRegisteredObjects() {
 		return register;
 	}
-	
-	public List<T> getRegisteredObjectsAsList(){
+
+	public List<T> getRegisteredObjectsAsList() {
 		return new ArrayList<>(register);
 	}
-	
+
+	public Stream<T> getRegisteredStream() {
+		return register.stream();
+	}
+
 	public void register(T object) {
 		register.add(object);
 	}

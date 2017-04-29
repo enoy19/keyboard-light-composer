@@ -8,14 +8,12 @@ import org.reflections.Reflections;
 
 public class Registerer {
 
-	public static <T> void registerObjects(Class<T> clazz, Register<T> register)
-			throws ReflectiveOperationException {
+	public static <T> void registerObjects(Class<T> clazz, Register<T> register) throws ReflectiveOperationException {
 
 		Set<Class<? extends T>> classes = getSubTypesOf(clazz);
 
 		for (Class<? extends T> objectClass : classes) {
-			boolean classAbstract = Modifier.isAbstract(objectClass.getModifiers());
-			if(!classAbstract){
+			if (!isAbstract(objectClass)) {
 				T object = objectClass.newInstance();
 				register.register(object);
 			}
@@ -23,15 +21,22 @@ public class Registerer {
 
 	}
 
-	public static <T> void registerClasses(Class<T> clazz,
-			Register<Class<? extends T>> register) {
+	public static <SEARCH, T> void registerParsed(Class<SEARCH> searchClazz, RegisterParser<SEARCH, T> parser,
+			Register<T> register) {
 
-		Set<Class<? extends T>> classes = getSubTypesOf(clazz);
+		Set<Class<? extends SEARCH>> classes = getSubTypesOf(searchClazz);
 
-		for (Class<? extends T> objectClass : classes) {
-			register.register(objectClass);
+		for (Class<? extends SEARCH> objectClass : classes) {
+			if (!isAbstract(objectClass)) {
+				T parsed = parser.getParsed(objectClass);
+				register.register(parsed);
+			}
 		}
 
+	}
+
+	private static boolean isAbstract(Class<?> objectClass) {
+		return Modifier.isAbstract(objectClass.getModifiers());
 	}
 
 	private static <T> Set<Class<? extends T>> getSubTypesOf(Class<T> clazz) {
@@ -39,6 +44,12 @@ public class Registerer {
 
 		Set<Class<? extends T>> classes = reflections.getSubTypesOf(clazz);
 		return classes;
+	}
+
+	public static interface RegisterParser<SOURCE, TARGET> {
+
+		public TARGET getParsed(Class<? extends SOURCE> source);
+
 	}
 
 }
