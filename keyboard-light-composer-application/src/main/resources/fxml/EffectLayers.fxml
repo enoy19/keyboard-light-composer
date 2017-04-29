@@ -5,14 +5,13 @@
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.VBox?>
 
-
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" type="VBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enoy.klc.app.components.EffectLayers">
    <children>
-      <TreeView fx:id="treeViewLayers" />
+      <TreeView fx:id="treeViewLayers" VBox.vgrow="ALWAYS" />
       <ToolBar fx:id="toolBar">
          <items>
             <Button mnemonicParsing="false" onAction="#delete" styleClass="fa" text="" />
          </items>
       </ToolBar>
    </children>
-</fx:root>
+</VBox>
