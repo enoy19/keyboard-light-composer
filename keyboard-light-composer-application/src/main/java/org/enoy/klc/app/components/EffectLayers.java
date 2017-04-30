@@ -58,10 +58,13 @@ public class EffectLayers implements Initializable {
 		
 		TreeItem<LayerBaseContainer<?>> dummyLayerContainer2 = new TreeItem<>(value);
 		
+		EffectGroupLayerContainer group = new EffectGroupLayerContainer(new EffectGroupLayer("Test Group"));
 		
-
+		TreeItem<LayerBaseContainer<?>> dummyLayerContainer3 = new TreeItem<LayerBaseContainer<?>>(group);
+		
 		treeRoot.getChildren().add(dummyLayerContainer);
 		treeRoot.getChildren().add(dummyLayerContainer2);
+		treeRoot.getChildren().add(dummyLayerContainer3);
 
 	}
 

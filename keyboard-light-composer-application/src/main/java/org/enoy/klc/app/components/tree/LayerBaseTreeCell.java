@@ -7,6 +7,7 @@ import org.enoy.klc.common.layers.EffectGroupLayer;
 import org.enoy.klc.common.layers.EffectLayer;
 import org.enoy.klc.common.layers.LayerBase;
 import org.enoy.klc.control.utils.LayerBaseUtil;
+import org.enoy.klc.control.utils.ListItemSwapUtil;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeCell;
@@ -17,23 +18,29 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 
-public class LayerBaseTreeCell extends TreeCell<LayerBaseContainer<? extends LayerBase>> {
+public class LayerBaseTreeCell
+		extends
+			TreeCell<LayerBaseContainer<? extends LayerBase>> {
 
-	private static final DataFormat LAYER_DATA_FORMAT = new DataFormat(LayerBase.class.getName());
+	private static final String DRAG_BELOW_LINE = "drag-below-line";
+	private static final String DRAG_ABOVE_LINE = "drag-above-line";
+	private static final DataFormat LAYER_DATA_FORMAT = new DataFormat(
+			LayerBase.class.getName());
 
 	public LayerBaseTreeCell() {
 
 		setOnDragOver(this::onDragOver);
 		setOnDragDetected(this::onDragDetected);
-		setOnDragEntered(this::onDragEntered);
 		setOnDragExited(this::onDragExited);
 		setOnDragDropped(this::onDragDropped);
 		setOnDragDone(this::onDragDone);
 
+		getStyleClass().add("fa");
 	}
 
 	@Override
-	protected void updateItem(LayerBaseContainer<? extends LayerBase> item, boolean empty) {
+	protected void updateItem(LayerBaseContainer<? extends LayerBase> item,
+			boolean empty) {
 		super.updateItem(item, empty);
 
 		if (!empty && item != null) {
@@ -43,14 +50,19 @@ public class LayerBaseTreeCell extends TreeCell<LayerBaseContainer<? extends Lay
 
 			if (layerBase instanceof EffectLayer) {
 				EffectLayer effectLayer = (EffectLayer) layerBase;
-				name = effectLayer.getEffectLayerInformation().getName().getValue();
+				name = "\uf005 ";
+				name += effectLayer.getEffectLayerInformation().getName()
+						.getValue();
 			} else if (layerBase instanceof EffectGroupLayer) {
 				EffectGroupLayer effectGroupLayer = (EffectGroupLayer) layerBase;
-				name = effectGroupLayer.getEffectLayerInformation().getName().getValue();
+				name = "\uf07b ";
+				name += effectGroupLayer.getEffectLayerInformation().getName()
+						.getValue();
 			}
 
 			setText(name);
 		} else {
+			setGraphic(null);
 			setText(null);
 		}
 
@@ -83,12 +95,13 @@ public class LayerBaseTreeCell extends TreeCell<LayerBaseContainer<? extends Lay
 		LayerBaseContainer<? extends LayerBase> layerBaseContainer = getItem();
 
 		if (layerBaseContainer != null) {
-			if (isLayerPresentInDragboard(event.getDragboard()) && !LayerTreeCellDragboard.isLayerDragged(this)) {
+			if (isLayerPresentInDragboard(event.getDragboard())
+					&& !LayerTreeCellDragboard.isLayerDragged(this)) {
 
 				boolean above = event.getY() < getHeight() / 2;
 
 				clearDragStyles();
-				getStyleClass().add(above ? "drag-above-line" : "drag-below-line");
+				getStyleClass().add(above ? DRAG_ABOVE_LINE : DRAG_BELOW_LINE);
 
 				event.acceptTransferModes(TransferMode.MOVE);
 			}
@@ -98,56 +111,38 @@ public class LayerBaseTreeCell extends TreeCell<LayerBaseContainer<? extends Lay
 
 	}
 
-	private void onDragEntered(DragEvent event) {
-		System.out.println("Drag Entered " + this);
-
-		LayerBaseContainer<? extends LayerBase> layerBaseContainer = getItem();
-
-		if (layerBaseContainer != null) {
-			if (isLayerPresentInDragboard(event.getDragboard())) {
-
-			}
-		}
-
-		event.consume();
-	}
-
 	private void onDragExited(DragEvent event) {
 		clearDragStyles();
 		event.consume();
 	}
 
 	private void onDragDropped(DragEvent event) {
-		System.out.println("Drag Dropped " + this);
-
-		boolean above = event.getY() < getHeight() / 2;
-
 		TreeCell<LayerBaseContainer<? extends LayerBase>> currentlyDraggedLayerTreeCell = LayerTreeCellDragboard
 				.getCurrentlyDraggedLayerTreeCell();
 		if (currentlyDraggedLayerTreeCell != null) {
+			boolean above = event.getY() < getHeight() / 2;
 
-			TreeItem<LayerBaseContainer<? extends LayerBase>> targetParent = this.getTreeItem().getParent();
-			ObservableList<TreeItem<LayerBaseContainer<? extends LayerBase>>> targetParentChildren = targetParent.getChildren();
-			int targetPosition = targetParentChildren.indexOf(this.getTreeItem());
-			int draggedNewPosition = targetPosition + (above ? -1 : 1);
-			draggedNewPosition = Math.max(0, draggedNewPosition);
+			TreeItem<LayerBaseContainer<? extends LayerBase>> targetParent = this
+					.getTreeItem().getParent();
+			ObservableList<TreeItem<LayerBaseContainer<? extends LayerBase>>> targetParentChildren = targetParent
+					.getChildren();
 
-			TreeItem<LayerBaseContainer<? extends LayerBase>> draggedItem =  currentlyDraggedLayerTreeCell.getTreeItem();
-			TreeItem<LayerBaseContainer<? extends LayerBase>> draggedParent = draggedItem.getParent();
-			
-			draggedParent.getChildren().remove(draggedItem);
-			if(draggedNewPosition > targetParentChildren.size()){
-;				draggedNewPosition = targetParentChildren.size();
-			}
-			
-			targetParentChildren.add(draggedNewPosition, draggedItem);
+			TreeItem<LayerBaseContainer<? extends LayerBase>> draggedItem = currentlyDraggedLayerTreeCell
+					.getTreeItem();
+			TreeItem<LayerBaseContainer<? extends LayerBase>> draggedParent = draggedItem
+					.getParent();
+			ObservableList<TreeItem<LayerBaseContainer<? extends LayerBase>>> draggedChildren = draggedParent
+					.getChildren();
+
+			ListItemSwapUtil.swapItems(draggedChildren, targetParentChildren,
+					draggedItem, this.getTreeItem(), above);
 
 		}
 
 	}
 
 	private void onDragDone(DragEvent event) {
-		System.out.println("Drag Done " + this);
+		LayerTreeCellDragboard.setCurrentlyDraggedLayerTreeCell(null);
 	}
 
 	private boolean isLayerPresentInDragboard(Dragboard dragboard) {
@@ -155,8 +150,8 @@ public class LayerBaseTreeCell extends TreeCell<LayerBaseContainer<? extends Lay
 	}
 
 	private void clearDragStyles() {
-		getStyleClass().remove("drag-below-line");
-		getStyleClass().remove("drag-above-line");
+		getStyleClass().remove(DRAG_BELOW_LINE);
+		getStyleClass().remove(DRAG_ABOVE_LINE);
 	}
 
 }
