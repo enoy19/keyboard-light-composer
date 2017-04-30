@@ -8,7 +8,7 @@ import org.enoy.klc.common.layers.EffectLayer;
 import org.enoy.klc.common.layers.LayerBase;
 import org.enoy.klc.control.utils.DelayedExecuter;
 import org.enoy.klc.control.utils.LayerBaseUtil;
-import org.enoy.klc.control.utils.ListItemSwapUtil;
+import org.enoy.klc.control.utils.ListItemUtil;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeCell;
@@ -19,15 +19,12 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 
-public class LayerBaseTreeCell
-		extends
-			TreeCell<LayerBaseContainer<? extends LayerBase>> {
+public class LayerBaseTreeCell extends TreeCell<LayerBaseContainer<? extends LayerBase>> {
 
+	public static final DataFormat LAYER_DATA_FORMAT = new DataFormat(LayerBase.class.getName());
 	private static final String DRAG_BELOW = "drag-below-line";
 	private static final String DRAG_ABOVE = "drag-above-line";
 	private static final String DRAG_INSIDE = "drag-inside";
-	private static final DataFormat LAYER_DATA_FORMAT = new DataFormat(
-			LayerBase.class.getName());
 
 	public LayerBaseTreeCell() {
 
@@ -41,8 +38,7 @@ public class LayerBaseTreeCell
 	}
 
 	@Override
-	protected void updateItem(LayerBaseContainer<? extends LayerBase> item,
-			boolean empty) {
+	protected void updateItem(LayerBaseContainer<? extends LayerBase> item, boolean empty) {
 		super.updateItem(item, empty);
 
 		if (!empty && item != null) {
@@ -53,13 +49,11 @@ public class LayerBaseTreeCell
 			if (layerBase instanceof EffectLayer) {
 				EffectLayer effectLayer = (EffectLayer) layerBase;
 				name = "\uf005 ";
-				name += effectLayer.getEffectLayerInformation().getName()
-						.getValue();
+				name += effectLayer.getEffectLayerInformation().getName().getValue();
 			} else if (layerBase instanceof EffectGroupLayer) {
 				EffectGroupLayer effectGroupLayer = (EffectGroupLayer) layerBase;
 				name = "\uf07b ";
-				name += effectGroupLayer.getEffectLayerInformation().getName()
-						.getValue();
+				name += effectGroupLayer.getEffectLayerInformation().getName().getValue();
 			}
 
 			setText(name);
@@ -85,7 +79,7 @@ public class LayerBaseTreeCell
 			data.put(LAYER_DATA_FORMAT, name);
 			data.put(DataFormat.PLAIN_TEXT, name);
 
-			LayerTreeCellDragboard.setCurrentlyDraggedLayerTreeCell(this);
+			LayerTreeCellDragboard.setCurrentlyDraggedLayerTreeItem(getTreeItem());
 
 			dragboard.setContent(data);
 		}
@@ -98,17 +92,14 @@ public class LayerBaseTreeCell
 
 		if (layerBaseContainer != null) {
 			if (isLayerPresentInDragboard(event.getDragboard())
-					&& !LayerTreeCellDragboard.isLayerDragged(this)) {
+					&& !LayerTreeCellDragboard.isLayerDragged(getTreeItem())) {
 
 				double y = event.getY();
 				double height = getHeight();
 				clearDragStyles();
 
-				if (layerBaseContainer
-						.getLayerBase() instanceof EffectGroupLayer) {
-					String style = y < height / 4
-							? DRAG_ABOVE
-							: y < height * 3 / 4 ? DRAG_INSIDE : DRAG_BELOW;
+				if (layerBaseContainer.getLayerBase() instanceof EffectGroupLayer) {
+					String style = y < height / 4 ? DRAG_ABOVE : y < height * 3 / 4 ? DRAG_INSIDE : DRAG_BELOW;
 					getStyleClass().add(style);
 				} else {
 					boolean above = y < getHeight() / 2;
@@ -129,55 +120,54 @@ public class LayerBaseTreeCell
 	}
 
 	private void onDragDropped(DragEvent event) {
-		TreeCell<LayerBaseContainer<? extends LayerBase>> currentlyDraggedLayerTreeCell = LayerTreeCellDragboard
-				.getCurrentlyDraggedLayerTreeCell();
+		TreeItem<LayerBaseContainer<? extends LayerBase>> currentlyDraggedLayerTreeItem = LayerTreeCellDragboard
+				.getCurrentlyDraggedLayerTreeItem();
 
 		LayerBaseContainer<? extends LayerBase> targetItem = getItem();
 		LayerBase targetLayer = targetItem.getLayerBase();
 
-		if (currentlyDraggedLayerTreeCell != null) {
+		if (currentlyDraggedLayerTreeItem != null) {
 			double y = event.getY();
 			double height = getHeight();
 			boolean above = y < height / 2;
 
-			TreeItem<LayerBaseContainer<? extends LayerBase>> targetParent = this
-					.getTreeItem().getParent();
+			TreeItem<LayerBaseContainer<? extends LayerBase>> targetParent = this.getTreeItem().getParent();
 			ObservableList<TreeItem<LayerBaseContainer<? extends LayerBase>>> targetParentChildren = targetParent
 					.getChildren();
 
-			TreeItem<LayerBaseContainer<? extends LayerBase>> draggedItem = currentlyDraggedLayerTreeCell
-					.getTreeItem();
-			TreeItem<LayerBaseContainer<? extends LayerBase>> draggedParent = draggedItem
-					.getParent();
-			ObservableList<TreeItem<LayerBaseContainer<? extends LayerBase>>> draggedChildren = draggedParent
-					.getChildren();
+			TreeItem<LayerBaseContainer<? extends LayerBase>> draggedItem = currentlyDraggedLayerTreeItem;
+			TreeItem<LayerBaseContainer<? extends LayerBase>> draggedParent = draggedItem.getParent();
+			ObservableList<TreeItem<LayerBaseContainer<? extends LayerBase>>> draggedChildren = draggedParent != null
+					? draggedParent.getChildren() : null;
 
-			if (targetLayer instanceof EffectGroupLayer
-					&& (y >= height / 4 && y < height * 3 / 4)) {
-				System.out.println("aha in group hmmm");
-				System.out.println("INSIDE AHA");
+			if (targetLayer instanceof EffectGroupLayer && (y >= height / 4 && y < height * 3 / 4)) {
 				// inside group
 				ObservableList<TreeItem<LayerBaseContainer<? extends LayerBase>>> groupChildren = getTreeItem()
 						.getChildren();
 				if (!groupChildren.equals(draggedChildren)) {
-					draggedChildren.remove(draggedItem);
-					DelayedExecuter.execute(100,
-							() -> groupChildren.add(0, draggedItem));
+					if (draggedChildren != null) {
+						draggedChildren.remove(draggedItem);
+					}
+					DelayedExecuter.execute(100, () -> groupChildren.add(0, draggedItem));
 				}
 			} else {
-				System.out.println("SWAPPY SWAPPY!");
-				ListItemSwapUtil.swapItems(draggedChildren,
-						targetParentChildren, draggedItem, this.getTreeItem(),
-						above);
+				if (draggedChildren != null) {
+					ListItemUtil.swapItems(draggedChildren, targetParentChildren, draggedItem, this.getTreeItem(),
+							above);
+				} else {
+					ListItemUtil.insertItem(targetParentChildren, draggedItem, this.getTreeItem(), above);
+				}
 			}
 		}
 
+		event.consume();
 		// TODO: drag on treeview = last index of root
 
 	}
 
 	private void onDragDone(DragEvent event) {
-		LayerTreeCellDragboard.setCurrentlyDraggedLayerTreeCell(null);
+		LayerTreeCellDragboard.setCurrentlyDraggedLayerTreeItem(null);
+		event.consume();
 	}
 
 	private boolean isLayerPresentInDragboard(Dragboard dragboard) {

@@ -2,10 +2,9 @@ package org.enoy.klc.control.utils;
 
 import java.util.List;
 
-public class ListItemSwapUtil {
+public class ListItemUtil {
 
-	public static <E> void swapItems(List<E> listFrom, List<E> listTo, E from,
-			E to, boolean above) {
+	public static <E> void swapItems(List<E> listFrom, List<E> listTo, E from, E to, boolean above) {
 
 		int indexFrom = listFrom.indexOf(from);
 		int indexTo = listTo.indexOf(to);
@@ -43,6 +42,18 @@ public class ListItemSwapUtil {
 
 		listFrom.remove(indexFrom);
 		DelayedExecuter.execute(100, () -> listTo.add(index1, from));
+
+	}
+
+	public static <E> void insertItem(List<E> listTo, E item, E to, boolean above) {
+
+		int indexTo = listTo.indexOf(to);
+
+		if (above) {
+			listTo.add(indexTo, item);
+		} else {
+			listTo.add(indexTo + 1, item);
+		}
 
 	}
 

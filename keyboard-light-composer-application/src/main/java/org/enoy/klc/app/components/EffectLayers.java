@@ -93,18 +93,15 @@ public class EffectLayers implements Initializable {
 			LayerBaseContainer<?> oldValue = o != null ? o.getValue() : null;
 			LayerBaseContainer<?> newValue = n != null ? n.getValue() : null;
 			LayerBase value = treeItem.getValue().getLayerBase();
-			System.out.println("VALUE: " + value);
 			if (oldValue != null) {
 				EffectGroupLayer parentGroup = (EffectGroupLayer) oldValue
 						.getLayerBase();
-				System.out.println("OLD: " + parentGroup.toString());
 				parentGroup.remove(value);
 			}
 
 			if (newValue != null) {
 				EffectGroupLayer parentGroup = (EffectGroupLayer) newValue
 						.getLayerBase();
-				System.out.println("NEW: " + parentGroup.toString());
 				parentGroup.addChild(value);
 				
 				// reorganize

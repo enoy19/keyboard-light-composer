@@ -45,7 +45,7 @@ public class EffectSelect implements Initializable {
 		listSearch.setCellFactory(list -> new EffectFactoryListCell());
 
 		textFieldSearch.textProperty().addListener((v, o, n) -> search(n));
-
+		
 		setupEffectList();
 	}
 

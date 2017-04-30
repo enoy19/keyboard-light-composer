@@ -41,14 +41,6 @@ public class LogitechDevice extends DeviceImpl {
 			}
 		}
 
-		for (int i = 0; i < bitmap.length; i += 4) {
-			byte blue = bitmap[i];
-			byte green = bitmap[i + 1];
-			byte red = bitmap[i + 2];
-			byte alpha = bitmap[i + 3];
-			System.out.println(blue + " " + green + " " + red + " " + alpha);
-		}
-
 		LogiLED.LogiLedSetLightingFromBitmap(bitmap);
 
 	}
