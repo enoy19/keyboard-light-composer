@@ -7,5 +7,5 @@ public class EffectLayerContainer extends LayerBaseContainer<EffectLayer> {
 	public EffectLayerContainer(EffectLayer layerBase) {
 		super(layerBase);
 	}
-
+	
 }

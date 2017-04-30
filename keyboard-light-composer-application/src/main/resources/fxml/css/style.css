@@ -27,3 +27,15 @@
 .no-padding {
 	-fx-padding: 0;
 }
+
+.drag-below-line {
+	-fx-border-style: solid;
+	-fx-border-color: #B35719;
+	-fx-border-width: 0 0 2 0;
+}
+
+.drag-above-line {
+	-fx-border-style: solid;
+	-fx-border-color: #B35719;
+	-fx-border-width: 2 0 0 0;
+}
