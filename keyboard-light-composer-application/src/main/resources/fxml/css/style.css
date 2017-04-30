@@ -39,3 +39,9 @@
 	-fx-border-color: #B35719;
 	-fx-border-width: 2 0 0 0;
 }
+
+.drag-inside {
+	-fx-border-style: solid;
+	-fx-border-color: #B35719;
+	-fx-border-width: 2;
+}

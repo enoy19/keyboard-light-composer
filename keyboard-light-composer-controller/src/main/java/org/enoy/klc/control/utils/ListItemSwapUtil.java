@@ -39,8 +39,10 @@ public class ListItemSwapUtil {
 
 		index = Math.max(0, index);
 
+		int index1 = index;
+
 		listFrom.remove(indexFrom);
-		listTo.add(index, from);
+		DelayedExecuter.execute(100, () -> listTo.add(index1, from));
 
 	}
 

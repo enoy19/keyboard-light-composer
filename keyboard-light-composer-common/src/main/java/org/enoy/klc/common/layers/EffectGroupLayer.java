@@ -10,15 +10,12 @@ import org.enoy.klc.common.properties.KlcWritableProperty;
 public class EffectGroupLayer extends LayerBase {
 
 	private EffectGroupLayerInformation effectGroupLayerInformation;
-	private List<? extends LayerBase> childEffectLayers;
-
-	public EffectGroupLayer() {
-		this.childEffectLayers = new ArrayList<>();
-	}
+	private List<LayerBase> childEffectLayers;
 
 	public EffectGroupLayer(String name) {
 		this.effectGroupLayerInformation = new EffectGroupLayerInformation(
 				name);
+		this.childEffectLayers = new ArrayList<>();
 	}
 
 	public EffectGroupLayerInformation getEffectLayerInformation() {
@@ -33,9 +30,10 @@ public class EffectGroupLayer extends LayerBase {
 		for (int i = childEffectLayers.size() - 1; i <= 0; i--) {
 			childEffectLayers.get(i).render(dlm);
 		}
-		
-		BlendMode blendMode = getEffectLayerInformation().getBlendMode().getValue();
-		
+
+		BlendMode blendMode = getEffectLayerInformation().getBlendMode()
+				.getValue();
+
 		blendMode.blend(dlm, copy);
 	}
 
@@ -47,6 +45,37 @@ public class EffectGroupLayer extends LayerBase {
 	@Override
 	public boolean isActive() {
 		return effectGroupLayerInformation.getActive().getValue();
+	}
+
+	public boolean remove(Object o) {
+		return childEffectLayers.remove(o);
+	}
+
+	public void addChild(LayerBase layer) {
+		childEffectLayers.add(layer);
+	}
+	
+	public void addChild(int index, LayerBase layer){
+		childEffectLayers.add(index, layer);
+	}
+	
+	public void clearChildren() {
+		childEffectLayers.clear();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder(getClass().getSimpleName() + " "
+				+ effectGroupLayerInformation.getName().getValue()+" - Children: ");
+		
+		synchronized (childEffectLayers) {
+			for (LayerBase layerBase : childEffectLayers) {
+				sb.append(layerBase.toString());
+				sb.append(' ');
+			}
+		}
+		
+		return sb.toString();
 	}
 
 }

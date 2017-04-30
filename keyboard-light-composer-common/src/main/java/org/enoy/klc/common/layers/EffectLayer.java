@@ -61,13 +61,14 @@ public class EffectLayer extends LayerBase {
 			LightRow lightRow = dlm.getLightRow(i);
 			for (int j = dlmLeft; j < dlmRight; j++) {
 				Light originalLight = lightRow.getLight(j);
-				
+
 				int effectX = j - x;
 				int effectY = i - y;
-				
+
 				Light effectLight = scaledMatrix.getLight(effectY, effectX);
-				Light blendedLight = blendMode.blend(originalLight, effectLight);
-				
+				Light blendedLight = blendMode.blend(originalLight,
+						effectLight);
+
 				originalLight.set(blendedLight);
 			}
 		}
@@ -77,6 +78,12 @@ public class EffectLayer extends LayerBase {
 	@Override
 	public KlcWritableProperty<?>[] getProperties() {
 		return effectLayerInformation.getProperties();
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " "
+				+ effectLayerInformation.getName().getValue();
 	}
 
 }

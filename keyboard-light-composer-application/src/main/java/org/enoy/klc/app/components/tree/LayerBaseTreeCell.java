@@ -6,6 +6,7 @@ import java.util.Map;
 import org.enoy.klc.common.layers.EffectGroupLayer;
 import org.enoy.klc.common.layers.EffectLayer;
 import org.enoy.klc.common.layers.LayerBase;
+import org.enoy.klc.control.utils.DelayedExecuter;
 import org.enoy.klc.control.utils.LayerBaseUtil;
 import org.enoy.klc.control.utils.ListItemSwapUtil;
 
@@ -22,8 +23,9 @@ public class LayerBaseTreeCell
 		extends
 			TreeCell<LayerBaseContainer<? extends LayerBase>> {
 
-	private static final String DRAG_BELOW_LINE = "drag-below-line";
-	private static final String DRAG_ABOVE_LINE = "drag-above-line";
+	private static final String DRAG_BELOW = "drag-below-line";
+	private static final String DRAG_ABOVE = "drag-above-line";
+	private static final String DRAG_INSIDE = "drag-inside";
 	private static final DataFormat LAYER_DATA_FORMAT = new DataFormat(
 			LayerBase.class.getName());
 
@@ -98,10 +100,20 @@ public class LayerBaseTreeCell
 			if (isLayerPresentInDragboard(event.getDragboard())
 					&& !LayerTreeCellDragboard.isLayerDragged(this)) {
 
-				boolean above = event.getY() < getHeight() / 2;
-
+				double y = event.getY();
+				double height = getHeight();
 				clearDragStyles();
-				getStyleClass().add(above ? DRAG_ABOVE_LINE : DRAG_BELOW_LINE);
+
+				if (layerBaseContainer
+						.getLayerBase() instanceof EffectGroupLayer) {
+					String style = y < height / 4
+							? DRAG_ABOVE
+							: y < height * 3 / 4 ? DRAG_INSIDE : DRAG_BELOW;
+					getStyleClass().add(style);
+				} else {
+					boolean above = y < getHeight() / 2;
+					getStyleClass().add(above ? DRAG_ABOVE : DRAG_BELOW);
+				}
 
 				event.acceptTransferModes(TransferMode.MOVE);
 			}
@@ -119,8 +131,14 @@ public class LayerBaseTreeCell
 	private void onDragDropped(DragEvent event) {
 		TreeCell<LayerBaseContainer<? extends LayerBase>> currentlyDraggedLayerTreeCell = LayerTreeCellDragboard
 				.getCurrentlyDraggedLayerTreeCell();
+
+		LayerBaseContainer<? extends LayerBase> targetItem = getItem();
+		LayerBase targetLayer = targetItem.getLayerBase();
+
 		if (currentlyDraggedLayerTreeCell != null) {
-			boolean above = event.getY() < getHeight() / 2;
+			double y = event.getY();
+			double height = getHeight();
+			boolean above = y < height / 2;
 
 			TreeItem<LayerBaseContainer<? extends LayerBase>> targetParent = this
 					.getTreeItem().getParent();
@@ -134,10 +152,27 @@ public class LayerBaseTreeCell
 			ObservableList<TreeItem<LayerBaseContainer<? extends LayerBase>>> draggedChildren = draggedParent
 					.getChildren();
 
-			ListItemSwapUtil.swapItems(draggedChildren, targetParentChildren,
-					draggedItem, this.getTreeItem(), above);
-
+			if (targetLayer instanceof EffectGroupLayer
+					&& (y >= height / 4 && y < height * 3 / 4)) {
+				System.out.println("aha in group hmmm");
+				System.out.println("INSIDE AHA");
+				// inside group
+				ObservableList<TreeItem<LayerBaseContainer<? extends LayerBase>>> groupChildren = getTreeItem()
+						.getChildren();
+				if (!groupChildren.equals(draggedChildren)) {
+					draggedChildren.remove(draggedItem);
+					DelayedExecuter.execute(100,
+							() -> groupChildren.add(0, draggedItem));
+				}
+			} else {
+				System.out.println("SWAPPY SWAPPY!");
+				ListItemSwapUtil.swapItems(draggedChildren,
+						targetParentChildren, draggedItem, this.getTreeItem(),
+						above);
+			}
 		}
+
+		// TODO: drag on treeview = last index of root
 
 	}
 
@@ -150,8 +185,9 @@ public class LayerBaseTreeCell
 	}
 
 	private void clearDragStyles() {
-		getStyleClass().remove(DRAG_BELOW_LINE);
-		getStyleClass().remove(DRAG_ABOVE_LINE);
+		getStyleClass().remove(DRAG_BELOW);
+		getStyleClass().remove(DRAG_ABOVE);
+		getStyleClass().remove(DRAG_INSIDE);
 	}
 
 }
