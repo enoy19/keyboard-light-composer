@@ -2,15 +2,17 @@ package org.enoy.klc.app.components.property.editors;
 
 import org.enoy.klc.app.components.PropertyValueEditor;
 
-public class PropertyValueEditorFactory<T extends PropertyValueEditor<?>> {
+public class PropertyValueEditorFactory<T> {
 
-	private Class<T> propertValueEditorClass;
+	private Class<? extends PropertyValueEditor<T>> propertValueEditorClass;
+	private Class<T> valueClass;
 
-	public PropertyValueEditorFactory(Class<T> propertValueEditorClass) {
+	public PropertyValueEditorFactory(Class<T> valueClass, Class<? extends PropertyValueEditor<T>> propertValueEditorClass) {
 		this.propertValueEditorClass = propertValueEditorClass;
+		this.valueClass = valueClass;
 	}
 
-	public PropertyValueEditor<?> createPropertyValueEditor() {
+	public PropertyValueEditor<T> createPropertyValueEditor() {
 		try {
 			return propertValueEditorClass.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
@@ -19,8 +21,12 @@ public class PropertyValueEditorFactory<T extends PropertyValueEditor<?>> {
 		}
 	}
 	
-	public Class<T> getPropertValueEditorClass() {
+	public Class<? extends PropertyValueEditor<T>> getPropertValueEditorClass() {
 		return propertValueEditorClass;
+	}
+	
+	public Class<T> getValueClass() {
+		return valueClass;
 	}
 
 }

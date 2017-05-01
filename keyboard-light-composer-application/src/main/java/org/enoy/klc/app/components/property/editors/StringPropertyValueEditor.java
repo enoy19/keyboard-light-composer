@@ -1,10 +1,12 @@
 package org.enoy.klc.app.components.property.editors;
 
 import org.enoy.klc.app.components.PropertyValueEditor;
+import org.enoy.klc.app.components.PropertyValueEditor.PropertyValueEditorTypeClass;
 
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
+@PropertyValueEditorTypeClass(String.class)
 public class StringPropertyValueEditor extends PropertyValueEditor<String> {
 
 	private TextField textField;
@@ -24,7 +26,8 @@ public class StringPropertyValueEditor extends PropertyValueEditor<String> {
 	}
 
 	@Override
-	protected Node getContent() {
+	protected Node initContent() {
+		textField = new TextField();
 		return textField;
 	}
 

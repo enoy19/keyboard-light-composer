@@ -18,13 +18,12 @@ public class PropertyValueEditorRegister extends Register<PropertyValueEditorFac
 	@Override
 	public void register(PropertyValueEditorFactory<?> object) {
 		super.register(object);
-		
-		FACTORIES.put(object.getPropertValueEditorClass().getName(), object);
+		FACTORIES.put(object.getValueClass().getName(), object);
 	}
 
 	
 	public PropertyValueEditorFactory<?> get(Class<?> propertyValueType) {
-		return FACTORIES.get(propertyValueType);
+		return FACTORIES.get(propertyValueType.getName());
 	}
 
 	public static PropertyValueEditorRegister getInstance() {

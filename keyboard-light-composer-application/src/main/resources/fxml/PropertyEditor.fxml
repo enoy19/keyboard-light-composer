@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-
-<fx:root alignment="CENTER_LEFT" type="HBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_LEFT" type="HBox" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0">
          <children>
@@ -43,7 +42,7 @@
       </HBox>
       <StackPane>
          <children>
-            <HBox alignment="CENTER_LEFT" StackPane.alignment="CENTER_LEFT">
+            <HBox fx:id="hBoxValueStrategy" alignment="CENTER_LEFT" StackPane.alignment="CENTER_LEFT">
                <children>
                   <Label fx:id="labelValueStrategyName" text="[ValueStrategyName]" HBox.hgrow="ALWAYS" />
                   <Button fx:id="buttonValueStrategyProperties" ellipsisString="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openValueStrategyProperties" text="" textOverrun="CLIP">

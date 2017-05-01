@@ -8,7 +8,7 @@
 }
 
 .flat-btn {
-	-fx-background-color: 0;
+	-fx-background-color: #00000000;
 	-fx-border-radius: 0;
 }
 

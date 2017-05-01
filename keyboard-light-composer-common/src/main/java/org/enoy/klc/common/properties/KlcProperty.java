@@ -1,5 +1,7 @@
 package org.enoy.klc.common.properties;
 
+import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
+
 public class KlcProperty<T> extends KlcReadOnlyProperty<T>
 		implements
 			KlcWritableProperty<T> {

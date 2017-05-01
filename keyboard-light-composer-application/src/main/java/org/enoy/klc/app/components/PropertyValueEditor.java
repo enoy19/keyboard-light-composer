@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 
 import org.enoy.klc.common.properties.KlcWritableProperty;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
@@ -15,7 +16,8 @@ public abstract class PropertyValueEditor<T> extends Pane {
 	private KlcWritableProperty<T> property;
 
 	public PropertyValueEditor() {
-		getChildren().add(getContent());
+		ObservableList<Node> children = getChildren();
+		children.add(initContent());
 	}
 
 	public void setKlcProperty(KlcWritableProperty<T> property) {
@@ -35,7 +37,7 @@ public abstract class PropertyValueEditor<T> extends Pane {
 
 	public abstract void initEditorValue(T value);
 
-	protected abstract Node getContent();
+	protected abstract Node initContent();
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.TYPE)

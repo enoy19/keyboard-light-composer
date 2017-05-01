@@ -1,4 +1,4 @@
-package org.enoy.klc.common.properties;
+package org.enoy.klc.common.properties.valuestrategy;
 
 public interface ValueStrategy<T> {
 

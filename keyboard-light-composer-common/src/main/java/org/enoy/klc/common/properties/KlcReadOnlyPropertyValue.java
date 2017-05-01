@@ -1,5 +1,7 @@
 package org.enoy.klc.common.properties;
 
+import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
+
 public class KlcReadOnlyPropertyValue<T> {
 
 	private Class<T> propertyValueType;

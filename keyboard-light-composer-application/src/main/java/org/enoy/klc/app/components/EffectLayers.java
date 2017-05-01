@@ -32,18 +32,32 @@ public class EffectLayers implements Initializable {
 
 	private TreeItem<LayerBaseContainer<? extends LayerBase>> treeRoot;
 
+	private KlcPropertyContainerEditor layerPropertiesEditor;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		treeViewLayers.setCellFactory(treeView -> new LayerBaseTreeCell());
 		treeViewLayers.setShowRoot(false);
-		treeViewLayers.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		treeViewLayers.getSelectionModel()
+				.setSelectionMode(SelectionMode.SINGLE);
+
+		treeViewLayers.getSelectionModel().selectedItemProperty()
+				.addListener((v, o, n) -> {
+					if(n != null){
+						LayerBase layerBase = n.getValue().getLayerBase();
+						layerPropertiesEditor.setPropertyContainer(layerBase);
+					}else{
+						layerPropertiesEditor.setPropertyContainer(null);
+					}
+				});
 
 		resetTreeView();
 	}
 
 	@FXML
 	private void delete(ActionEvent event) {
-		DialogUtil.confirm("Confirmation", null, "Effect Layer will be deleted.", this::deleteSelectedTreeItem);
+		DialogUtil.confirm("Confirmation", null,
+				"Effect Layer will be deleted.", this::deleteSelectedTreeItem);
 	}
 
 	private void deleteSelectedTreeItem() {
@@ -78,14 +92,20 @@ public class EffectLayers implements Initializable {
 		root = new EffectGroupLayer("Root");
 		treeRoot = new TreeItem<>(new EffectGroupLayerContainer(root));
 		treeViewLayers.setRoot(treeRoot);
-		
+
 	}
 
 	private TreeItem<LayerBaseContainer<? extends LayerBase>> createEffectGroup() {
 		TreeItem<LayerBaseContainer<? extends LayerBase>> effectGroupTreeItem = new TreeItem<LayerBaseContainer<? extends LayerBase>>(
-				new LayerBaseContainer<LayerBase>(new EffectGroupLayer("New Group")));
+				new LayerBaseContainer<LayerBase>(
+						new EffectGroupLayer("New Group")));
 		LayerTreeItemListenerUtil.addListenersToTreeItem(effectGroupTreeItem);
 		return effectGroupTreeItem;
+	}
+
+	public void setLayerPropertiesEditor(
+			KlcPropertyContainerEditor layerPropertiesEditor) {
+		this.layerPropertiesEditor = layerPropertiesEditor;
 	}
 
 }

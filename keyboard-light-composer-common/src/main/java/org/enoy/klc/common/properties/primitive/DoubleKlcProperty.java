@@ -2,7 +2,7 @@ package org.enoy.klc.common.properties.primitive;
 
 import org.enoy.klc.common.properties.KlcPropertyValue;
 import org.enoy.klc.common.properties.KlcWritableProperty;
-import org.enoy.klc.common.properties.ValueStrategy;
+import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
 
 public class DoubleKlcProperty extends DoubleKlcReadOnlyProperty
 		implements
