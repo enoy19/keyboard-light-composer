@@ -15,9 +15,6 @@ public class EffectsRegister extends Register<EffectFactory> {
 
 	}
 
-	// TODO: effect definition? Effect annotation with name and description and
-	// author?
-
 	public Map<String, List<EffectFactory>> getEffectFactoryMap() {
 
 		Map<String, List<EffectFactory>> map = new LinkedHashMap<>();
@@ -41,9 +38,6 @@ public class EffectsRegister extends Register<EffectFactory> {
 		group.add(ef);
 	}
 
-	// TODO: effect definition? Effect annotation with name and description and
-	// author?
-	
 	public static EffectsRegister getInstance() {
 		return instance == null ? instance = new EffectsRegister() : instance;
 	}
