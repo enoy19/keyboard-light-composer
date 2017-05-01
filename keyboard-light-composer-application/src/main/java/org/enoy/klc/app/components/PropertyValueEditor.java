@@ -4,9 +4,9 @@ import org.enoy.klc.common.properties.KlcWritableProperty;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
-public abstract class PropertyValueEditor<T> extends Pane {
+public abstract class PropertyValueEditor<T> extends StackPane {
 
 	private KlcWritableProperty<T> property;
 

@@ -4,10 +4,10 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enoy.klc.app.components.KlcApplication">
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enoy.klc.app.components.KlcApplication">
    <children>
       <MenuBar>
         <menus>
@@ -33,13 +33,13 @@
             <SplitPane dividerPositions="0.5" orientation="VERTICAL">
                <items>
                   <fx:include source="EffectSelect.fxml" />
-                  <fx:include source="EffectLayers.fxml" fx:id="effectLayers" />
+                  <fx:include fx:id="effectLayers" source="EffectLayers.fxml" />
                </items>
             </SplitPane>
             <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" />
             <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
-                  <Pane fx:id="layerPropertiesEditorPane" />
+                  <StackPane fx:id="layerPropertiesEditorPane" alignment="TOP_CENTER" prefHeight="150.0" prefWidth="200.0" />
                </items>
             </SplitPane>
          </items>

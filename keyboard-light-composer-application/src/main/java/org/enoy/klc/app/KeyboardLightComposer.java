@@ -28,7 +28,7 @@ public class KeyboardLightComposer {
 		Registerer.registerParsed(ValueStrategy.class,
 				ValueStrategyFactory::createValueStrategyFactory,
 				ValueStrategyRegister.getInstance());
-
+		
 		Application.launch(KeyboardLightComposerApplication.class, args);
 
 		// DefaultRenderer renderer = new DefaultRenderer();

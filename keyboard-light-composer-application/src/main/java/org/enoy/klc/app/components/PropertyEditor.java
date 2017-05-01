@@ -20,7 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 public class PropertyEditor extends HBox implements Initializable {
 
@@ -40,7 +40,7 @@ public class PropertyEditor extends HBox implements Initializable {
 	private Button buttonValueStrategyProperties;
 
 	@FXML
-	private Pane panePropertyValueEditor;
+	private StackPane stackPanePropertyValueEditor;
 
 	@FXML
 	private HBox hBoxValueStrategy;
@@ -54,8 +54,7 @@ public class PropertyEditor extends HBox implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		panePropertyValueEditor.setVisible(true);
-		hBoxValueStrategy.setVisible(false);
+		setValueStrategyVisible(false);
 	}
 
 	@FXML
@@ -80,6 +79,8 @@ public class PropertyEditor extends HBox implements Initializable {
 						.createValueStrategy();
 				labelValueStrategyName.setText(valueStrategy.getClass().getSimpleName());
 				property.setValueStrategy(valueStrategy);
+				
+				setValueStrategyVisible(true);
 			}
 		} else {
 			DialogUtil.alert("No Value Strategy found", null,
@@ -91,6 +92,7 @@ public class PropertyEditor extends HBox implements Initializable {
 		this.property = property;
 		labelPropertyName.setText(property.getName());
 		tooltipPropertyDescription.setText(property.getDescription());
+		buttonValueStrategySelector.setVisible(property.isValueStrategyAllowed());
 		setValueEditor(property);
 	}
 
@@ -109,8 +111,14 @@ public class PropertyEditor extends HBox implements Initializable {
 			valueEditor = new Label(property.getValue().toString());
 		}
 
-		panePropertyValueEditor.getChildren().clear();
-		panePropertyValueEditor.getChildren().add(valueEditor);
+		stackPanePropertyValueEditor.getChildren().clear();
+		stackPanePropertyValueEditor.getChildren().add(valueEditor);
+	}
+	
+
+	private void setValueStrategyVisible(boolean visible) {
+		stackPanePropertyValueEditor.setVisible(!visible);
+		hBoxValueStrategy.setVisible(visible);
 	}
 
 }

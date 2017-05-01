@@ -16,8 +16,7 @@ public class ValueStrategyRegister extends Register<ValueStrategyFactory<?>> {
 
 	}
 
-	public List<ValueStrategyFactory<?>> getValueStrategiesFor(
-			Class<?> valueType) {
+	public List<ValueStrategyFactory<?>> getValueStrategiesFor(Class<?> valueType) {
 		List<ValueStrategyFactory<?>> list = getList(valueType);
 		return new ArrayList<>(list);
 	}
@@ -26,18 +25,17 @@ public class ValueStrategyRegister extends Register<ValueStrategyFactory<?>> {
 
 		String key = valueType.getName();
 		List<ValueStrategyFactory<?>> list = FACTORIES.get(key);
-		
-		if(list == null){
+
+		if (list == null) {
 			FACTORIES.put(key, list = new ArrayList<>());
+			getRegisteredStream().filter(factory -> factory.getValueType().equals(valueType)).forEach(list::add);
 		}
-		
+
 		return list;
 	}
 
 	public static ValueStrategyRegister getInstance() {
-		return instance == null
-				? instance = new ValueStrategyRegister()
-				: instance;
+		return instance == null ? instance = new ValueStrategyRegister() : instance;
 	}
 
 }

@@ -6,10 +6,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root alignment="CENTER_LEFT" type="HBox" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" type="HBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0">
          <children>
@@ -40,7 +39,7 @@
             </Label>
          </children>
       </HBox>
-      <StackPane>
+      <StackPane HBox.hgrow="ALWAYS">
          <children>
             <HBox fx:id="hBoxValueStrategy" alignment="CENTER_LEFT" StackPane.alignment="CENTER_LEFT">
                <children>
@@ -54,7 +53,7 @@
                   </Button>
                </children>
             </HBox>
-            <Pane fx:id="panePropertyValueEditor" />
+            <StackPane fx:id="stackPanePropertyValueEditor" StackPane.alignment="CENTER_LEFT" />
          </children>
       </StackPane>
    </children>

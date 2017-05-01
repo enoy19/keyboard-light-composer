@@ -5,12 +5,12 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 public class KlcApplication implements Initializable {
 
 	@FXML
-	private Pane layerPropertiesEditorPane;
+	private StackPane layerPropertiesEditorPane;
 	
 	@FXML
 	private EffectLayers effectLayersController;
