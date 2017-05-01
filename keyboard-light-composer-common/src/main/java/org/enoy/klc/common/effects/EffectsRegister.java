@@ -16,7 +16,6 @@ public class EffectsRegister extends Register<EffectFactory> {
 	}
 
 	public Map<String, List<EffectFactory>> getEffectFactoryMap() {
-
 		Map<String, List<EffectFactory>> map = new LinkedHashMap<>();
 		getRegisteredStream()//
 				.sorted((o1, o2) -> o1.getGroup().compareTo(o2.getGroup()))//
@@ -24,7 +23,6 @@ public class EffectsRegister extends Register<EffectFactory> {
 				.forEach(ef -> addEffectFactoryToGroup(map, ef));
 
 		return map;
-
 	}
 
 	private void addEffectFactoryToGroup(Map<String, List<EffectFactory>> map, EffectFactory ef) {
@@ -41,5 +39,5 @@ public class EffectsRegister extends Register<EffectFactory> {
 	public static EffectsRegister getInstance() {
 		return instance == null ? instance = new EffectsRegister() : instance;
 	}
-
+	
 }

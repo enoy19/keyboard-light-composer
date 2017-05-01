@@ -1,10 +1,5 @@
 package org.enoy.klc.app.components;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
 import org.enoy.klc.common.properties.KlcWritableProperty;
 
 import javafx.collections.ObservableList;
@@ -38,13 +33,5 @@ public abstract class PropertyValueEditor<T> extends Pane {
 	public abstract void initEditorValue(T value);
 
 	protected abstract Node initContent();
-
-	@Retention(RetentionPolicy.RUNTIME)
-	@Target(ElementType.TYPE)
-	public static @interface PropertyValueEditorTypeClass {
-
-		public Class<?> value();
-
-	}
-
+	
 }

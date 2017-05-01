@@ -3,8 +3,11 @@ package org.enoy.klc.app;
 import org.enoy.klc.common.device.Device;
 import org.enoy.klc.common.device.DeviceRegister;
 import org.enoy.klc.common.effects.Effect;
-import org.enoy.klc.common.effects.EffectFactoryUtil;
+import org.enoy.klc.common.effects.EffectFactory;
 import org.enoy.klc.common.effects.EffectsRegister;
+import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
+import org.enoy.klc.common.properties.valuestrategy.ValueStrategyFactory;
+import org.enoy.klc.common.properties.valuestrategy.ValueStrategyRegister;
 import org.enoy.klc.control.PluginClassLoader;
 import org.enoy.klc.control.exceptions.PluginLoadingException;
 import org.enoy.klc.control.registerer.Registerer;
@@ -18,8 +21,13 @@ public class KeyboardLightComposer {
 		loadPlugins();
 
 		Registerer.registerObjects(Device.class, DeviceRegister.getInstance());
-		Registerer.registerParsed(Effect.class, clazz -> EffectFactoryUtil.getEffectFactory(clazz),
+		Registerer.registerParsed(Effect.class,
+				EffectFactory::createEffectFactory,
 				EffectsRegister.getInstance());
+
+		Registerer.registerParsed(ValueStrategy.class,
+				ValueStrategyFactory::createValueStrategyFactory,
+				ValueStrategyRegister.getInstance());
 
 		Application.launch(KeyboardLightComposerApplication.class, args);
 

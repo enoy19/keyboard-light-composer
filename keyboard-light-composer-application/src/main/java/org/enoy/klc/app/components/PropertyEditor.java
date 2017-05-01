@@ -70,6 +70,7 @@ public class PropertyEditor extends HBox implements Initializable {
 		setValueEditor(property);
 	}
 
+	@SuppressWarnings("rawtypes")
 	private void setValueEditor(KlcWritableProperty<?> property) {
 		Node valueEditor;
 

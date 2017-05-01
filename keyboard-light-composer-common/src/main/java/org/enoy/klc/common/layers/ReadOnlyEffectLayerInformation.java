@@ -54,12 +54,14 @@ public class ReadOnlyEffectLayerInformation implements KlcPropertyContainer {
 		this.active = new BooleanKlcProperty("Active",
 				"If this layer is active and rendered", true, true);
 
-		// TODO: move default blendmode to constructor params and pass it in controller
+		// TODO: move default blendmode to constructor params and pass it in
+		// controller
 		this.blendMode = new KlcProperty<>(BlendMode.class, "Blend Mode",
 				"The Blend Mode of this layer", false,
 				BlendModeAdd.getInstance());
 
-		// TODO: move default scalemode to constructor params and pass it in controller
+		// TODO: move default scalemode to constructor params and pass it in
+		// controller
 		this.scaleMode = new KlcProperty<>(ScaleMode.class, "Scale Mode",
 				"How the rendered effect should be scaled", false,
 				DefaultScaleMode.getInstance());
@@ -100,12 +102,12 @@ public class ReadOnlyEffectLayerInformation implements KlcPropertyContainer {
 	public FloatKlcReadOnlyProperty getScaleY() {
 		return scaleY;
 	}
-	
-	public KlcReadOnlyProperty<ScaleMode> getScaleMode(){
+
+	public KlcReadOnlyProperty<ScaleMode> getScaleMode() {
 		return scaleMode;
 	}
-	
-	public KlcReadOnlyProperty<BlendMode> getBlendMode(){
+
+	public KlcReadOnlyProperty<BlendMode> getBlendMode() {
 		return blendMode;
 	}
 
@@ -113,7 +115,7 @@ public class ReadOnlyEffectLayerInformation implements KlcPropertyContainer {
 	public KlcWritableProperty<?>[] getProperties() {
 		// TODO: add blend- and scalemode
 		return new KlcWritableProperty[]{name, active, opacity, x, y, width,
-				height};
+				height, scaleX, scaleY};
 	}
 
 }
