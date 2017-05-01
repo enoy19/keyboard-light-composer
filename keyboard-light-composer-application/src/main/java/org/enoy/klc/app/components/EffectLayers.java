@@ -7,6 +7,7 @@ import org.enoy.klc.app.components.tree.EffectGroupLayerContainer;
 import org.enoy.klc.app.components.tree.EffectLayerContainer;
 import org.enoy.klc.app.components.tree.LayerBaseContainer;
 import org.enoy.klc.app.components.tree.LayerBaseTreeCell;
+import org.enoy.klc.app.components.utils.DialogUtil;
 import org.enoy.klc.common.layers.EffectGroupLayer;
 import org.enoy.klc.common.layers.EffectLayer;
 import org.enoy.klc.common.layers.LayerBase;
@@ -15,6 +16,7 @@ import org.enoy.klc.effects.standard.SolidColorEffect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -35,13 +37,19 @@ public class EffectLayers implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		treeViewLayers.setCellFactory(treeView -> new LayerBaseTreeCell());
 		treeViewLayers.setShowRoot(false);
+		treeViewLayers.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		resetTreeView();
 	}
 
 	@FXML
 	private void delete(ActionEvent event) {
-
+		DialogUtil.confirm("Confirmation", null, "Effect Layer will be deleted.", this::deleteSelectedTreeItem);
+	}
+	
+	private void deleteSelectedTreeItem(){
+		TreeItem<?> selectedItem = treeViewLayers.getSelectionModel().getSelectedItem();
+		selectedItem.getParent().getChildren().remove(selectedItem);
 	}
 
 	private void resetTreeView() {
