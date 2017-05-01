@@ -4,14 +4,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import org.enoy.klc.app.components.tree.EffectGroupLayerContainer;
-import org.enoy.klc.app.components.tree.EffectLayerContainer;
 import org.enoy.klc.app.components.tree.LayerBaseContainer;
 import org.enoy.klc.app.components.tree.LayerBaseTreeCell;
 import org.enoy.klc.app.components.utils.DialogUtil;
+import org.enoy.klc.app.components.utils.LayerTreeItemListenerUtil;
 import org.enoy.klc.common.layers.EffectGroupLayer;
 import org.enoy.klc.common.layers.EffectLayer;
 import org.enoy.klc.common.layers.LayerBase;
-import org.enoy.klc.effects.standard.SolidColorEffect;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,10 +45,32 @@ public class EffectLayers implements Initializable {
 	private void delete(ActionEvent event) {
 		DialogUtil.confirm("Confirmation", null, "Effect Layer will be deleted.", this::deleteSelectedTreeItem);
 	}
-	
-	private void deleteSelectedTreeItem(){
-		TreeItem<?> selectedItem = treeViewLayers.getSelectionModel().getSelectedItem();
+
+	private void deleteSelectedTreeItem() {
+		TreeItem<LayerBaseContainer<? extends LayerBase>> selectedItem = getSelectedItem();
 		selectedItem.getParent().getChildren().remove(selectedItem);
+	}
+
+	private TreeItem<LayerBaseContainer<? extends LayerBase>> getSelectedItem() {
+		return treeViewLayers.getSelectionModel().getSelectedItem();
+	}
+
+	@FXML
+	private void addFolder(ActionEvent event) {
+		TreeItem<LayerBaseContainer<? extends LayerBase>> selectedItem = getSelectedItem();
+		TreeItem<LayerBaseContainer<? extends LayerBase>> effectGroup = createEffectGroup();
+
+		if (selectedItem != null) {
+			LayerBase layerBase = selectedItem.getValue().getLayerBase();
+			if (layerBase instanceof EffectLayer) {
+				selectedItem.getParent().getChildren().add(effectGroup);
+			} else if (layerBase instanceof EffectGroupLayer) {
+				selectedItem.getChildren().add(effectGroup);
+			}
+		} else {
+			treeRoot.getChildren().add(effectGroup);
+		}
+
 	}
 
 	private void resetTreeView() {
@@ -57,69 +78,14 @@ public class EffectLayers implements Initializable {
 		root = new EffectGroupLayer("Root");
 		treeRoot = new TreeItem<>(new EffectGroupLayerContainer(root));
 		treeViewLayers.setRoot(treeRoot);
-
-		EffectLayerContainer value = new EffectLayerContainer(
-				new EffectLayer(new SolidColorEffect()));
-		TreeItem<LayerBaseContainer<?>> dummyLayerContainer = new TreeItem<>(
-				value);
-
-		value = new EffectLayerContainer(
-				new EffectLayer(new SolidColorEffect()));
-		((EffectLayer) value.getLayerBase()).getEffectLayerInformation()
-				.getName().setValue("TEST");
-
-		TreeItem<LayerBaseContainer<?>> dummyLayerContainer2 = new TreeItem<>(
-				value);
-
-		EffectGroupLayerContainer group = new EffectGroupLayerContainer(
-				new EffectGroupLayer("Test Group"));
-		EffectGroupLayerContainer group2 = new EffectGroupLayerContainer(
-				new EffectGroupLayer("Test Group2"));
-
-		TreeItem<LayerBaseContainer<?>> dummyLayerContainer3 = new TreeItem<LayerBaseContainer<?>>(
-				group);
-
-		TreeItem<LayerBaseContainer<?>> dummyLayerContainer4 = new TreeItem<LayerBaseContainer<?>>(
-				group2);
-
-		addListenersToTreeItem(dummyLayerContainer);
-		addListenersToTreeItem(dummyLayerContainer2);
-		addListenersToTreeItem(dummyLayerContainer3);
-		addListenersToTreeItem(dummyLayerContainer4);
-
-		treeRoot.getChildren().add(dummyLayerContainer);
-		treeRoot.getChildren().add(dummyLayerContainer2);
-		treeRoot.getChildren().add(dummyLayerContainer3);
-		treeRoot.getChildren().add(dummyLayerContainer4);
-
+		
 	}
 
-	private void addListenersToTreeItem(
-			TreeItem<LayerBaseContainer<?>> treeItem) {
-
-		treeItem.parentProperty().addListener((v, o, n) -> {
-			LayerBaseContainer<?> oldValue = o != null ? o.getValue() : null;
-			LayerBaseContainer<?> newValue = n != null ? n.getValue() : null;
-			LayerBase value = treeItem.getValue().getLayerBase();
-			if (oldValue != null) {
-				EffectGroupLayer parentGroup = (EffectGroupLayer) oldValue
-						.getLayerBase();
-				parentGroup.remove(value);
-			}
-
-			if (newValue != null) {
-				EffectGroupLayer parentGroup = (EffectGroupLayer) newValue
-						.getLayerBase();
-				parentGroup.addChild(value);
-				
-				// reorganize
-				parentGroup.clearChildren();
-				n.getChildren().forEach(ti->{
-					parentGroup.addChild(ti.getValue().getLayerBase());
-				});
-			}
-		});
-
+	private TreeItem<LayerBaseContainer<? extends LayerBase>> createEffectGroup() {
+		TreeItem<LayerBaseContainer<? extends LayerBase>> effectGroupTreeItem = new TreeItem<LayerBaseContainer<? extends LayerBase>>(
+				new LayerBaseContainer<LayerBase>(new EffectGroupLayer("New Group")));
+		LayerTreeItemListenerUtil.addListenersToTreeItem(effectGroupTreeItem);
+		return effectGroupTreeItem;
 	}
 
 }

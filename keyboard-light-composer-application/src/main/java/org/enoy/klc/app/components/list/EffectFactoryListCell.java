@@ -7,6 +7,7 @@ import org.enoy.klc.app.components.tree.EffectLayerContainer;
 import org.enoy.klc.app.components.tree.LayerBaseContainer;
 import org.enoy.klc.app.components.tree.LayerBaseTreeCell;
 import org.enoy.klc.app.components.tree.LayerTreeCellDragboard;
+import org.enoy.klc.app.components.utils.LayerTreeItemListenerUtil;
 import org.enoy.klc.common.effects.Effect;
 import org.enoy.klc.common.effects.EffectFactory;
 import org.enoy.klc.common.layers.EffectLayer;
@@ -58,6 +59,7 @@ public class EffectFactoryListCell extends ListCell<EffectFactory> {
 				data.put(DataFormat.PLAIN_TEXT, name);
 
 				TreeItem<LayerBaseContainer<? extends LayerBase>> treeItem = new TreeItem<>(layerBaseContainer);
+				LayerTreeItemListenerUtil.addListenersToTreeItem(treeItem);
 				LayerTreeCellDragboard.setCurrentlyDraggedLayerTreeItem(treeItem);
 
 				dragboard.setContent(data);

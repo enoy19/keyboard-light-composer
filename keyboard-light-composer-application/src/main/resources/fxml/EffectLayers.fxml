@@ -8,9 +8,10 @@
 <VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enoy.klc.app.components.EffectLayers">
    <children>
       <TreeView fx:id="treeViewLayers" VBox.vgrow="ALWAYS" />
-      <ToolBar fx:id="toolBar">
+      <ToolBar fx:id="toolBar" styleClass="fa">
          <items>
-            <Button mnemonicParsing="false" onAction="#delete" styleClass="fa" text="" />
+            <Button mnemonicParsing="false" onAction="#delete" text="" />
+            <Button mnemonicParsing="false" onAction="#addFolder" text="+" />
          </items>
       </ToolBar>
    </children>
