@@ -1,11 +1,16 @@
 package org.enoy.klc.app.components;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.enoy.klc.app.components.property.editors.PropertyValueEditorFactory;
 import org.enoy.klc.app.components.property.editors.PropertyValueEditorRegister;
+import org.enoy.klc.app.components.utils.DialogUtil;
 import org.enoy.klc.common.properties.KlcWritableProperty;
+import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
+import org.enoy.klc.common.properties.valuestrategy.ValueStrategyFactory;
+import org.enoy.klc.common.properties.valuestrategy.ValueStrategyRegister;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,7 +41,7 @@ public class PropertyEditor extends HBox implements Initializable {
 
 	@FXML
 	private Pane panePropertyValueEditor;
-	
+
 	@FXML
 	private HBox hBoxValueStrategy;
 
@@ -58,9 +63,28 @@ public class PropertyEditor extends HBox implements Initializable {
 
 	}
 
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@FXML
 	private void openValueStrategySelector(ActionEvent event) {
+		List<ValueStrategyFactory<?>> strategies = ValueStrategyRegister
+				.getInstance()
+				.getValueStrategiesFor(property.getPropertyType());
 
+		if (strategies.size() > 0) {
+			ValueStrategyFactory selectedFactory = DialogUtil.select(
+					"Select Value Strategy", null, "Select Value Factory: ",
+					strategies);
+
+			if (selectedFactory != null) {
+				ValueStrategy valueStrategy = selectedFactory
+						.createValueStrategy();
+				labelValueStrategyName.setText(valueStrategy.getClass().getSimpleName());
+				property.setValueStrategy(valueStrategy);
+			}
+		} else {
+			DialogUtil.alert("No Value Strategy found", null,
+					"No value strategy was found for that property type");
+		}
 	}
 
 	public void setKlcProperty(KlcWritableProperty<?> property) {
@@ -70,7 +94,7 @@ public class PropertyEditor extends HBox implements Initializable {
 		setValueEditor(property);
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void setValueEditor(KlcWritableProperty<?> property) {
 		Node valueEditor;
 
@@ -79,7 +103,7 @@ public class PropertyEditor extends HBox implements Initializable {
 		if (propertyValueEditorFactory != null) {
 			valueEditor = propertyValueEditorFactory
 					.createPropertyValueEditor();
-			((PropertyValueEditor)valueEditor).setKlcProperty(property);
+			((PropertyValueEditor) valueEditor).setKlcProperty(property);
 		} else {
 			// no property value factory available
 			valueEditor = new Label(property.getValue().toString());
