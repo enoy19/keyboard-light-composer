@@ -19,18 +19,27 @@ public abstract class NumberPropertyValueEditor<T extends Number>
 
 	public NumberPropertyValueEditor() {
 		textField.setOnAction(e -> {
-			try {
-				String value = textField.getText();
-				Number number = NUMBER_FORMAT.parse(value);
-				if (!value.equalsIgnoreCase(number.toString())) {
-					textField.setText(number.toString());
-				}
-			} catch (NumberFormatException | ParseException ex) {
-				textField.setText(
-						NUMBER_FORMAT.format(getProperty().getValue()));
-			}
-			updateValue();
+			updateTextField();
 		});
+		textField.focusedProperty().addListener((v,o,n)->{
+			if(!n){
+				updateTextField();
+			}
+		});
+	}
+
+	private void updateTextField() {
+		try {
+			String value = textField.getText();
+			Number number = NUMBER_FORMAT.parse(value);
+			if (!value.equalsIgnoreCase(number.toString())) {
+				textField.setText(number.toString());
+			}
+		} catch (NumberFormatException | ParseException ex) {
+			textField.setText(
+					NUMBER_FORMAT.format(getProperty().getValue()));
+		}
+		updateValue();
 	}
 
 	@Override

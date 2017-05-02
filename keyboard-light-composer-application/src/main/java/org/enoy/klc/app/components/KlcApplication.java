@@ -13,12 +13,9 @@ import org.enoy.klc.control.updater.Updater;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.StackPane;
-import javafx.util.Callback;
 
 public class KlcApplication implements Initializable {
 
@@ -52,18 +49,12 @@ public class KlcApplication implements Initializable {
 		layerPropertiesEditorPane.getChildren().add(layerPropertiesEditor);
 		effectLayersController.setLayerPropertiesEditor(layerPropertiesEditor);
 
-		comboBoxDevice.disableProperty()
-				.bind(toggleButtonPlay.selectedProperty());
-		toggleButtonPlay.disableProperty().bind(comboBoxDevice
-				.getSelectionModel().selectedItemProperty().isNull());
-		splitPaneEffectsAndLayers.disableProperty()
-				.bind(toggleButtonPlay.selectedProperty());
-		layerPropertiesEditorPane.disableProperty()
-				.bind(toggleButtonPlay.selectedProperty());
+		comboBoxDevice.disableProperty().bind(toggleButtonPlay.selectedProperty());
+		toggleButtonPlay.disableProperty().bind(comboBoxDevice.getSelectionModel().selectedItemProperty().isNull());
+		splitPaneEffectsAndLayers.disableProperty().bind(toggleButtonPlay.selectedProperty());
+		layerPropertiesEditorPane.disableProperty().bind(toggleButtonPlay.selectedProperty());
 
-		comboBoxDevice.getItems().addAll(
-				DeviceRegister.getInstance().getRegisteredObjectsAsList());
-
+		comboBoxDevice.getItems().addAll(DeviceRegister.getInstance().getRegisteredObjectsAsList());
 		comboBoxDevice.setCellFactory(lv -> new DeviceListCell());
 
 	}
@@ -71,16 +62,19 @@ public class KlcApplication implements Initializable {
 	@FXML
 	private void play() {
 		boolean selected = toggleButtonPlay.isSelected();
-		String text = selected ? "\uf04d" : "\uf04b";
-		toggleButtonPlay.setText(text);
+		updateToggleButtonText();
 
 		if (selected) {
-			layerRenderer.setRenderables(
-					Arrays.asList(effectLayersController.getRoot()));
+			layerRenderer.setRenderables(Arrays.asList(effectLayersController.getRoot()));
 		}
 
 		updater.setPaused(!selected);
 		layerRenderer.setPaused(!selected);
+	}
+
+	private void updateToggleButtonText() {
+		String text = toggleButtonPlay.isSelected() ? "\uf04d" : "\uf04b";
+		toggleButtonPlay.setText(text);
 	}
 
 	@FXML
@@ -90,19 +84,32 @@ public class KlcApplication implements Initializable {
 		}
 		currentDevice = comboBoxDevice.getValue();
 		currentDevice.init();
+		layerRenderer.setDevice(currentDevice);
 	}
 
 	public void setUpdater(Updater updater) {
+		if (this.updater != null) {
+			updater.setOnPause(null);
+		}
 		this.updater = updater;
-		updater.setOnPause(this::onPause);
-	}
-
-	private void onPause() {
-		toggleButtonPlay.setSelected(false);
+		this.updater.setOnPause(this::onPause);
 	}
 
 	public void setRenderer(LayerRenderer layerRenderer) {
+		if (this.layerRenderer != null) {
+			layerRenderer.setOnPause(null);
+		}
 		this.layerRenderer = layerRenderer;
+		this.layerRenderer.setOnPause(this::onPause);
+	}
+
+	private void onPause(boolean pause) {
+		if (pause) {
+			toggleButtonPlay.setSelected(false);
+			updater.setPaused(true);
+			layerRenderer.setPaused(true);
+			updateToggleButtonText();
+		}
 	}
 
 }

@@ -6,6 +6,7 @@ public abstract class StopPauseLoop implements Runnable {
 	private volatile boolean paused = false;
 	private volatile long sleepLoopCycle;
 	private volatile long sleepPaused;
+	private PauseListener onPause;
 
 	public StopPauseLoop() {
 		this.sleepLoopCycle = 20;
@@ -72,7 +73,22 @@ public abstract class StopPauseLoop implements Runnable {
 	}
 	
 	public void setPaused(boolean paused) {
-		this.paused = paused;
+		if(this.paused != paused){
+			this.paused = paused;
+			if(onPause != null){
+				onPause.onPause(paused);
+			}
+		}
+	}
+	
+	public void setOnPause(PauseListener onPause) {
+		this.onPause = onPause;
+	}
+	
+	public static interface PauseListener{
+		
+		public void onPause(boolean pause);
+		
 	}
 
 }

@@ -72,7 +72,7 @@ public class LightMatrix {
 	}
 
 	protected void setLightMatrix(LightMatrix other) {
-		int min = Math.min(width, other.width);
+		int min = Math.min(height, other.height);
 
 		for (int i = 0; i < min; i++) {
 			other.setLightRow(i, getLightRow(i));

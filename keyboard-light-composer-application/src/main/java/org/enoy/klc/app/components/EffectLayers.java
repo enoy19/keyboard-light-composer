@@ -15,6 +15,7 @@ import org.enoy.klc.common.layers.LayerBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.TreeItem;
@@ -38,10 +39,10 @@ public class EffectLayers implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		treeViewLayers.setCellFactory(treeView -> new LayerBaseTreeCell());
 		treeViewLayers.setShowRoot(false);
-		treeViewLayers.getSelectionModel()
+		getSelectionModel()
 				.setSelectionMode(SelectionMode.SINGLE);
 
-		treeViewLayers.getSelectionModel().selectedItemProperty()
+		getSelectionModel().selectedItemProperty()
 				.addListener((v, o, n) -> {
 					if(n != null){
 						LayerBase layerBase = n.getValue().getLayerBase();
@@ -54,10 +55,18 @@ public class EffectLayers implements Initializable {
 		resetTreeView();
 	}
 
+	private MultipleSelectionModel<TreeItem<LayerBaseContainer<? extends LayerBase>>> getSelectionModel() {
+		return treeViewLayers.getSelectionModel();
+	}
+
 	@FXML
 	private void delete(ActionEvent event) {
+		// TODO: close property editor!
+		int selectedIndex = getSelectionModel().getSelectedIndex();
 		DialogUtil.confirm("Confirmation", null,
 				"Effect Layer will be deleted.", this::deleteSelectedTreeItem);
+		getSelectionModel().clearAndSelect(selectedIndex);
+		
 	}
 
 	private void deleteSelectedTreeItem() {
@@ -66,7 +75,7 @@ public class EffectLayers implements Initializable {
 	}
 
 	private TreeItem<LayerBaseContainer<? extends LayerBase>> getSelectedItem() {
-		return treeViewLayers.getSelectionModel().getSelectedItem();
+		return getSelectionModel().getSelectedItem();
 	}
 
 	@FXML

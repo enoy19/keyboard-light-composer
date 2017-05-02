@@ -27,8 +27,11 @@ public class EffectGroupLayer extends LayerBase {
 		// TODO: move this logic to controller
 		DeviceLightMatrix copy = dlm.getCopy();
 
-		for (int i = childEffectLayers.size() - 1; i <= 0; i--) {
-			childEffectLayers.get(i).render(dlm);
+		for (int i = childEffectLayers.size() - 1; i >= 0; i--) {
+			LayerBase childEffectLayer = childEffectLayers.get(i);
+			if(childEffectLayer.isActive()){
+				childEffectLayer.render(dlm);
+			}
 		}
 
 		BlendMode blendMode = getEffectLayerInformation().getBlendMode()

@@ -53,6 +53,7 @@ public class KeyboardLightComposerApplication extends Application {
 
 		scene.getStylesheets().add("fxml/css/style.css");
 		primaryStage.setScene(scene);
+		primaryStage.setTitle("Keyboard Light Composer");
 		primaryStage.show();
 	}
 
