@@ -12,6 +12,7 @@ public class DelayedExecuter {
 			runnable.run();
 		});
 		t.setDaemon(true);
+		t.setName("Delayed Thread");
 		t.start();
 	}
 	

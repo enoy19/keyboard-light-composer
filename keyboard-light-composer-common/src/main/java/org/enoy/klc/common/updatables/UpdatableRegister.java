@@ -1,29 +1,25 @@
 package org.enoy.klc.common.updatables;
 
-import java.util.HashSet;
-import java.util.Set;
+import org.enoy.klc.common.Register;
 
-public class UpdatableRegister {
+public class UpdatableRegister extends Register<Updatable>{
 
 	private static UpdatableRegister instance;
-	private Set<Updatable> updatables = new HashSet<>();
 
 	private UpdatableRegister() {
 
 	}
 
-	public synchronized void registerUpdatable(Updatable updatable) {
-		updatables.add(updatable);
+	@Override
+	public synchronized void register(Updatable object) {
+		super.register(object);
 	}
-
-	public synchronized void unregisterUpdatable(Updatable updatable) {
-		updatables.add(updatable);
+	
+	@Override
+	public synchronized void unregister(Updatable object) {
+		super.unregister(object);
 	}
-
-	public Set<Updatable> getUpdatables() {
-		return updatables;
-	}
-
+	
 	public static UpdatableRegister getInstance(){
 		return instance == null ? instance = new UpdatableRegister() : instance;
 	}

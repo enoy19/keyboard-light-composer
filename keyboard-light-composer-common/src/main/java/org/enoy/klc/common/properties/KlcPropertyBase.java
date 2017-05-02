@@ -9,5 +9,6 @@ public interface KlcPropertyBase<T> {
 	public KlcReadOnlyPropertyValue<T> getPropertyValue();
 	public T getDefaultValue();
 	public Class<T> getPropertyType();
-
+	public boolean isValueStrategyPresent();
+	
 }

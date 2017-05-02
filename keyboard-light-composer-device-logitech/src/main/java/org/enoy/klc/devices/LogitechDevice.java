@@ -44,7 +44,7 @@ public class LogitechDevice extends DeviceImpl {
 		LogiLED.LogiLedSetLightingFromBitmap(bitmap);
 
 	}
-
+	
 	@Override
 	protected void internalInit() {
 		LogiLED.LogiLedInit();

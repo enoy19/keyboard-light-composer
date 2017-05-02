@@ -20,11 +20,11 @@ public interface Updatable {
 	}
 
 	public default void registerUpdatable() {
-		UpdatableRegister.getInstance().registerUpdatable(this);
+		UpdatableRegister.getInstance().register(this);
 	}
 
 	public default void unregisterUpdatable() {
-		UpdatableRegister.getInstance().unregisterUpdatable(this);
+		UpdatableRegister.getInstance().unregister(this);
 	}
 
 }

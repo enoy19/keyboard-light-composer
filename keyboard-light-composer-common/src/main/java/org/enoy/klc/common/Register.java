@@ -25,12 +25,16 @@ public class Register<T> {
 	public Stream<T> getRegisteredStream() {
 		return register.stream();
 	}
+	
+	public Stream<T> getRegisteredParallelStream(){
+		return register.parallelStream();
+	}
 
 	public void register(T object) {
 		register.add(object);
 	}
 
-	public void unregisterDevice(T object) {
+	public void unregister(T object) {
 		register.remove(object);
 	}
 

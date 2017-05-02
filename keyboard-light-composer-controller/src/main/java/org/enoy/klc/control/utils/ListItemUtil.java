@@ -2,17 +2,53 @@ package org.enoy.klc.control.utils;
 
 import java.util.List;
 
+import javafx.application.Platform;
+
 public class ListItemUtil {
 
-	public static <E> void swapItems(List<E> listFrom, List<E> listTo, E from, E to, boolean above) {
+	public static <E> void swapItems(List<E> listFrom, List<E> listTo, E from,
+			E to, boolean above) {
 
 		int indexFrom = listFrom.indexOf(from);
 		int indexTo = listTo.indexOf(to);
-		int index;
 
+		final int index = getSwappedIndex(listFrom, listTo, above, indexFrom,
+				indexTo);
+
+		if (index == -1) {
+			return;
+		}
+
+		listFrom.remove(indexFrom);
+		DelayedExecuter.execute(100, () -> listTo.add(index, from));
+
+	}
+
+	public static <E> void swapItemsJavaFxThread(List<E> listFrom,
+			List<E> listTo, E from, E to, boolean above) {
+
+		int indexFrom = listFrom.indexOf(from);
+		int indexTo = listTo.indexOf(to);
+
+		final int index = getSwappedIndex(listFrom, listTo, above, indexFrom,
+				indexTo);
+
+		if (index == -1) {
+			return;
+		}
+
+		listFrom.remove(indexFrom);
+		DelayedExecuter.execute(100,
+				() -> Platform.runLater(() -> listTo.add(index, from)));
+
+	}
+
+	private static <E> int getSwappedIndex(List<E> listFrom, List<E> listTo,
+			boolean above, int indexFrom, int indexTo) {
+		int index;
 		if (listFrom.equals(listTo)) {
 			if (indexFrom == indexTo) {
-				return;
+				return -1;
 			}
 
 			if (above) {
@@ -37,15 +73,11 @@ public class ListItemUtil {
 		}
 
 		index = Math.max(0, index);
-
-		int index1 = index;
-
-		listFrom.remove(indexFrom);
-		DelayedExecuter.execute(100, () -> listTo.add(index1, from));
-
+		return index;
 	}
 
-	public static <E> void insertItem(List<E> listTo, E item, E to, boolean above) {
+	public static <E> void insertItem(List<E> listTo, E item, E to,
+			boolean above) {
 
 		int indexTo = listTo.indexOf(to);
 

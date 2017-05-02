@@ -1,45 +1,35 @@
 package org.enoy.klc.control.updater;
 
 import org.enoy.klc.common.updatables.UpdatableRegister;
+import org.enoy.klc.control.StopPauseLoop;
 
-public class Updater implements Runnable {
+public class Updater extends StopPauseLoop {
 
 	private UpdatableRegister updatableRegister;
-	private boolean stopped = false;
-	private boolean paused = false;
-
-	@Override
-	public void run() {
-		long time = System.currentTimeMillis();
-
-		while (!stopped && !Thread.interrupted()) {
-			while (!paused && !Thread.interrupted()) {
-				long deltaLong = time - System.currentTimeMillis();
-				time = System.currentTimeMillis();
-				double delta = (double) deltaLong / 1000f;
-
-				synchronized (updatableRegister) {
-					updatableRegister.getUpdatables().parallelStream()
-							.filter(u -> u.isDirty())
-							.forEach(u -> u.updateAndClean(delta));
-				}
-
-				sleep(20);
-			}
-			sleep(50);
-		}
-
-	}
+	private Runnable onPause;
 
 	public void setUpdatableRegister(UpdatableRegister updatableRegister) {
 		this.updatableRegister = updatableRegister;
 	}
 
-	private void sleep(long millis) {
-		try {
-			Thread.sleep(millis);
-		} catch (InterruptedException e) {
-			// ignore
+	public void setOnPause(Runnable onPause) {
+		this.onPause = onPause;
+	}
+	
+	@Override
+	public void setPaused(boolean paused) {
+		super.setPaused(paused);
+		if(!paused){
+			onPause.run();
+		}
+	}
+
+	@Override
+	public void executeLoop(double delta) {
+		synchronized (updatableRegister) {
+			updatableRegister.getRegisteredParallelStream()
+					.filter(u -> u.isDirty())
+					.forEach(u -> u.updateAndClean(delta));
 		}
 	}
 

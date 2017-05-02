@@ -107,5 +107,9 @@ public class EffectLayers implements Initializable {
 			KlcPropertyContainerEditor layerPropertiesEditor) {
 		this.layerPropertiesEditor = layerPropertiesEditor;
 	}
+	
+	public EffectGroupLayer getRoot() {
+		return root;
+	}
 
 }

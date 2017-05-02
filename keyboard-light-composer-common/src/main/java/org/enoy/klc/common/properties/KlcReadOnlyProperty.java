@@ -86,4 +86,8 @@ public class KlcReadOnlyProperty<T> implements KlcPropertyBase<T> {
 		return propertyType;
 	}
 
+	public boolean isValueStrategyPresent() {
+		return propertyValue.getValueStrategy() != null;
+	}
+
 }

@@ -21,5 +21,10 @@ public abstract class DeviceImpl implements Device {
 	
 	protected abstract void internalInit();
 	protected abstract void internalShutdown();
+	
+	@Override
+	public String toString() {
+		return getName();
+	}
 
 }

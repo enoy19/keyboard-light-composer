@@ -82,4 +82,14 @@ public class Light {
 		this.setAlpha(other.getAlpha());
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("[ ");
+		sb.append(red+", ");
+		sb.append(green+", ");
+		sb.append(blue+", ");
+		sb.append(alpha+" ]");
+		return sb.toString();
+	}
+	
 }

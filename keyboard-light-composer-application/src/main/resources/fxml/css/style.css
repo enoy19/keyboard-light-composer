@@ -45,3 +45,7 @@
 	-fx-border-color: #B35719;
 	-fx-border-width: 2;
 }
+
+.large-font-size {
+	-fx-font-size: 48px;
+}

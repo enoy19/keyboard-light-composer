@@ -8,5 +8,8 @@ public interface Device {
 	public void shutdown();
 	public DeviceInformation getDeviceInformation();
 	public void applyDeviceLightMatrix(DeviceLightMatrix deviceLightMatrix);
+	public default String getName() {
+		return getDeviceInformation().getName();
+	}
 
 }

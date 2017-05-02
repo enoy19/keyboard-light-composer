@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import org.enoy.klc.app.components.property.editors.PropertyValueEditorFactory;
 import org.enoy.klc.app.components.property.editors.PropertyValueEditorRegister;
 import org.enoy.klc.app.components.utils.DialogUtil;
+import org.enoy.klc.common.properties.KlcPropertyContainer;
 import org.enoy.klc.common.properties.KlcWritableProperty;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategyFactory;
@@ -77,9 +78,7 @@ public class PropertyEditor extends HBox implements Initializable {
 			if (selectedFactory != null) {
 				ValueStrategy valueStrategy = selectedFactory
 						.createValueStrategy();
-				labelValueStrategyName.setText(valueStrategy.getClass().getSimpleName());
 				property.setValueStrategy(valueStrategy);
-				
 				setValueStrategyVisible(true);
 			}
 		} else {
@@ -92,7 +91,9 @@ public class PropertyEditor extends HBox implements Initializable {
 		this.property = property;
 		labelPropertyName.setText(property.getName());
 		tooltipPropertyDescription.setText(property.getDescription());
-		buttonValueStrategySelector.setVisible(property.isValueStrategyAllowed());
+		buttonValueStrategySelector
+				.setVisible(property.isValueStrategyAllowed());
+		setValueStrategyVisible(property.isValueStrategyPresent());
 		setValueEditor(property);
 	}
 
@@ -114,11 +115,29 @@ public class PropertyEditor extends HBox implements Initializable {
 		stackPanePropertyValueEditor.getChildren().clear();
 		stackPanePropertyValueEditor.getChildren().add(valueEditor);
 	}
-	
 
 	private void setValueStrategyVisible(boolean visible) {
 		stackPanePropertyValueEditor.setVisible(!visible);
 		hBoxValueStrategy.setVisible(visible);
+
+		updateValueStrategyControls();
+	}
+
+	private void updateValueStrategyControls() {
+		if (property != null) {
+			ValueStrategy<?> valueStrategy = property.getPropertyValue()
+					.getValueStrategy();
+			if (valueStrategy != null) {
+				labelValueStrategyName
+						.setText(valueStrategy.getClass().getSimpleName());
+				// TODO: group property container
+				buttonValueStrategyProperties.setVisible(
+						valueStrategy instanceof KlcPropertyContainer);
+			} else {
+				labelValueStrategyName.setText(null);
+				buttonValueStrategyProperties.setVisible(false);
+			}
+		}
 	}
 
 }

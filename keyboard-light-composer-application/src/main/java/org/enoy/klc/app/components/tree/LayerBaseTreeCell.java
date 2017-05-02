@@ -186,7 +186,7 @@ public class LayerBaseTreeCell extends TreeCell<LayerBaseContainer<? extends Lay
 			}
 		} else {
 			if (draggedParentChildren != null) {
-				ListItemUtil.swapItems(draggedParentChildren, targetParentChildren, draggedItem, this.getTreeItem(),
+				ListItemUtil.swapItemsJavaFxThread(draggedParentChildren, targetParentChildren, draggedItem, this.getTreeItem(),
 						above);
 			} else {
 				ListItemUtil.insertItem(targetParentChildren, draggedItem, this.getTreeItem(), above);

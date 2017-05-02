@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enoy.klc.app.components.KlcApplication">
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enoy.klc.app.components.KlcApplication">
    <children>
       <MenuBar>
         <menus>
@@ -30,16 +33,26 @@
       </MenuBar>
       <SplitPane dividerPositions="0.3107769423558897, 0.6904761904761905" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <items>
-            <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+            <SplitPane fx:id="splitPaneEffectsAndLayers" dividerPositions="0.5" orientation="VERTICAL">
                <items>
                   <fx:include source="EffectSelect.fxml" />
                   <fx:include fx:id="effectLayers" source="EffectLayers.fxml" />
                </items>
             </SplitPane>
             <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" />
-            <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
                   <StackPane fx:id="layerPropertiesEditorPane" alignment="TOP_CENTER" prefHeight="150.0" prefWidth="200.0" />
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <ComboBox fx:id="comboBoxDevice" onAction="#deviceChanged" prefWidth="200.0" promptText="Device" />
+                        <ToggleButton fx:id="toggleButtonPlay" mnemonicParsing="false" onAction="#play" prefHeight="100.0" prefWidth="200.0" text="" VBox.vgrow="ALWAYS">
+                           <styleClass>
+                              <String fx:value="fa" />
+                              <String fx:value="large-font-size" />
+                           </styleClass></ToggleButton>
+                     </children>
+                  </VBox>
                </items>
             </SplitPane>
          </items>
