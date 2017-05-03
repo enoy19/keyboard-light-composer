@@ -8,7 +8,7 @@ public interface DirtyUpdatable extends Updatable {
 	}
 
 	@Override
-	public default void setDirty(boolean dirty) {
-	};
+	default void setDirty(boolean dirty) {
+	}
 
 }

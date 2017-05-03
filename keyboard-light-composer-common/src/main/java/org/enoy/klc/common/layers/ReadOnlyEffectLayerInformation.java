@@ -1,5 +1,6 @@
 package org.enoy.klc.common.layers;
 
+import org.enoy.klc.common.Activatable;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendMode;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendModeAdd;
 import org.enoy.klc.common.effects.lights.scalemodes.DefaultScaleMode;
@@ -16,8 +17,9 @@ import org.enoy.klc.common.properties.primitive.IntegerKlcProperty;
 import org.enoy.klc.common.properties.primitive.IntegerKlcReadOnlyProperty;
 import org.enoy.klc.common.properties.primitive.StringKlcProperty;
 import org.enoy.klc.common.properties.primitive.StringKlcReadOnlyProperty;
+import org.enoy.klc.common.updatables.Dependent;
 
-public class ReadOnlyEffectLayerInformation implements KlcPropertyContainer {
+public class ReadOnlyEffectLayerInformation implements KlcPropertyContainer, Dependent {
 
 	protected StringKlcProperty name;
 	protected IntegerKlcProperty x;
@@ -30,6 +32,7 @@ public class ReadOnlyEffectLayerInformation implements KlcPropertyContainer {
 	protected BooleanKlcProperty active;
 	protected KlcProperty<BlendMode> blendMode;
 	protected KlcProperty<ScaleMode> scaleMode;
+	private Activatable dependency;
 
 	public ReadOnlyEffectLayerInformation(String name) {
 		this.name = new StringKlcProperty("Name", "Name of the Layer", false,
@@ -116,6 +119,26 @@ public class ReadOnlyEffectLayerInformation implements KlcPropertyContainer {
 		// TODO: add blend- and scalemode
 		return new KlcWritableProperty[]{name, active, opacity, x, y, width,
 				height, scaleX, scaleY, blendMode, scaleMode};
+	}
+
+	@Override
+	public Activatable getDependency() {
+		return dependency;
+	}
+
+	@Override
+	public void setDependency(Activatable dependency) {
+		this.dependency = dependency;
+		name.setDependency(dependency);
+		x.setDependency(dependency);
+		y.setDependency(dependency);
+		width.setDependency(dependency);
+		height.setDependency(dependency);
+		scaleX.setDependency(dependency);
+		scaleY.setDependency(dependency);
+		opacity.setDependency(dependency);
+		blendMode.setDependency(dependency);
+		scaleMode.setDependency(dependency);
 	}
 
 }

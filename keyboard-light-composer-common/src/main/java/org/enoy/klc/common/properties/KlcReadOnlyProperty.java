@@ -1,5 +1,6 @@
 package org.enoy.klc.common.properties;
 
+import org.enoy.klc.common.Activatable;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
 
 public class KlcReadOnlyProperty<T> implements KlcPropertyBase<T> {
@@ -10,6 +11,7 @@ public class KlcReadOnlyProperty<T> implements KlcPropertyBase<T> {
 	private final boolean valueStrategyAllowed;
 	protected KlcPropertyValue<T> propertyValue;
 	protected T defaultValue;
+	private Activatable dependency;
 
 	public KlcReadOnlyProperty(Class<T> propertyType, String name,
 			String description, boolean valueStrategyAllowed, T defaultValue) {
@@ -93,6 +95,17 @@ public class KlcReadOnlyProperty<T> implements KlcPropertyBase<T> {
 	@Override
 	public void delete() {
 		propertyValue.delete();
+	}
+
+	@Override
+	public Activatable getDependency() {
+		return dependency;
+	}
+
+	@Override
+	public void setDependency(Activatable dependency) {
+		this.dependency = dependency;
+		this.propertyValue.setDependency(dependency);
 	}
 
 }

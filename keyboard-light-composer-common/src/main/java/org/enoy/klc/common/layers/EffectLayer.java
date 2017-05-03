@@ -8,6 +8,7 @@ import org.enoy.klc.common.effects.lights.LightRow;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendMode;
 import org.enoy.klc.common.effects.lights.scalemodes.ScaleMode;
 import org.enoy.klc.common.properties.KlcWritableProperty;
+import org.enoy.klc.common.updatables.Dependent;
 
 public class EffectLayer extends LayerBase {
 
@@ -18,6 +19,11 @@ public class EffectLayer extends LayerBase {
 		this.effect = effect;
 		this.effectLayerInformation = new EffectLayerInformation(
 				effect.getName());
+		
+		if(effect instanceof Dependent){
+			((Dependent) effect).setDependency(this);
+		}
+		this.effectLayerInformation.setDependency(this);
 	}
 
 	public Effect getEffect() {

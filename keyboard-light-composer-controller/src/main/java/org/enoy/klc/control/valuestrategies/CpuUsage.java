@@ -10,27 +10,18 @@ import javax.management.ObjectName;
 import org.enoy.klc.common.factories.FactoryGenericType;
 import org.enoy.klc.common.factories.Name;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
+import org.enoy.klc.common.updatables.DependentImpl;
 import org.enoy.klc.common.updatables.DirtyUpdatable;
 
 @FactoryGenericType(Float.class)
 @Name("CPU Usage")
-public class CpuUsage implements ValueStrategy<Float>, DirtyUpdatable {
+public class CpuUsage extends DependentImpl implements ValueStrategy<Float>, DirtyUpdatable {
 
 	private volatile float value = 0;
 
 	@Override
 	public Float getValue() {
 		return value;
-	}
-
-	@Override
-	public void update(double delta) {
-		try {
-			value = (float) getProcessCpuLoad();
-			value = Math.max(0, value);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	public static double getProcessCpuLoad() throws Exception {
@@ -50,6 +41,17 @@ public class CpuUsage implements ValueStrategy<Float>, DirtyUpdatable {
 			return Double.NaN;
 		// returns a percentage value with 1 decimal point precision
 		return value;
+	}
+
+	@Override
+	public void update(double delta) {
+		try {
+			System.out.println("UPDATE: "+this);
+			value = (float) getProcessCpuLoad();
+			value = Math.max(0, value);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

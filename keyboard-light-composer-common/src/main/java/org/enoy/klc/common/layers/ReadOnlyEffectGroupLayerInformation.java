@@ -1,5 +1,6 @@
 package org.enoy.klc.common.layers;
 
+import org.enoy.klc.common.Activatable;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendMode;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendModeAdd;
 import org.enoy.klc.common.properties.KlcProperty;
@@ -12,15 +13,17 @@ import org.enoy.klc.common.properties.primitive.FloatKlcProperty;
 import org.enoy.klc.common.properties.primitive.FloatKlcReadOnlyProperty;
 import org.enoy.klc.common.properties.primitive.StringKlcProperty;
 import org.enoy.klc.common.properties.primitive.StringKlcReadOnlyProperty;
+import org.enoy.klc.common.updatables.Dependent;
 
 public class ReadOnlyEffectGroupLayerInformation
 		implements
-			KlcPropertyContainer {
+			KlcPropertyContainer, Dependent {
 
 	protected StringKlcProperty name;
 	protected FloatKlcProperty opacity;
 	protected BooleanKlcProperty active;
 	protected KlcProperty<BlendMode> blendMode;
+	private Activatable dependency;
 
 	public ReadOnlyEffectGroupLayerInformation(String name) {
 		this.name = new StringKlcProperty("Name", "Name of the Layer", false,
@@ -55,6 +58,19 @@ public class ReadOnlyEffectGroupLayerInformation
 	@Override
 	public KlcWritableProperty<?>[] getProperties() {
 		return new KlcWritableProperty[]{name, active, opacity, blendMode};
+	}
+
+	@Override
+	public Activatable getDependency() {
+		return dependency;
+	}
+
+	@Override
+	public void setDependency(Activatable dependency) {
+		this.dependency = dependency;
+		name.setDependency(dependency);
+		opacity.setDependency(dependency);
+		blendMode.setDependency(dependency);
 	}
 
 }

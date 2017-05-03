@@ -1,8 +1,9 @@
 package org.enoy.klc.common.properties;
 
 import org.enoy.klc.common.Deletable;
+import org.enoy.klc.common.updatables.Dependent;
 
-public interface KlcPropertyBase<T> extends Deletable {
+public interface KlcPropertyBase<T> extends Deletable, Dependent {
 
 	public String getName();
 	public String getDescription();
