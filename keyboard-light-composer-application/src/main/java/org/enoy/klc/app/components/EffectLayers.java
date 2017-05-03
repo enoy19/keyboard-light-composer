@@ -33,24 +33,22 @@ public class EffectLayers implements Initializable {
 
 	private TreeItem<LayerBaseContainer<? extends LayerBase>> treeRoot;
 
-	private KlcPropertyContainerEditor layerPropertiesEditor;
+	private LayerSelectListener selectListener;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		treeViewLayers.setCellFactory(treeView -> new LayerBaseTreeCell());
 		treeViewLayers.setShowRoot(false);
-		getSelectionModel()
-				.setSelectionMode(SelectionMode.SINGLE);
+		getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-		getSelectionModel().selectedItemProperty()
-				.addListener((v, o, n) -> {
-					if(n != null){
-						LayerBase layerBase = n.getValue().getLayerBase();
-						layerPropertiesEditor.setPropertyContainer(layerBase);
-					}else{
-						layerPropertiesEditor.setPropertyContainer(null);
-					}
-				});
+		getSelectionModel().selectedItemProperty().addListener((v, o, n) -> {
+			if (n != null) {
+				LayerBase layerBase = n.getValue().getLayerBase();
+				selectListener.onEffectLayerSelected(layerBase);
+			} else {
+				selectListener.onEffectLayerSelected(null);
+			}
+		});
 
 		resetTreeView();
 	}
@@ -63,10 +61,9 @@ public class EffectLayers implements Initializable {
 	private void delete(ActionEvent event) {
 		// TODO: close property editor!
 		int selectedIndex = getSelectionModel().getSelectedIndex();
-		DialogUtil.confirm("Confirmation", null,
-				"Effect Layer will be deleted.", this::deleteSelectedTreeItem);
+		DialogUtil.confirm("Confirmation", null, "Effect Layer will be deleted.", this::deleteSelectedTreeItem);
 		getSelectionModel().clearAndSelect(selectedIndex);
-		
+
 	}
 
 	private void deleteSelectedTreeItem() {
@@ -106,19 +103,23 @@ public class EffectLayers implements Initializable {
 
 	private TreeItem<LayerBaseContainer<? extends LayerBase>> createEffectGroup() {
 		TreeItem<LayerBaseContainer<? extends LayerBase>> effectGroupTreeItem = new TreeItem<LayerBaseContainer<? extends LayerBase>>(
-				new LayerBaseContainer<LayerBase>(
-						new EffectGroupLayer("New Group")));
+				new LayerBaseContainer<LayerBase>(new EffectGroupLayer("New Group")));
 		LayerTreeItemListenerUtil.addListenersToTreeItem(effectGroupTreeItem);
 		return effectGroupTreeItem;
 	}
 
-	public void setLayerPropertiesEditor(
-			KlcPropertyContainerEditor layerPropertiesEditor) {
-		this.layerPropertiesEditor = layerPropertiesEditor;
+	public void setSelectListener(LayerSelectListener selectListener) {
+		this.selectListener = selectListener;
 	}
 	
 	public EffectGroupLayer getRoot() {
 		return root;
+	}
+
+	public static interface LayerSelectListener {
+
+		public void onEffectLayerSelected(LayerBase layer);
+
 	}
 
 }

@@ -39,5 +39,5 @@ public class EffectsRegister extends Register<EffectFactory> {
 	public static EffectsRegister getInstance() {
 		return instance == null ? instance = new EffectsRegister() : instance;
 	}
-	
+
 }

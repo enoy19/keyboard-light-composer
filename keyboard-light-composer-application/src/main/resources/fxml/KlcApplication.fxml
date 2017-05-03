@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enoy.klc.app.components.KlcApplication">
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enoy.klc.app.components.KlcApplication">
    <children>
       <MenuBar>
         <menus>
@@ -39,7 +39,11 @@
                   <fx:include fx:id="effectLayers" source="EffectLayers.fxml" />
                </items>
             </SplitPane>
-            <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" />
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+               <items>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" />
+                  <StackPane fx:id="stackPaneEffectProperties" prefHeight="150.0" prefWidth="200.0" />
+               </items></SplitPane>
             <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
                   <StackPane fx:id="layerPropertiesEditorPane" alignment="TOP_CENTER" prefHeight="150.0" prefWidth="200.0" />

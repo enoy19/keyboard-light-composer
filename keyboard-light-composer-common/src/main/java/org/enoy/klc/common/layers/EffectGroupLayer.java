@@ -46,6 +46,17 @@ public class EffectGroupLayer extends LayerBase {
 	}
 
 	@Override
+	public void delete() {
+		super.delete();
+		synchronized (childEffectLayers) {
+			for (LayerBase layerBase : childEffectLayers) {
+				layerBase.delete();
+			}
+		}
+		effectGroupLayerInformation.delete();
+	}
+	
+	@Override
 	public boolean isActive() {
 		return effectGroupLayerInformation.getActive().getValue();
 	}

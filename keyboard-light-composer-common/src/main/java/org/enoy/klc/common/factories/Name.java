@@ -1,4 +1,4 @@
-package org.enoy.klc.common.effects.describers;
+package org.enoy.klc.common.factories;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface EffectGroup {
+public @interface Name {
 	
 	public String value();
 

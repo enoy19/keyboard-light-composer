@@ -1,6 +1,8 @@
 package org.enoy.klc.common.effects;
 
-public interface Effect extends Renderable {
+import org.enoy.klc.common.Deletable;
+
+public interface Effect extends Renderable, Deletable {
 	
 	public String getName();
 

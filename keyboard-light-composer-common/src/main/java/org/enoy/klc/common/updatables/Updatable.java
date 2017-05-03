@@ -1,6 +1,8 @@
 package org.enoy.klc.common.updatables;
 
-public interface Updatable {
+import org.enoy.klc.common.Deletable;
+
+public interface Updatable extends Deletable {
 
 	public boolean isDirty();
 	public void setDirty(boolean dirty);
@@ -25,6 +27,11 @@ public interface Updatable {
 
 	public default void unregisterUpdatable() {
 		UpdatableRegister.getInstance().unregister(this);
+	}
+	
+	@Override
+	default void delete() {
+		unregisterUpdatable();
 	}
 
 }

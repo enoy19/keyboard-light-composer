@@ -90,4 +90,9 @@ public class KlcReadOnlyProperty<T> implements KlcPropertyBase<T> {
 		return propertyValue.getValueStrategy() != null;
 	}
 
+	@Override
+	public void delete() {
+		propertyValue.delete();
+	}
+
 }

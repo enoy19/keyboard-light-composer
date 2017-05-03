@@ -32,6 +32,13 @@ public class EffectLayer extends LayerBase {
 	public boolean isActive() {
 		return this.effectLayerInformation.active.getValue();
 	}
+	
+	@Override
+	public void delete() {
+		super.delete();
+		effect.delete();
+		effectLayerInformation.delete();
+	}
 
 	@Override
 	public void render(DeviceLightMatrix dlm) {

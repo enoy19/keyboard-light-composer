@@ -7,6 +7,10 @@ import java.util.ResourceBundle;
 import org.enoy.klc.app.components.list.DeviceListCell;
 import org.enoy.klc.common.device.Device;
 import org.enoy.klc.common.device.DeviceRegister;
+import org.enoy.klc.common.effects.Effect;
+import org.enoy.klc.common.layers.EffectLayer;
+import org.enoy.klc.common.layers.LayerBase;
+import org.enoy.klc.common.properties.KlcPropertyContainer;
 import org.enoy.klc.control.effects.LayerRenderer;
 import org.enoy.klc.control.updater.Updater;
 
@@ -19,6 +23,7 @@ import javafx.scene.layout.StackPane;
 
 public class KlcApplication implements Initializable {
 
+	// TODO: refactor to type prefix
 	@FXML
 	private StackPane layerPropertiesEditorPane;
 
@@ -34,7 +39,12 @@ public class KlcApplication implements Initializable {
 	@FXML
 	private SplitPane splitPaneEffectsAndLayers;
 
+	@FXML
+	private StackPane stackPaneEffectProperties;
+
 	private KlcPropertyContainerEditor layerPropertiesEditor;
+
+	private KlcPropertyContainerEditor effectPropertiesEditor;
 
 	private Device currentDevice;
 
@@ -46,8 +56,10 @@ public class KlcApplication implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		updater = new Updater();
 		layerPropertiesEditor = new KlcPropertyContainerEditor();
+		effectPropertiesEditor = new KlcPropertyContainerEditor();
 		layerPropertiesEditorPane.getChildren().add(layerPropertiesEditor);
-		effectLayersController.setLayerPropertiesEditor(layerPropertiesEditor);
+		stackPaneEffectProperties.getChildren().add(effectPropertiesEditor);
+		effectLayersController.setSelectListener(this::onEffectLayerSelect);
 
 		comboBoxDevice.disableProperty().bind(toggleButtonPlay.selectedProperty());
 		toggleButtonPlay.disableProperty().bind(comboBoxDevice.getSelectionModel().selectedItemProperty().isNull());
@@ -101,6 +113,18 @@ public class KlcApplication implements Initializable {
 		}
 		this.layerRenderer = layerRenderer;
 		this.layerRenderer.setOnPause(this::onPause);
+	}
+
+	private void onEffectLayerSelect(LayerBase layerBase) {
+		layerPropertiesEditor.setPropertyContainer(layerBase);
+		Effect effect;
+		if (layerBase instanceof EffectLayer
+				&& (effect = ((EffectLayer) layerBase).getEffect()) instanceof KlcPropertyContainer) {
+			effectPropertiesEditor.setPropertyContainer((KlcPropertyContainer) effect);
+			stackPaneEffectProperties.setVisible(true);
+		}else{
+			stackPaneEffectProperties.setVisible(false);
+		}
 	}
 
 	private void onPause(boolean pause) {

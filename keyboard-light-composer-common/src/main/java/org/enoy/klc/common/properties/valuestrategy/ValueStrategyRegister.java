@@ -7,28 +7,32 @@ import java.util.Map;
 
 import org.enoy.klc.common.Register;
 
-public class ValueStrategyRegister extends Register<ValueStrategyFactory<?>> {
+public class ValueStrategyRegister extends Register<ValueStrategyFactory> {
 
 	private static ValueStrategyRegister instance;
-	private final Map<String, List<ValueStrategyFactory<?>>> FACTORIES = new HashMap<>();
+	private final Map<String, List<ValueStrategyFactory>> FACTORIES = new HashMap<>();
 
 	private ValueStrategyRegister() {
 
 	}
 
-	public List<ValueStrategyFactory<?>> getValueStrategiesFor(Class<?> valueType) {
-		List<ValueStrategyFactory<?>> list = getList(valueType);
+	public List<ValueStrategyFactory> getValueStrategiesFor(Class<?> valueType) {
+		List<ValueStrategyFactory> list = getList(valueType);
 		return new ArrayList<>(list);
 	}
 
-	private List<ValueStrategyFactory<?>> getList(Class<?> valueType) {
+	private List<ValueStrategyFactory> getList(Class<?> valueType) {
 
 		String key = valueType.getName();
-		List<ValueStrategyFactory<?>> list = FACTORIES.get(key);
+		List<ValueStrategyFactory> list = FACTORIES.get(key);
 
 		if (list == null) {
 			FACTORIES.put(key, list = new ArrayList<>());
-			getRegisteredStream().filter(factory -> factory.getValueType().equals(valueType)).forEach(list::add);
+			getRegisteredStream()//
+					.filter(factory -> {
+						Class<?> factoryGenericType = factory.getFactoryGenericType();
+						return factoryGenericType != null && factoryGenericType.equals(valueType);
+					}).forEach(list::add);
 		}
 
 		return list;

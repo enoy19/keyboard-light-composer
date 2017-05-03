@@ -1,9 +1,10 @@
 package org.enoy.klc.common.properties;
 
+import org.enoy.klc.common.Deletable;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
 import org.enoy.klc.common.updatables.Updatable;
 
-public class KlcReadOnlyPropertyValue<T> {
+public class KlcReadOnlyPropertyValue<T> implements Deletable {
 
 	private Class<T> propertyValueType;
 	protected T value;
@@ -52,6 +53,13 @@ public class KlcReadOnlyPropertyValue<T> {
 
 	public Class<T> getPropertyValueType() {
 		return propertyValueType;
+	}
+
+	@Override
+	public void delete() {
+		if(valueStrategy != null && valueStrategy instanceof Deletable){
+			((Deletable)valueStrategy).delete();
+		}
 	}
 
 }

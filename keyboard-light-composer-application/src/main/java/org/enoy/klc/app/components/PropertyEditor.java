@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import org.enoy.klc.app.components.property.editors.PropertyValueEditorFactory;
 import org.enoy.klc.app.components.property.editors.PropertyValueEditorRegister;
 import org.enoy.klc.app.components.utils.DialogUtil;
+import org.enoy.klc.common.Deletable;
 import org.enoy.klc.common.properties.KlcPropertyContainer;
 import org.enoy.klc.common.properties.KlcWritableProperty;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
@@ -24,6 +25,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 public class PropertyEditor extends HBox implements Initializable {
+
+	private static final String VALUE_STRATEGY_SELECT_ICON = "\uf085";
+	private static final String VALUE_STRATEGY_DELETE = "\uf1f8";
 
 	@FXML
 	private Label labelPropertyName;
@@ -49,8 +53,7 @@ public class PropertyEditor extends HBox implements Initializable {
 	private KlcWritableProperty<?> property;
 
 	public PropertyEditor() {
-		FXMLLoaderUtil.loadRootControllerFXMLDocument(this,
-				"/fxml/PropertyEditor.fxml", "fxml/i18n/klc");
+		FXMLLoaderUtil.loadRootControllerFXMLDocument(this, "/fxml/PropertyEditor.fxml", "fxml/i18n/klc");
 	}
 
 	@Override
@@ -63,27 +66,38 @@ public class PropertyEditor extends HBox implements Initializable {
 
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
 	@FXML
 	private void openValueStrategySelector(ActionEvent event) {
-		List<ValueStrategyFactory<?>> strategies = ValueStrategyRegister
-				.getInstance()
+		if (property != null) {
+			ValueStrategy<?> valueStrategy = property.getPropertyValue().getValueStrategy();
+			if (valueStrategy != null) {
+				property.setValueStrategy(null);
+				if (valueStrategy instanceof Deletable) {
+					((Deletable) valueStrategy).delete();
+				}
+				setValueStrategyVisible(false);
+			} else {
+				selectValueStrategy();
+			}
+		}
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private void selectValueStrategy() {
+		List<ValueStrategyFactory> strategies = ValueStrategyRegister.getInstance()
 				.getValueStrategiesFor(property.getPropertyType());
 
 		if (strategies.size() > 0) {
-			ValueStrategyFactory selectedFactory = DialogUtil.select(
-					"Select Value Strategy", null, "Select Value Factory: ",
-					strategies);
+			ValueStrategyFactory selectedFactory = DialogUtil.select("Select Value Strategy", null,
+					"Select Value Factory: ", strategies);
 
 			if (selectedFactory != null) {
-				ValueStrategy valueStrategy = selectedFactory
-						.createValueStrategy();
-				property.setValueStrategy(valueStrategy);
+				ValueStrategy<?> valueStrategy = selectedFactory.create();
+				property.setValueStrategy((ValueStrategy) valueStrategy);
 				setValueStrategyVisible(true);
 			}
 		} else {
-			DialogUtil.alert("No Value Strategy found", null,
-					"No value strategy was found for that property type");
+			DialogUtil.alert("No Value Strategy found", null, "No value strategy was found for that property type");
 		}
 	}
 
@@ -91,21 +105,19 @@ public class PropertyEditor extends HBox implements Initializable {
 		this.property = property;
 		labelPropertyName.setText(property.getName());
 		tooltipPropertyDescription.setText(property.getDescription());
-		buttonValueStrategySelector
-				.setVisible(property.isValueStrategyAllowed());
+		buttonValueStrategySelector.setVisible(property.isValueStrategyAllowed());
 		setValueStrategyVisible(property.isValueStrategyPresent());
 		setValueEditor(property);
 	}
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void setValueEditor(KlcWritableProperty<?> property) {
 		Node valueEditor;
 
-		PropertyValueEditorFactory<?> propertyValueEditorFactory = PropertyValueEditorRegister
-				.getInstance().get(property.getPropertyType());
+		PropertyValueEditorFactory<?> propertyValueEditorFactory = PropertyValueEditorRegister.getInstance()
+				.get(property.getPropertyType());
 		if (propertyValueEditorFactory != null) {
-			valueEditor = propertyValueEditorFactory
-					.createPropertyValueEditor();
+			valueEditor = propertyValueEditorFactory.createPropertyValueEditor();
 			((PropertyValueEditor) valueEditor).setKlcProperty(property);
 		} else {
 			// no property value factory available
@@ -125,15 +137,14 @@ public class PropertyEditor extends HBox implements Initializable {
 
 	private void updateValueStrategyControls() {
 		if (property != null) {
-			ValueStrategy<?> valueStrategy = property.getPropertyValue()
-					.getValueStrategy();
+			ValueStrategy<?> valueStrategy = property.getPropertyValue().getValueStrategy();
 			if (valueStrategy != null) {
-				labelValueStrategyName
-						.setText(valueStrategy.getClass().getSimpleName());
+				labelValueStrategyName.setText(valueStrategy.getClass().getSimpleName());
 				// TODO: group property container
-				buttonValueStrategyProperties.setVisible(
-						valueStrategy instanceof KlcPropertyContainer);
+				buttonValueStrategyProperties.setVisible(valueStrategy instanceof KlcPropertyContainer);
+				buttonValueStrategySelector.setText(VALUE_STRATEGY_DELETE);
 			} else {
+				buttonValueStrategySelector.setText(VALUE_STRATEGY_SELECT_ICON);
 				labelValueStrategyName.setText(null);
 				buttonValueStrategyProperties.setVisible(false);
 			}

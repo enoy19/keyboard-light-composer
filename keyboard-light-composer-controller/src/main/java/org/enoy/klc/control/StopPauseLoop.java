@@ -22,7 +22,7 @@ public abstract class StopPauseLoop implements Runnable {
 
 		while (!isStopped() && !Thread.currentThread().isInterrupted()) {
 			while (!isPaused() && !Thread.currentThread().isInterrupted()) {
-				long deltaLong = time - System.currentTimeMillis();
+				long deltaLong = System.currentTimeMillis() - time;
 				time = System.currentTimeMillis();
 				double delta = (double) deltaLong / 1000f;
 

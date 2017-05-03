@@ -10,6 +10,7 @@ import org.enoy.klc.app.components.tree.LayerTreeCellDragboard;
 import org.enoy.klc.app.components.utils.LayerTreeItemListenerUtil;
 import org.enoy.klc.common.effects.Effect;
 import org.enoy.klc.common.effects.EffectFactory;
+import org.enoy.klc.common.factories.Factory;
 import org.enoy.klc.common.layers.EffectLayer;
 import org.enoy.klc.common.layers.LayerBase;
 
@@ -40,11 +41,11 @@ public class EffectFactoryListCell extends ListCell<EffectFactory> {
 
 	private void onDragDetected(MouseEvent event) {
 
-		EffectFactory factory = getItem();
+		Factory<Effect> factory = getItem();
 
 		if (factory != null) {
 
-			Effect effect = factory.createEffect();
+			Effect effect = factory.create();
 			EffectLayer effectLayer = new EffectLayer(effect);
 			LayerBaseContainer<? extends LayerBase> layerBaseContainer = new EffectLayerContainer(effectLayer);
 

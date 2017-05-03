@@ -7,13 +7,13 @@ import javax.management.AttributeList;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
+import org.enoy.klc.common.factories.FactoryGenericType;
+import org.enoy.klc.common.factories.Name;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
-import org.enoy.klc.common.properties.valuestrategy.ValueStrategyName;
-import org.enoy.klc.common.properties.valuestrategy.ValueStrategyType;
 import org.enoy.klc.common.updatables.DirtyUpdatable;
 
-@ValueStrategyType(Float.class)
-@ValueStrategyName("CPU Usage")
+@FactoryGenericType(Float.class)
+@Name("CPU Usage")
 public class CpuUsage implements ValueStrategy<Float>, DirtyUpdatable {
 
 	private volatile float value = 0;
@@ -27,6 +27,7 @@ public class CpuUsage implements ValueStrategy<Float>, DirtyUpdatable {
 	public void update(double delta) {
 		try {
 			value = (float) getProcessCpuLoad();
+			value = Math.max(0, value);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

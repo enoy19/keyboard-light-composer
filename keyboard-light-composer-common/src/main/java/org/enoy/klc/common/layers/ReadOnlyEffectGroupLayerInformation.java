@@ -33,7 +33,7 @@ public class ReadOnlyEffectGroupLayerInformation
 		// TODO: pass default blendmode in constructor and instantiate in controller
 		this.blendMode = new KlcProperty<BlendMode>(BlendMode.class,
 				"Blend Mode", "The Blend Mode of this layer", false,
-				BlendModeAdd.getInstance());
+				new BlendModeAdd());
 	}
 
 	public StringKlcReadOnlyProperty getName() {
@@ -54,7 +54,7 @@ public class ReadOnlyEffectGroupLayerInformation
 
 	@Override
 	public KlcWritableProperty<?>[] getProperties() {
-		return new KlcWritableProperty[]{name, active, opacity};
+		return new KlcWritableProperty[]{name, active, opacity, blendMode};
 	}
 
 }

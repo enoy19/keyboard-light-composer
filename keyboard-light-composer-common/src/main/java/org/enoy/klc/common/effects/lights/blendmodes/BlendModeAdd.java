@@ -1,15 +1,11 @@
 package org.enoy.klc.common.effects.lights.blendmodes;
 
 import org.enoy.klc.common.effects.lights.Light;
+import org.enoy.klc.common.factories.Name;
 
 // TODO: move this to controller
+@Name("Add")
 public class BlendModeAdd implements BlendMode {
-
-	private static BlendModeAdd instance;
-
-	private BlendModeAdd() {
-
-	}
 
 	@Override
 	public Light blend(Light lightA, Light lightB) {
@@ -24,10 +20,6 @@ public class BlendModeAdd implements BlendMode {
 		alpha = Math.min(alpha, 1);
 
 		return new Light(red, green, blue, alpha);
-	}
-
-	public static BlendModeAdd getInstance() {
-		return instance == null ? instance = new BlendModeAdd() : instance;
 	}
 
 }

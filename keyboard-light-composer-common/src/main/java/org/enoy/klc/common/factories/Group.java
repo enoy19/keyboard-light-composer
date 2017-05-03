@@ -1,14 +1,14 @@
-package org.enoy.klc.common.properties.valuestrategy;
+package org.enoy.klc.common.factories;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface ValueStrategyType {
-
-	public Class<?> value();
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Group {
 	
+	public String value();
+
 }

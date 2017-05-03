@@ -1,67 +1,22 @@
 package org.enoy.klc.common.effects;
 
-import org.enoy.klc.common.effects.describers.EffectGroup;
-import org.enoy.klc.common.effects.describers.EffectName;
+import java.lang.reflect.InvocationTargetException;
 
-public class EffectFactory {
+import org.enoy.klc.common.factories.Factory;
 
-	private String name;
-	private String group;
-	private Class<? extends Effect> effectClass;
+public class EffectFactory extends Factory<Effect> {
 
-	public EffectFactory(String name, String group,
-			Class<? extends Effect> effectClass) {
-		this.name = name;
-		this.group = group;
-		this.effectClass = effectClass;
+	public EffectFactory(Class<? extends Effect> factoryType) {
+		super(factoryType);
 	}
 
-	public Effect createEffect() {
+	public static EffectFactory createFactory(Class<? extends Effect> factoryType) {
 		try {
-			return effectClass.newInstance();
-		} catch (InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
+			return Factory.createFactory(factoryType, EffectFactory.class);
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| SecurityException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getGroup() {
-		return group;
-	}
-
-	public static EffectFactory createEffectFactory(Class<? extends Effect> effectClass) {
-		String name = getEffectName(effectClass);
-		String group = getEffectGroup(effectClass);
-		EffectFactory factory = new EffectFactory(name, group, effectClass);
-		return factory;
-	}
-
-	private static String getEffectName(Class<? extends Effect> effectClass) {
-		String effectNameValue;
-		EffectName effectName = effectClass.getAnnotation(EffectName.class);
-
-		if (effectName != null && (effectNameValue = effectName.value()) != null && !effectNameValue.trim().isEmpty()) {
-			return effectNameValue;
-		} else {
-			return effectClass.getSimpleName();
-		}
-	}
-
-	private static String getEffectGroup(Class<? extends Effect> effectClass) {
-		EffectGroup effectGroup = effectClass.getAnnotation(EffectGroup.class);
-		String effectGroupValue;
-
-		if (effectGroup != null && (effectGroupValue = effectGroup.value()) != null
-				&& !effectGroupValue.trim().isEmpty()) {
-			return effectGroupValue;
-		}
-
-		// TODO: localizable
-		return "No Group";
 	}
 
 }

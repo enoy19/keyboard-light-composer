@@ -2,6 +2,7 @@ package org.enoy.klc.app.components.property.editors;
 
 import org.enoy.klc.app.components.PropertyValueEditor;
 
+// TODO: use Factory<T>
 public class PropertyValueEditorFactory<T> {
 
 	private Class<? extends PropertyValueEditor<T>> propertValueEditorClass;

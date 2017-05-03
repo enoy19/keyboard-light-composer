@@ -58,7 +58,7 @@ public class ReadOnlyEffectLayerInformation implements KlcPropertyContainer {
 		// controller
 		this.blendMode = new KlcProperty<>(BlendMode.class, "Blend Mode",
 				"The Blend Mode of this layer", false,
-				BlendModeAdd.getInstance());
+				new BlendModeAdd());
 
 		// TODO: move default scalemode to constructor params and pass it in
 		// controller
@@ -115,7 +115,7 @@ public class ReadOnlyEffectLayerInformation implements KlcPropertyContainer {
 	public KlcWritableProperty<?>[] getProperties() {
 		// TODO: add blend- and scalemode
 		return new KlcWritableProperty[]{name, active, opacity, x, y, width,
-				height, scaleX, scaleY};
+				height, scaleX, scaleY, blendMode, scaleMode};
 	}
 
 }
