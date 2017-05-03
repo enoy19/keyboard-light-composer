@@ -1,5 +1,6 @@
 package org.enoy.klc.control.updater;
 
+import org.enoy.klc.common.Activatable;
 import org.enoy.klc.common.updatables.Dependent;
 import org.enoy.klc.common.updatables.UpdatableRegister;
 import org.enoy.klc.control.StopPauseLoop;
@@ -19,7 +20,8 @@ public class Updater extends StopPauseLoop {
 					.filter(u -> u.isDirty())
 					.filter(u->{
 						if(u instanceof Dependent){
-							return ((Dependent) u).getDependency().isActive();
+							Activatable dependency = ((Dependent) u).getDependency();
+							return dependency == null || dependency.isActive();
 						}
 						return true;
 					})
