@@ -43,6 +43,7 @@ public class EffectLayer extends LayerBase {
 	@Override
 	public void render(DeviceLightMatrix dlm) {
 		// TODO: move this logic to controller
+		// TODO: implement opacity
 
 		int x = effectLayerInformation.getX().getValue();
 		int y = effectLayerInformation.getY().getValue();

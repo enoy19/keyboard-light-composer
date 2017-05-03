@@ -8,13 +8,13 @@ import org.enoy.klc.common.effects.lights.blendmodes.BlendModeRegister;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 
-// not finished uncomment below when done
-// @PropertyValueEditorTypeClass(BlendMode.class)
-public class BlendModePropertyValueEditor extends PropertyValueEditor<BlendMode>{
+// TODO: finish this
+@PropertyValueEditorTypeClass(BlendMode.class)
+public class BlendModePropertyValueEditor extends PropertyValueEditor<BlendMode> {
 
 	private ComboBox<BlendModeFactory> blendModeFactories;
 	private BlendMode currentBlendMode;
-	
+
 	@Override
 	public BlendMode getValue() {
 		return currentBlendMode;
@@ -32,6 +32,4 @@ public class BlendModePropertyValueEditor extends PropertyValueEditor<BlendMode>
 		return blendModeFactories;
 	}
 
-	
-	
 }

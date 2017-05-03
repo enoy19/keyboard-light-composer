@@ -25,6 +25,8 @@ public class EffectGroupLayer extends LayerBase {
 	@Override
 	public void render(DeviceLightMatrix dlm) {
 		// TODO: move this logic to controller
+		// TODO: implement opacity
+		
 		DeviceLightMatrix copy = dlm.getCopy();
 
 		for (int i = childEffectLayers.size() - 1; i >= 0; i--) {
