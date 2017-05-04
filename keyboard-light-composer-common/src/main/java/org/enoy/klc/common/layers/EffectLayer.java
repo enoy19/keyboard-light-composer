@@ -36,7 +36,7 @@ public class EffectLayer extends LayerBase {
 
 	@Override
 	public boolean isActive() {
-		return this.effectLayerInformation.active.getValue();
+		return this.effectLayerInformation.getActive().getValue();
 	}
 	
 	@Override
