@@ -91,5 +91,9 @@ public class Light {
 		sb.append(alpha+" ]");
 		return sb.toString();
 	}
+
+	public void applyOpacity(float opacity) {
+		setAlpha(getAlpha() * opacity);
+	}
 	
 }

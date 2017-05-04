@@ -61,7 +61,8 @@ public class EffectLayers implements Initializable {
 	private void delete(ActionEvent event) {
 		// TODO: close property editor!
 		int selectedIndex = getSelectionModel().getSelectedIndex();
-		DialogUtil.confirm("Confirmation", null, "Effect Layer will be deleted.", this::deleteSelectedTreeItem);
+		DialogUtil.confirm(treeViewLayers.getScene().getWindow(), "Confirmation", null, "Effect Layer will be deleted.",
+				this::deleteSelectedTreeItem);
 		getSelectionModel().clearAndSelect(selectedIndex);
 
 	}
@@ -111,7 +112,7 @@ public class EffectLayers implements Initializable {
 	public void setSelectListener(LayerSelectListener selectListener) {
 		this.selectListener = selectListener;
 	}
-	
+
 	public EffectGroupLayer getRoot() {
 		return root;
 	}

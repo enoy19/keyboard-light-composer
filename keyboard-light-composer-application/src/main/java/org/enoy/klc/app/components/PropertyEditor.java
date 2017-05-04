@@ -63,7 +63,13 @@ public class PropertyEditor extends HBox implements Initializable {
 
 	@FXML
 	private void openValueStrategyProperties(ActionEvent event) {
-
+		if (property != null) {
+			ValueStrategy<?> valueStrategy = property.getPropertyValue().getValueStrategy();
+			if (valueStrategy != null && valueStrategy instanceof KlcPropertyContainer) {
+				DialogUtil.showPropertyContainerEditor(getScene().getWindow(), (KlcPropertyContainer) valueStrategy,
+						"Properties of: " + property.getName(), null, null);
+			}
+		}
 	}
 
 	@FXML
@@ -88,8 +94,8 @@ public class PropertyEditor extends HBox implements Initializable {
 				.getValueStrategiesFor(property.getPropertyType());
 
 		if (strategies.size() > 0) {
-			ValueStrategyFactory selectedFactory = DialogUtil.select("Select Value Strategy", null,
-					"Select Value Factory: ", strategies);
+			ValueStrategyFactory selectedFactory = DialogUtil.select(getScene().getWindow(), "Select Value Strategy",
+					null, "Select Value Factory: ", strategies);
 
 			if (selectedFactory != null) {
 				ValueStrategy<?> valueStrategy = selectedFactory.create();
@@ -97,7 +103,8 @@ public class PropertyEditor extends HBox implements Initializable {
 				setValueStrategyVisible(true);
 			}
 		} else {
-			DialogUtil.alert("No Value Strategy found", null, "No value strategy was found for that property type");
+			DialogUtil.alert(getScene().getWindow(), "No Value Strategy found", null,
+					"No value strategy was found for that property type");
 		}
 	}
 

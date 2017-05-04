@@ -43,4 +43,10 @@ public class LightRow {
 		return width;
 	}
 
+	public void applyOpacity(float opacity) {
+		for (int i = 0; i < lights.length; i++) {
+			lights[i].applyOpacity(opacity);
+		}
+	}
+
 }

@@ -44,7 +44,7 @@ public abstract class NumberPropertyValueEditor<T extends Number>
 
 	@Override
 	public void initEditorValue(T value) {
-		String numberString = NumberFormat.getInstance().format(value);
+		String numberString = NUMBER_FORMAT.format(value);
 		textField.setText(numberString);
 	}
 
@@ -56,7 +56,7 @@ public abstract class NumberPropertyValueEditor<T extends Number>
 
 	protected Number getTextFieldNumber() {
 		try {
-			return NumberFormat.getInstance().parse(textField.getText());
+			return NUMBER_FORMAT.parse(textField.getText());
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}

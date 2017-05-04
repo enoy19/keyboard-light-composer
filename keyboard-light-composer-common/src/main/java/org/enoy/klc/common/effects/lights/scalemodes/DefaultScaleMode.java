@@ -1,8 +1,10 @@
 package org.enoy.klc.common.effects.lights.scalemodes;
 
 import org.enoy.klc.common.effects.lights.LightMatrix;
+import org.enoy.klc.common.factories.Name;
 
 // TODO: move this to controller
+@Name("Default Scale Mode")
 public class DefaultScaleMode implements ScaleMode {
 
 	private static DefaultScaleMode instance;

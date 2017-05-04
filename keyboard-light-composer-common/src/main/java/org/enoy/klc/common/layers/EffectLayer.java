@@ -64,6 +64,10 @@ public class EffectLayer extends LayerBase {
 		height = (int) ((float) height * scaleY);
 
 		LightMatrix colorMatrix = effect.getColorMatrix();
+		
+		float opacity = effectLayerInformation.getOpacity().getValue();
+		colorMatrix.applyOpacity(opacity);
+		
 		LightMatrix scaledMatrix = scaleMode.scale(colorMatrix, width, height);
 
 		int dlmBottom = Math.min(dlm.getHeight(), y + height);

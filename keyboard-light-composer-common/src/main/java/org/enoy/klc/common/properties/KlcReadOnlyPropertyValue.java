@@ -9,7 +9,7 @@ import org.enoy.klc.common.updatables.Updatable;
 public class KlcReadOnlyPropertyValue<T> implements Deletable, Dependent {
 
 	private Class<T> propertyValueType;
-	protected T value;
+	protected volatile T value;
 	protected ValueStrategy<T> valueStrategy;
 	protected Activatable dependency;
 

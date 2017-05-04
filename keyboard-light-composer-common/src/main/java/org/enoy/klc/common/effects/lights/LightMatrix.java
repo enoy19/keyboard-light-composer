@@ -70,6 +70,15 @@ public class LightMatrix {
 		setLightMatrix(copy);
 		return copy;
 	}
+	
+
+	public void applyOpacity(float opacity) {
+		synchronized (rows) {
+			for (int i = 0; i < rows.length; i++) {
+				rows[i].applyOpacity(opacity);
+			}
+		}
+	}
 
 	protected void setLightMatrix(LightMatrix other) {
 		int min = Math.min(height, other.height);

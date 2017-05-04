@@ -9,17 +9,18 @@ public class BlendModeAdd implements BlendMode {
 
 	@Override
 	public Light blend(Light lightA, Light lightB) {
-		float red = lightA.getRed() + lightB.getRed();
-		float green = lightA.getGreen() + lightB.getGreen();
-		float blue = lightA.getBlue() + lightB.getBlue();
-		float alpha = lightA.getAlpha() + lightB.getAlpha();
+		
+		float alpha = lightB.getAlpha();
+		
+		float red = lightA.getRed() + lightB.getRed() * alpha;
+		float green = lightA.getGreen() + lightB.getGreen() * alpha;
+		float blue = lightA.getBlue() + lightB.getBlue() * alpha;
 
 		red = Math.min(red, 1);
 		green = Math.min(green, 1);
 		blue = Math.min(blue, 1);
-		alpha = Math.min(alpha, 1);
 
-		return new Light(red, green, blue, alpha);
+		return new Light(red, green, blue, 1);
 	}
 
 }

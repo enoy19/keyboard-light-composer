@@ -2,7 +2,7 @@ package org.enoy.klc.common.layers;
 
 import org.enoy.klc.common.Activatable;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendMode;
-import org.enoy.klc.common.effects.lights.blendmodes.BlendModeAdd;
+import org.enoy.klc.common.effects.lights.blendmodes.BlendModeNormal;
 import org.enoy.klc.common.properties.KlcProperty;
 import org.enoy.klc.common.properties.KlcPropertyContainer;
 import org.enoy.klc.common.properties.KlcReadOnlyProperty;
@@ -36,7 +36,7 @@ public class ReadOnlyEffectGroupLayerInformation
 		// TODO: pass default blendmode in constructor and instantiate in controller
 		this.blendMode = new KlcProperty<BlendMode>(BlendMode.class,
 				"Blend Mode", "The Blend Mode of this layer", false,
-				new BlendModeAdd());
+				new BlendModeNormal());
 	}
 
 	public StringKlcReadOnlyProperty getName() {

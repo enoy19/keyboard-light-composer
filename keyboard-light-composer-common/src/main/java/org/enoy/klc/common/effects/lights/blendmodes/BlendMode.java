@@ -5,6 +5,11 @@ import org.enoy.klc.common.effects.lights.LightMatrix;
 
 public interface BlendMode {
 
+	/**
+	 * @param lightA below
+	 * @param lightB on top
+	 * @return
+	 */
 	public Light blend(Light lightA, Light lightB);
 
 	public default void blend(LightMatrix lightMatrixA,

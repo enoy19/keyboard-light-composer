@@ -32,9 +32,12 @@ public class EffectGroupLayer extends LayerBase {
 		for (int i = childEffectLayers.size() - 1; i >= 0; i--) {
 			LayerBase childEffectLayer = childEffectLayers.get(i);
 			if(childEffectLayer.isActive()){
-				childEffectLayer.render(dlm);
+				childEffectLayer.render(copy);
 			}
 		}
+		
+		float opacity = effectGroupLayerInformation.getOpacity().getValue();
+		copy.applyOpacity(opacity);
 
 		BlendMode blendMode = getEffectLayerInformation().getBlendMode()
 				.getValue();

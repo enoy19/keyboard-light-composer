@@ -46,7 +46,6 @@ public class CpuUsage extends DependentImpl implements ValueStrategy<Float>, Dir
 	@Override
 	public void update(double delta) {
 		try {
-			System.out.println("UPDATE: "+this);
 			value = (float) getProcessCpuLoad();
 			value = Math.max(0, value);
 		} catch (Exception e) {

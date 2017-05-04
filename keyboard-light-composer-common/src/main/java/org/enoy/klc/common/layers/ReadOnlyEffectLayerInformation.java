@@ -2,7 +2,7 @@ package org.enoy.klc.common.layers;
 
 import org.enoy.klc.common.Activatable;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendMode;
-import org.enoy.klc.common.effects.lights.blendmodes.BlendModeAdd;
+import org.enoy.klc.common.effects.lights.blendmodes.BlendModeNormal;
 import org.enoy.klc.common.effects.lights.scalemodes.DefaultScaleMode;
 import org.enoy.klc.common.effects.lights.scalemodes.ScaleMode;
 import org.enoy.klc.common.properties.KlcProperty;
@@ -61,7 +61,7 @@ public class ReadOnlyEffectLayerInformation implements KlcPropertyContainer, Dep
 		// controller
 		this.blendMode = new KlcProperty<>(BlendMode.class, "Blend Mode",
 				"The Blend Mode of this layer", false,
-				new BlendModeAdd());
+				new BlendModeNormal());
 
 		// TODO: move default scalemode to constructor params and pass it in
 		// controller

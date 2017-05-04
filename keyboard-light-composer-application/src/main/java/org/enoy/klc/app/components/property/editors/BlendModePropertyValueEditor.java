@@ -8,12 +8,18 @@ import org.enoy.klc.common.effects.lights.blendmodes.BlendModeRegister;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 
-// TODO: finish this
 @PropertyValueEditorTypeClass(BlendMode.class)
 public class BlendModePropertyValueEditor extends PropertyValueEditor<BlendMode> {
 
 	private ComboBox<BlendModeFactory> blendModeFactories;
 	private BlendMode currentBlendMode;
+
+	public BlendModePropertyValueEditor() {
+		blendModeFactories.setOnAction(e -> {
+			currentBlendMode = blendModeFactories.getSelectionModel().getSelectedItem().create();
+			updateValue();
+		});
+	}
 
 	@Override
 	public BlendMode getValue() {
@@ -22,7 +28,12 @@ public class BlendModePropertyValueEditor extends PropertyValueEditor<BlendMode>
 
 	@Override
 	public void initEditorValue(BlendMode value) {
-		// TODO: get factory of value
+		Class<?> bmClass = value.getClass();
+		blendModeFactories.getItems()//
+				.stream()//
+				.filter(bmf -> bmf.getFactoryType().equals(bmClass)).findAny().ifPresent(bmf -> {
+					blendModeFactories.getSelectionModel().select(bmf);
+				});
 	}
 
 	@Override

@@ -8,6 +8,9 @@ import org.enoy.klc.common.effects.EffectsRegister;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendMode;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendModeFactory;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendModeRegister;
+import org.enoy.klc.common.effects.lights.scalemodes.ScaleMode;
+import org.enoy.klc.common.effects.lights.scalemodes.ScaleModeFactory;
+import org.enoy.klc.common.effects.lights.scalemodes.ScaleModeRegister;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategyFactory;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategyRegister;
@@ -27,6 +30,7 @@ public class KeyboardLightComposer {
 		Registerer.registerParsed(Effect.class, EffectFactory::createFactory, EffectsRegister.getInstance());
 		Registerer.registerParsed(ValueStrategy.class, ValueStrategyFactory::createFactory,ValueStrategyRegister.getInstance());
 		Registerer.registerParsed(BlendMode.class, BlendModeFactory::createFactory, BlendModeRegister.getInstance());
+		Registerer.registerParsed(ScaleMode.class, ScaleModeFactory::createFactory, ScaleModeRegister.getInstance());
 
 		Application.launch(KeyboardLightComposerApplication.class, args);
 
