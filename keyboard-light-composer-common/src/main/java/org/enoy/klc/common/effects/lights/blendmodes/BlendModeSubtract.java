@@ -16,9 +16,9 @@ public class BlendModeSubtract implements BlendMode {
 		float green = lightA.getGreen() - lightB.getGreen() * alpha;
 		float blue = lightA.getBlue() - lightB.getBlue() * alpha;
 
-		red = Math.max(red, 1);
-		green = Math.max(green, 1);
-		blue = Math.max(blue, 1);
+		red = Math.max(red, 0);
+		green = Math.max(green, 0);
+		blue = Math.max(blue, 0);
 
 		return new Light(red, green, blue, 1);
 	}
