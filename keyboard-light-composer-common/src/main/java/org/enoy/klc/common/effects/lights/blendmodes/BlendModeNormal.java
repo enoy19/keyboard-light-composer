@@ -10,10 +10,11 @@ public class BlendModeNormal implements BlendMode{
 	@Override
 	public Light blend(Light lightA, Light lightB) {
 		
-		float invertedAlpha = 1 - lightB.getAlpha();
-		float red = lightB.getRed() + lightA.getRed() * invertedAlpha;
-		float green = lightB.getGreen() + lightA.getGreen() * invertedAlpha;
-		float blue = lightB.getBlue() + lightA.getBlue() * invertedAlpha;
+		float alpha = lightB.getAlpha();
+		float invertedAlpha = 1 - alpha;
+		float red = lightB.getRed() * alpha + lightA.getRed() * invertedAlpha;
+		float green = lightB.getGreen() * alpha + lightA.getGreen() * invertedAlpha;
+		float blue = lightB.getBlue() * alpha + lightA.getBlue() * invertedAlpha;
 		
 		return new Light(red, green, blue, 1);
 	}
