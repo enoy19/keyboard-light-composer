@@ -3,15 +3,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enoy</groupId>
 	<artifactId>keyboard-light-composer</artifactId>
-	<version>1.0.0-ALPHA</version>
+	<version>1.0.1-ALPHA</version>
 	<packaging>pom</packaging>
 	<name>Keyboard Light Composer</name>
 	<modules>
 		<module>keyboard-light-composer-common</module>
 		<module>keyboard-light-composer-controller</module>
 		<module>keyboard-light-composer-device-logitech</module>
-		<module>keyboard-light-composer-application</module>
 		<module>keyboard-light-composer-standard-effects</module>
+		<module>keyboard-light-composer-application</module>
 	</modules>
 
 	<build>

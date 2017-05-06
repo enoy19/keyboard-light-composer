@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.enoy</groupId>
 		<artifactId>keyboard-light-composer</artifactId>
-		<version>1.0.0-ALPHA</version>
+		<version>1.0.1-ALPHA</version>
 	</parent>
 	<artifactId>keyboard-light-composer-common</artifactId>
 	<name>Keyboard Light Composer Common</name>
