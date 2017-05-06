@@ -19,7 +19,16 @@ public class KlcColor implements Externalizable {
 	}
 
 	public KlcColor(double red, double green, double blue, double alpha) {
+		red = zeroToOne(red);
+		green = zeroToOne(green);
+		blue = zeroToOne(blue);
+		alpha = zeroToOne(alpha);
+		
 		color = new Color(red, green, blue, alpha);
+	}
+
+	private double zeroToOne(double value) {
+		return value > 1 ? 1 : value < 0 ? 0 : value;
 	}
 
 	public KlcColor(float red, float green, float blue, float alpha) {
