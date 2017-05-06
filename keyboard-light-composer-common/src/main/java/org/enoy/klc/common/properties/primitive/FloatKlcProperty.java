@@ -8,6 +8,8 @@ public class FloatKlcProperty extends FloatKlcReadOnlyProperty
 		implements
 			KlcWritableProperty<Float> {
 
+	private static final long serialVersionUID = -5030919166622556044L;
+
 	public FloatKlcProperty(String name, String description,
 			boolean valueStrategyAllowed, Float defaultValue) {
 		super(name, description, valueStrategyAllowed, defaultValue);

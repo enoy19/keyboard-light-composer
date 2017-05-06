@@ -2,9 +2,11 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.StackPane?>
@@ -16,6 +18,25 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
+                  <MenuItem mnemonicParsing="false" onAction="#save" text="Save...">
+                     <graphic>
+                        <Label text="">
+                           <styleClass>
+                              <String fx:value="fa" />
+                              <String fx:value="black-font" />
+                           </styleClass></Label>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#open" text="Open...">
+                     <graphic>
+                        <Label text="">
+                           <styleClass>
+                              <String fx:value="fa" />
+                              <String fx:value="black-font" />
+                           </styleClass></Label>
+                     </graphic>
+                  </MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>

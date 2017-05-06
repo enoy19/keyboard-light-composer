@@ -17,6 +17,8 @@ import org.enoy.klc.common.updatables.DirtyUpdatable;
 @Name("CPU Usage")
 public class CpuUsage extends DependentImpl implements ValueStrategy<Float>, DirtyUpdatable {
 
+	private static final long serialVersionUID = -3109388978685967802L;
+	
 	private volatile float value = 0;
 
 	@Override

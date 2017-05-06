@@ -1,9 +1,13 @@
 package org.enoy.klc.common.properties;
 
+import java.io.Serializable;
+
 import org.enoy.klc.common.Activatable;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
 
-public class KlcReadOnlyProperty<T> implements KlcPropertyBase<T> {
+public class KlcReadOnlyProperty<T extends Serializable> implements KlcPropertyBase<T> {
+
+	private static final long serialVersionUID = -2806512082375290750L;
 
 	private Class<T> propertyType;
 	protected String name;
@@ -13,17 +17,17 @@ public class KlcReadOnlyProperty<T> implements KlcPropertyBase<T> {
 	protected T defaultValue;
 	private Activatable dependency;
 
-	public KlcReadOnlyProperty(Class<T> propertyType, String name,
-			String description, boolean valueStrategyAllowed, T defaultValue) {
-		
+	public KlcReadOnlyProperty(Class<T> propertyType, String name, String description, boolean valueStrategyAllowed,
+			T defaultValue) {
+
 		this.propertyType = propertyType;
 		this.name = name;
 		this.description = description;
 		this.valueStrategyAllowed = valueStrategyAllowed;
-		this.propertyValue = new KlcPropertyValue<T>(propertyType, defaultValue,
-				null);
+		this.propertyValue = new KlcPropertyValue<T>(propertyType, defaultValue, null);
 		this.defaultValue = defaultValue;
 	}
+
 
 	@Override
 	public String getName() {

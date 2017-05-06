@@ -1,9 +1,11 @@
 package org.enoy.klc.app.components.property.editors;
 
+import java.io.Serializable;
+
 import org.enoy.klc.app.components.PropertyValueEditor;
 
 // TODO: use Factory<T>
-public class PropertyValueEditorFactory<T> {
+public class PropertyValueEditorFactory<T extends Serializable> {
 
 	private Class<? extends PropertyValueEditor<T>> propertValueEditorClass;
 	private Class<T> valueClass;

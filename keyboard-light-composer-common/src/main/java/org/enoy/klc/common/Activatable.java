@@ -1,6 +1,8 @@
 package org.enoy.klc.common;
 
-public interface Activatable {
+import java.io.Serializable;
+
+public interface Activatable extends Serializable{
 
 	public boolean isActive();
 	

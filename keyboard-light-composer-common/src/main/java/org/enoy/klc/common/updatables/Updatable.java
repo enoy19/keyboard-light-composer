@@ -5,7 +5,9 @@ import org.enoy.klc.common.Deletable;
 public interface Updatable extends Deletable {
 
 	public boolean isDirty();
+
 	public void setDirty(boolean dirty);
+
 	public void update(double delta);
 
 	public default void updateAndClean(double delta) {
@@ -28,7 +30,7 @@ public interface Updatable extends Deletable {
 	public default void unregisterUpdatable() {
 		UpdatableRegister.getInstance().unregister(this);
 	}
-	
+
 	@Override
 	default void delete() {
 		unregisterUpdatable();

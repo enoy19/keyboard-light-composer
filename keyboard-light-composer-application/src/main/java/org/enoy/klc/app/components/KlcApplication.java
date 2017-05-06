@@ -1,10 +1,15 @@
 package org.enoy.klc.app.components;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import org.enoy.klc.app.components.list.DeviceListCell;
+import org.enoy.klc.app.components.tree.LayerBaseContainer;
+import org.enoy.klc.app.components.utils.DialogUtil;
+import org.enoy.klc.app.components.utils.LayerTreeItemUtil;
+import org.enoy.klc.app.components.utils.LoadSaveFileChooser;
 import org.enoy.klc.common.device.Device;
 import org.enoy.klc.common.device.DeviceRegister;
 import org.enoy.klc.common.effects.Effect;
@@ -19,7 +24,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.TreeItem;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Window;
 
 public class KlcApplication implements Initializable {
 
@@ -52,8 +59,11 @@ public class KlcApplication implements Initializable {
 
 	private LayerRenderer layerRenderer;
 
+	private LoadSaveFileChooser loadSaveFileChooser;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		loadSaveFileChooser = new LoadSaveFileChooser();
 		updater = new Updater();
 		layerPropertiesEditor = new KlcPropertyContainerEditor();
 		effectPropertiesEditor = new KlcPropertyContainerEditor();
@@ -99,6 +109,28 @@ public class KlcApplication implements Initializable {
 		layerRenderer.setDevice(currentDevice);
 	}
 
+	@FXML
+	private void open() {
+		try {
+			LayerBase layerBase = loadSaveFileChooser.open(getWindow());
+			TreeItem<LayerBaseContainer<?>> rootTreeItem = LayerTreeItemUtil.getTreeItem(layerBase);
+			effectLayersController.setRoot(rootTreeItem);
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+			DialogUtil.error(getWindow(), "Open Error", "Error occured while loading", e.getMessage());
+		}
+	}
+
+	@FXML
+	private void save() {
+		try {
+			loadSaveFileChooser.save(getWindow(), effectLayersController.getRoot());
+		} catch (IOException e) {
+			e.printStackTrace();
+			DialogUtil.error(getWindow(), "Save Error", "Error occured while saving", e.getMessage());
+		}
+	}
+
 	public void setUpdater(Updater updater) {
 		if (this.updater != null) {
 			updater.setOnPause(null);
@@ -122,7 +154,7 @@ public class KlcApplication implements Initializable {
 				&& (effect = ((EffectLayer) layerBase).getEffect()) instanceof KlcPropertyContainer) {
 			effectPropertiesEditor.setPropertyContainer((KlcPropertyContainer) effect);
 			stackPaneEffectProperties.setVisible(true);
-		}else{
+		} else {
 			stackPaneEffectProperties.setVisible(false);
 		}
 	}
@@ -134,6 +166,10 @@ public class KlcApplication implements Initializable {
 			layerRenderer.setPaused(true);
 			updateToggleButtonText();
 		}
+	}
+
+	private Window getWindow() {
+		return layerPropertiesEditorPane.getScene().getWindow();
 	}
 
 }

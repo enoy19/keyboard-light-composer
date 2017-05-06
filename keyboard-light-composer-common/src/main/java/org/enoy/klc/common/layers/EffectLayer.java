@@ -12,6 +12,8 @@ import org.enoy.klc.common.updatables.Dependent;
 
 public class EffectLayer extends LayerBase {
 
+	private static final long serialVersionUID = 420476429962987879L;
+	
 	private EffectLayerInformation effectLayerInformation;
 	private Effect effect;
 

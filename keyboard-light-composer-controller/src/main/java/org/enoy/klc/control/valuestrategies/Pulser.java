@@ -13,6 +13,8 @@ import org.enoy.klc.common.updatables.DirtyUpdatable;
 @Name("Pulser")
 public class Pulser extends DependentImpl implements ValueStrategy<Float>, DirtyUpdatable, KlcPropertyContainer {
 
+	private static final long serialVersionUID = 6267695861865537928L;
+	
 	private volatile float value = 0;
 	private boolean up;
 	private FloatKlcProperty rate;

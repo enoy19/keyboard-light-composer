@@ -96,9 +96,9 @@ public class EffectLayers implements Initializable {
 
 	private void resetTreeView() {
 
-		root = new EffectGroupLayer("Root");
-		treeRoot = new TreeItem<>(new EffectGroupLayerContainer(root));
-		treeViewLayers.setRoot(treeRoot);
+		EffectGroupLayer root = new EffectGroupLayer("Root");
+		TreeItem<LayerBaseContainer<?>> treeRoot = new TreeItem<>(new EffectGroupLayerContainer(root));
+		setRoot(treeRoot, root);
 
 	}
 
@@ -121,6 +121,24 @@ public class EffectLayers implements Initializable {
 
 		public void onEffectLayerSelected(LayerBase layer);
 
+	}
+
+	public void setRoot(TreeItem<LayerBaseContainer<?>> rootTreeItem) {
+
+		EffectGroupLayer layerBase = (EffectGroupLayer) rootTreeItem.getValue().getLayerBase();
+		setRoot(rootTreeItem, layerBase);
+
+	}
+
+	private void setRoot(TreeItem<LayerBaseContainer<?>> rootTreeItem, LayerBase layerBase) {
+		if (root != null) {
+			root.delete();
+		}
+
+		// TODO: exception
+		root = (EffectGroupLayer) layerBase;
+		treeRoot = rootTreeItem;
+		treeViewLayers.setRoot(rootTreeItem);
 	}
 
 }

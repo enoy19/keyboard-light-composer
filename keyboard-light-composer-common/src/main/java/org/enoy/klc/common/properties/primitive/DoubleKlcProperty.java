@@ -8,6 +8,8 @@ public class DoubleKlcProperty extends DoubleKlcReadOnlyProperty
 		implements
 			KlcWritableProperty<Double> {
 
+	private static final long serialVersionUID = 2944914371160302015L;
+
 	public DoubleKlcProperty(String name, String description,
 			boolean valueStrategyAllowed, Double defaultValue) {
 		super(name, description, valueStrategyAllowed, defaultValue);

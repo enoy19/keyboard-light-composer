@@ -7,6 +7,8 @@ import org.enoy.klc.common.factories.Name;
 @Name("Default Scale Mode")
 public class DefaultScaleMode implements ScaleMode {
 
+	private static final long serialVersionUID = 3944935489502068024L;
+	
 	private static DefaultScaleMode instance;
 
 	private DefaultScaleMode() {

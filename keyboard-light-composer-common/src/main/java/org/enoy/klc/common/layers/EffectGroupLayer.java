@@ -9,6 +9,8 @@ import org.enoy.klc.common.properties.KlcWritableProperty;
 
 public class EffectGroupLayer extends LayerBase {
 
+	private static final long serialVersionUID = -7633323072600833148L;
+	
 	private EffectGroupLayerInformation effectGroupLayerInformation;
 	private List<LayerBase> childEffectLayers;
 
@@ -80,6 +82,10 @@ public class EffectGroupLayer extends LayerBase {
 	
 	public void clearChildren() {
 		childEffectLayers.clear();
+	}
+	
+	public List<LayerBase> getChildren() {
+		return new ArrayList<>(childEffectLayers);
 	}
 
 	@Override

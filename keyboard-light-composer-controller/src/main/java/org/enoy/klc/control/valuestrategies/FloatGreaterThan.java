@@ -12,6 +12,8 @@ import org.enoy.klc.common.updatables.DependentImpl;
 @Name("Float Greater Than")
 public class FloatGreaterThan extends DependentImpl implements ValueStrategy<Boolean>, KlcPropertyContainer {
 
+	private static final long serialVersionUID = -8734809933004496435L;
+	
 	private FloatKlcProperty a;
 	private FloatKlcProperty b;
 

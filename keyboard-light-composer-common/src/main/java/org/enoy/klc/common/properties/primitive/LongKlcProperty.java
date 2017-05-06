@@ -6,6 +6,8 @@ import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
 
 public class LongKlcProperty extends LongKlcReadOnlyProperty implements KlcWritableProperty<Long> {
 
+	private static final long serialVersionUID = -1305555386288409551L;
+
 	public LongKlcProperty(String name, String description,
 			boolean valueStrategyAllowed, Long defaultValue) {
 		super(name, description, valueStrategyAllowed, defaultValue);

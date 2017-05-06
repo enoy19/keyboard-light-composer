@@ -7,6 +7,8 @@ import org.enoy.klc.common.factories.Name;
 @Name("Normal")
 public class BlendModeNormal implements BlendMode{
 
+	private static final long serialVersionUID = 8477697751595091052L;
+
 	@Override
 	public Light blend(Light lightA, Light lightB) {
 		

@@ -1,8 +1,10 @@
 package org.enoy.klc.common.properties;
 
+import java.io.Serializable;
+
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
 
-public interface KlcWritableProperty<T> extends KlcPropertyBase<T> {
+public interface KlcWritableProperty<T extends Serializable> extends KlcPropertyBase<T> {
 
 	public void setName(String name);
 

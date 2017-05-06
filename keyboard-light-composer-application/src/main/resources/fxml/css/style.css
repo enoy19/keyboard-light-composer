@@ -49,3 +49,7 @@
 .large-font-size {
 	-fx-font-size: 48px;
 }
+
+.black-font {
+	-fx-text-fill: #000000;
+}

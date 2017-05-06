@@ -25,8 +25,8 @@ public class Register<T> {
 	public Stream<T> getRegisteredStream() {
 		return register.stream();
 	}
-	
-	public Stream<T> getRegisteredParallelStream(){
+
+	public Stream<T> getRegisteredParallelStream() {
 		return register.parallelStream();
 	}
 
@@ -36,6 +36,10 @@ public class Register<T> {
 
 	public void unregister(T object) {
 		register.remove(object);
+	}
+
+	public void clear() {
+		register.clear();
 	}
 
 }

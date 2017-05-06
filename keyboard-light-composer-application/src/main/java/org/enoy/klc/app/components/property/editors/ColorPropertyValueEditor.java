@@ -1,13 +1,13 @@
 package org.enoy.klc.app.components.property.editors;
 
 import org.enoy.klc.app.components.PropertyValueEditor;
+import org.enoy.klc.common.model.KlcColor;
 
 import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.paint.Color;
 
-@PropertyValueEditorTypeClass(Color.class)
-public class ColorPropertyValueEditor extends PropertyValueEditor<Color>{
+@PropertyValueEditorTypeClass(KlcColor.class)
+public class ColorPropertyValueEditor extends PropertyValueEditor<KlcColor>{
 
 	private ColorPicker colorPicker;
 	
@@ -16,13 +16,13 @@ public class ColorPropertyValueEditor extends PropertyValueEditor<Color>{
 	}
 	
 	@Override
-	public Color getValue() {
-		return colorPicker.getValue();
+	public KlcColor getValue() {
+		return new KlcColor(colorPicker.getValue());
 	}
 
 	@Override
-	public void initEditorValue(Color value) {
-		colorPicker.setValue(value);
+	public void initEditorValue(KlcColor value) {
+		colorPicker.setValue(value.getColor());
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package org.enoy.klc.common.layers;
 
+import java.io.Serializable;
+
 import org.enoy.klc.common.Activatable;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendMode;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendModeNormal;
@@ -19,8 +21,10 @@ import org.enoy.klc.common.properties.primitive.StringKlcProperty;
 import org.enoy.klc.common.properties.primitive.StringKlcReadOnlyProperty;
 import org.enoy.klc.common.updatables.Dependent;
 
-public class ReadOnlyEffectLayerInformation implements KlcPropertyContainer, Dependent {
+public class ReadOnlyEffectLayerInformation implements KlcPropertyContainer, Dependent, Serializable {
 
+	private static final long serialVersionUID = 5242168768619555010L;
+	
 	protected StringKlcProperty name;
 	protected IntegerKlcProperty x;
 	protected IntegerKlcProperty y;

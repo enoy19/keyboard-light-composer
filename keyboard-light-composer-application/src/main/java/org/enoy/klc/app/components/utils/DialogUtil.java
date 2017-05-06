@@ -17,11 +17,7 @@ public class DialogUtil {
 
 	public static void confirm(Window owner, String title, String headerText, String contentText, Runnable onConfirm) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle(title);
-		alert.setHeaderText(headerText);
-		alert.setContentText(contentText);
-		alert.initOwner(owner);
-		alert.initModality(Modality.WINDOW_MODAL);
+		setupDialog(owner, title, headerText, contentText, alert);
 
 		alert.showAndWait().ifPresent(bt -> {
 			if (bt == ButtonType.OK) {
@@ -30,13 +26,25 @@ public class DialogUtil {
 		});
 	}
 
-	public static void alert(Window owner, String title, String headerText, String contentText) {
-		Alert alert = new Alert(AlertType.INFORMATION);
+	public static void error(Window owner, String title, String headerText, String contentText) {
+
+		Alert alert = new Alert(AlertType.ERROR);
+		setupDialog(owner, title, headerText, contentText, alert);
+		alert.showAndWait();
+
+	}
+
+	private static void setupDialog(Window owner, String title, String headerText, String contentText, Dialog<?> alert) {
 		alert.setTitle(title);
 		alert.setHeaderText(headerText);
 		alert.setContentText(contentText);
 		alert.initOwner(owner);
 		alert.initModality(Modality.WINDOW_MODAL);
+	}
+
+	public static void alert(Window owner, String title, String headerText, String contentText) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		setupDialog(owner, title, headerText, contentText, alert);
 
 		alert.showAndWait();
 	}
@@ -46,11 +54,7 @@ public class DialogUtil {
 
 		Dialog<T> dialog = new ChoiceDialog<T>(null, choices);
 
-		dialog.initOwner(owner);
-		dialog.initModality(Modality.WINDOW_MODAL);
-		dialog.setTitle(title);
-		dialog.setHeaderText(headerText);
-		dialog.setContentText(contentText);
+		setupDialog(owner, title, headerText, contentText, dialog);
 
 		return dialog.showAndWait().orElse(null);
 

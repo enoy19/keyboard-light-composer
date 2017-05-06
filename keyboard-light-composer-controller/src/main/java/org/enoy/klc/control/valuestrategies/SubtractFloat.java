@@ -12,6 +12,8 @@ import org.enoy.klc.common.updatables.DependentImpl;
 @Name("Subtract Float")
 public class SubtractFloat extends DependentImpl implements ValueStrategy<Float>, KlcPropertyContainer {
 
+	private static final long serialVersionUID = 2154436004080599672L;
+	
 	private FloatKlcProperty a;
 	private FloatKlcProperty b;
 

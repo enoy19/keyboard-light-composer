@@ -12,6 +12,8 @@ import org.enoy.klc.common.updatables.DependentImpl;
 @Name("Multiply Float")
 public class MultiplyFloat extends DependentImpl implements ValueStrategy<Float>, KlcPropertyContainer {
 
+	private static final long serialVersionUID = -9191133758532058858L;
+	
 	private FloatKlcProperty a;
 	private FloatKlcProperty b;
 

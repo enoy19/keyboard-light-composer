@@ -8,6 +8,8 @@ public class BooleanKlcProperty extends BooleanKlcReadOnlyProperty
 		implements
 			KlcWritableProperty<Boolean> {
 
+	private static final long serialVersionUID = 2744854553690099464L;
+
 	public BooleanKlcProperty(String name, String description,
 			boolean valueStrategyAllowed, Boolean defaultValue) {
 		super(name, description, valueStrategyAllowed, defaultValue);

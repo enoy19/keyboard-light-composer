@@ -7,6 +7,8 @@ import org.enoy.klc.common.factories.Name;
 @Name("Subtract")
 public class BlendModeSubtract implements BlendMode {
 
+	private static final long serialVersionUID = 6744361291696184905L;
+
 	@Override
 	public Light blend(Light lightA, Light lightB) {
 

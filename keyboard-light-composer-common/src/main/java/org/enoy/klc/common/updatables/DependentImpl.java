@@ -4,6 +4,8 @@ import org.enoy.klc.common.Activatable;
 
 public class DependentImpl implements Dependent {
 
+	private static final long serialVersionUID = 1036106766505723763L;
+	
 	private Activatable dependency;
 	
 	@Override

@@ -1,12 +1,14 @@
 package org.enoy.klc.app.components;
 
+import java.io.Serializable;
+
 import org.enoy.klc.common.properties.KlcWritableProperty;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
-public abstract class PropertyValueEditor<T> extends StackPane {
+public abstract class PropertyValueEditor<T extends Serializable> extends StackPane {
 
 	private KlcWritableProperty<T> property;
 

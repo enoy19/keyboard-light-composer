@@ -10,6 +10,8 @@ public class EffectGroupLayerInformation
 		extends
 			ReadOnlyEffectGroupLayerInformation {
 
+	private static final long serialVersionUID = 4455951916080000180L;
+
 	public EffectGroupLayerInformation(String name) {
 		super(name);
 	}

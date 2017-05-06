@@ -10,6 +10,8 @@ import org.enoy.klc.common.properties.primitive.StringKlcProperty;
 
 public class EffectLayerInformation extends ReadOnlyEffectLayerInformation {
 
+	private static final long serialVersionUID = 169797653205580357L;
+
 	public EffectLayerInformation(String name) {
 		super(name);
 	}

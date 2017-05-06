@@ -1,10 +1,14 @@
 package org.enoy.klc.common.properties;
 
+import java.io.Serializable;
+
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
 
-public class KlcProperty<T> extends KlcReadOnlyProperty<T>
+public class KlcProperty<T extends Serializable> extends KlcReadOnlyProperty<T>
 		implements
 			KlcWritableProperty<T> {
+
+	private static final long serialVersionUID = 1852864023903072488L;
 
 	public KlcProperty(Class<T> propertyType, String name, String description,
 			boolean valueStrategyAllowed, T defaultValue) {
