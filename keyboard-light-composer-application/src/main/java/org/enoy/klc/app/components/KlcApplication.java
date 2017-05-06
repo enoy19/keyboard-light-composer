@@ -75,6 +75,7 @@ public class KlcApplication implements Initializable {
 		toggleButtonPlay.disableProperty().bind(comboBoxDevice.getSelectionModel().selectedItemProperty().isNull());
 		splitPaneEffectsAndLayers.disableProperty().bind(toggleButtonPlay.selectedProperty());
 		layerPropertiesEditorPane.disableProperty().bind(toggleButtonPlay.selectedProperty());
+		effectPropertiesEditor.disableProperty().bind(toggleButtonPlay.selectedProperty());
 
 		comboBoxDevice.getItems().addAll(DeviceRegister.getInstance().getRegisteredObjectsAsList());
 		comboBoxDevice.setCellFactory(lv -> new DeviceListCell());
