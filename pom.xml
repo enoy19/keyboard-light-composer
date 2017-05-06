@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enoy</groupId>
 	<artifactId>keyboard-light-composer</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.0-ALPHA</version>
 	<packaging>pom</packaging>
 	<name>Keyboard Light Composer</name>
 	<modules>
@@ -27,6 +27,42 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-	<!-- TODO: dependencyManagement -->
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.enoy</groupId>
+				<artifactId>
+					keyboard-light-composer-application
+				</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.enoy</groupId>
+				<artifactId>keyboard-light-composer-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.enoy</groupId>
+				<artifactId>
+					keyboard-light-composer-controller
+				</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.enoy</groupId>
+				<artifactId>
+					keyboard-light-composer-device-logitech
+				</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.enoy</groupId>
+				<artifactId>
+					keyboard-light-composer-standard-effects
+				</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>	
 </project>

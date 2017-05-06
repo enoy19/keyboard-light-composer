@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.enoy</groupId>
 		<artifactId>keyboard-light-composer</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.0-ALPHA</version>
 	</parent>
 	<artifactId>keyboard-light-composer-controller</artifactId>
 
@@ -12,7 +12,6 @@
 		<dependency>
 			<groupId>org.enoy</groupId>
 			<artifactId>keyboard-light-composer-common</artifactId>
-			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.reflections</groupId>

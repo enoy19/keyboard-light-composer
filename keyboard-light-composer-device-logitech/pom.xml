@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.enoy</groupId>
 		<artifactId>keyboard-light-composer</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.0-ALPHA</version>
 	</parent>
 	<artifactId>keyboard-light-composer-device-logitech</artifactId>
 	<name>Device Provider for Logitech Keyboards</name>
@@ -22,7 +22,6 @@
 		<dependency>
 			<groupId>org.enoy</groupId>
 			<artifactId>keyboard-light-composer-controller</artifactId>
-			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 
