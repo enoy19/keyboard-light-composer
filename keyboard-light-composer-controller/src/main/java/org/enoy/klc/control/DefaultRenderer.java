@@ -35,4 +35,9 @@ public class DefaultRenderer extends LayerRenderer {
 		}
 	}
 
+	@Override
+	public void reset() {
+		
+	}
+
 }

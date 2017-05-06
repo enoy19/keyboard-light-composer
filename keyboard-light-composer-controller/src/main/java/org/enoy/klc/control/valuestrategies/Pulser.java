@@ -1,5 +1,9 @@
 package org.enoy.klc.control.valuestrategies;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+import org.enoy.klc.common.Resettable;
 import org.enoy.klc.common.factories.FactoryGenericType;
 import org.enoy.klc.common.factories.Name;
 import org.enoy.klc.common.properties.KlcPropertyContainer;
@@ -11,18 +15,20 @@ import org.enoy.klc.common.updatables.DirtyUpdatable;
 
 @FactoryGenericType(Float.class)
 @Name("Pulser")
-public class Pulser extends DependentImpl implements ValueStrategy<Float>, DirtyUpdatable, KlcPropertyContainer {
+public class Pulser extends DependentImpl implements ValueStrategy<Float>, DirtyUpdatable, KlcPropertyContainer, Resettable {
 
 	private static final long serialVersionUID = 6267695861865537928L;
-	
+
 	private volatile float value = 0;
 	private boolean up;
 	private FloatKlcProperty rate;
+	private FloatKlcProperty start;
 
 	public Pulser() {
 		rate = new FloatKlcProperty("Speed", "Speed of this Pulser", true, 1f);
+		start = new FloatKlcProperty("Start at", "The starting point of this pulser", true, 0f);
 	}
-	
+
 	@Override
 	public Float getValue() {
 		return value;
@@ -54,7 +60,20 @@ public class Pulser extends DependentImpl implements ValueStrategy<Float>, Dirty
 
 	@Override
 	public KlcWritableProperty<?>[] getProperties() {
-		return new KlcWritableProperty<?>[]{rate};
+		return new KlcWritableProperty<?>[] { rate, start };
+	}
+
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+		in.defaultReadObject();
+		if(start == null){
+			start = new FloatKlcProperty("Start at", "The starting point of this pulser", true, 0f);
+		}
+	}
+
+	@Override
+	public void reset() {
+		value = start.getValue();
+		up = true;
 	}
 
 }

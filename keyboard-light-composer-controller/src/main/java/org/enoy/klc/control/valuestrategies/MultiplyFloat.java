@@ -6,11 +6,10 @@ import org.enoy.klc.common.properties.KlcPropertyContainer;
 import org.enoy.klc.common.properties.KlcWritableProperty;
 import org.enoy.klc.common.properties.primitive.FloatKlcProperty;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
-import org.enoy.klc.common.updatables.DependentImpl;
 
 @FactoryGenericType(Float.class)
 @Name("Multiply Float")
-public class MultiplyFloat extends DependentImpl implements ValueStrategy<Float>, KlcPropertyContainer {
+public class MultiplyFloat implements ValueStrategy<Float>, KlcPropertyContainer {
 
 	private static final long serialVersionUID = -9191133758532058858L;
 	

@@ -60,7 +60,7 @@
                   <fx:include fx:id="effectLayers" source="EffectLayers.fxml" />
                </items>
             </SplitPane>
-            <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+            <SplitPane dividerPositions="0.75" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
                   <StackPane prefHeight="150.0" prefWidth="200.0" />
                   <StackPane fx:id="stackPaneEffectProperties" prefHeight="150.0" prefWidth="200.0" />

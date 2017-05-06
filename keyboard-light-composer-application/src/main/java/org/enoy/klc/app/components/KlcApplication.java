@@ -113,8 +113,11 @@ public class KlcApplication implements Initializable {
 	private void open() {
 		try {
 			LayerBase layerBase = loadSaveFileChooser.open(getWindow());
-			TreeItem<LayerBaseContainer<?>> rootTreeItem = LayerTreeItemUtil.getTreeItem(layerBase);
-			effectLayersController.setRoot(rootTreeItem);
+			
+			if(layerBase != null){
+				TreeItem<LayerBaseContainer<?>> rootTreeItem = LayerTreeItemUtil.getTreeItem(layerBase);
+				effectLayersController.setRoot(rootTreeItem);
+			}
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 			DialogUtil.error(getWindow(), "Open Error", "Error occured while loading", e.getMessage());

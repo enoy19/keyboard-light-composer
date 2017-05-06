@@ -7,12 +7,23 @@ import java.io.ObjectOutput;
 
 import javafx.scene.paint.Color;
 
-public class KlcColor implements Externalizable{
+// TODO: extends Color?
+public class KlcColor implements Externalizable {
 	
+	private static final long serialVersionUID = 6077172583776199343L;
+
 	private Color color;
-	
+
 	public KlcColor() {
 		color = new Color(0, 0, 0, 1);
+	}
+
+	public KlcColor(double red, double green, double blue, double alpha) {
+		color = new Color(red, green, blue, alpha);
+	}
+
+	public KlcColor(float red, float green, float blue, float alpha) {
+		this((double) red, (double) green, (double) blue, (double) alpha);
 	}
 
 	public KlcColor(Color color) {
@@ -22,11 +33,11 @@ public class KlcColor implements Externalizable{
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
+
 	public Color getColor() {
 		return color;
 	}
-	
+
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		out.writeObject(color.getRed());

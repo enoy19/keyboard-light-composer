@@ -1,12 +1,15 @@
 package org.enoy.klc.control;
 
-public abstract class StopPauseLoop implements Runnable {
+import org.enoy.klc.common.Resettable;
+
+public abstract class StopPauseLoop implements Runnable, Resettable {
 
 	private volatile boolean stopped = false;
 	private volatile boolean paused = false;
 	private volatile long sleepLoopCycle;
 	private volatile long sleepPaused;
 	private PauseListener onPause;
+	private boolean reset;
 
 	public StopPauseLoop() {
 		this.sleepLoopCycle = 20;
@@ -18,14 +21,19 @@ public abstract class StopPauseLoop implements Runnable {
 
 	@Override
 	public void run() {
-		long time = System.currentTimeMillis();
-
 		while (!isStopped() && !Thread.currentThread().isInterrupted()) {
+			long time = System.currentTimeMillis();
+			reset = false;
 			while (!isPaused() && !Thread.currentThread().isInterrupted()) {
 				long deltaLong = System.currentTimeMillis() - time;
 				time = System.currentTimeMillis();
 				double delta = (double) deltaLong / 1000f;
-
+				
+				if(!reset){
+					reset = true;
+					reset();
+				}
+				
 				executeLoop(delta);
 
 				try {

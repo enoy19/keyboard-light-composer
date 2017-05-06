@@ -1,6 +1,7 @@
 package org.enoy.klc.control.updater;
 
 import org.enoy.klc.common.Activatable;
+import org.enoy.klc.common.Resettable;
 import org.enoy.klc.common.properties.KlcPropertyContainer;
 import org.enoy.klc.common.properties.KlcWritableProperty;
 import org.enoy.klc.common.updatables.Dependent;
@@ -30,16 +31,15 @@ public class Updater extends StopPauseLoop {
 		}
 	}
 
-	@Override
-	public void setPaused(boolean paused) {
-		super.setPaused(paused);
-		if (!paused) {
-			setDependencies();
-		}
+	private void resetUpdatables() {
+		updatableRegister.getRegisteredStream()//
+				.filter(u -> u instanceof Resettable)//
+				.map(u -> (Resettable) u)//
+				.forEach(Resettable::reset);
 	}
 
 	private void setDependencies() {
-		updatableRegister.getRegisteredParallelStream().forEach(u -> {
+		updatableRegister.getRegisteredStream().forEach(u -> {
 			inheritDependencies(u);
 		});
 	}
@@ -65,6 +65,12 @@ public class Updater extends StopPauseLoop {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void reset() {
+		setDependencies();
+		resetUpdatables();
 	}
 
 }

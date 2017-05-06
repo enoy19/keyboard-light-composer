@@ -6,11 +6,10 @@ import org.enoy.klc.common.properties.KlcPropertyContainer;
 import org.enoy.klc.common.properties.KlcWritableProperty;
 import org.enoy.klc.common.properties.primitive.FloatKlcProperty;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
-import org.enoy.klc.common.updatables.DependentImpl;
 
 @FactoryGenericType(Boolean.class)
 @Name("Float Greater Than")
-public class FloatGreaterThan extends DependentImpl implements ValueStrategy<Boolean>, KlcPropertyContainer {
+public class FloatGreaterThan implements ValueStrategy<Boolean>, KlcPropertyContainer {
 
 	private static final long serialVersionUID = -8734809933004496435L;
 	
