@@ -5,7 +5,7 @@ So I wanted to create a Desktop application (JavaFx) that provides an easy frame
 
 ### Features
   * Effects are customizable using properties
-  * Using "ValueStrategies" property values can be obtained using any algorithm (CPU Usage)
+  * Using "ValueStrategies" property values can be obtained using any algorithm (e.g. CPU Usage)
   * You may arrange effects in layers as you wish and group them in effectgroups
 
 ### Planned features
