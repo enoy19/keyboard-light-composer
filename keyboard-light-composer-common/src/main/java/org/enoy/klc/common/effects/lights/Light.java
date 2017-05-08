@@ -1,5 +1,7 @@
 package org.enoy.klc.common.effects.lights;
 
+import org.enoy.klc.common.model.KlcColor;
+
 import javafx.scene.paint.Color;
 
 public class Light {
@@ -10,6 +12,7 @@ public class Light {
 	private float alpha;
 
 	public Light() {
+		this(0, 0, 0, 0);
 	}
 
 	public Light(float red, float green, float blue, float alpha) {
@@ -17,6 +20,18 @@ public class Light {
 		this.green = green;
 		this.blue = blue;
 		this.alpha = alpha;
+	}
+
+	public Light(KlcColor klcColorValue) {
+		this(klcColorValue.getColor());
+	}
+
+	public Light(Color color) {
+		this(color.getRed(), color.getGreen(), color.getBlue(), color.getOpacity());
+	}
+
+	public Light(double red, double green, double blue, double opacity) {
+		this((float) red, (float) green, (float) blue, (float) opacity);
 	}
 
 	public float getRed() {
@@ -68,7 +83,7 @@ public class Light {
 	}
 
 	private byte toUnsignedByte(float value) {
-		return (byte) ((0xFF) & (short)(value * 255));
+		return (byte) ((0xFF) & (short) (value * 255));
 	}
 
 	public Color getColor() {
@@ -85,15 +100,15 @@ public class Light {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("[ ");
-		sb.append(red+", ");
-		sb.append(green+", ");
-		sb.append(blue+", ");
-		sb.append(alpha+" ]");
+		sb.append(red + ", ");
+		sb.append(green + ", ");
+		sb.append(blue + ", ");
+		sb.append(alpha + " ]");
 		return sb.toString();
 	}
 
 	public void applyOpacity(float opacity) {
 		setAlpha(getAlpha() * opacity);
 	}
-	
+
 }
