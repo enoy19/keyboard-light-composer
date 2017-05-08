@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.enoy</groupId>
 	<artifactId>keyboard-light-composer</artifactId>
-	<version>1.0.1-ALPHA</version>
+	<version>1.0.2-ALPHA</version>
 	<packaging>pom</packaging>
 	<name>Keyboard Light Composer</name>
 	<modules>
