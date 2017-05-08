@@ -3,9 +3,11 @@
 I bought an RGB lighty colory pretty keyboard(y) that looks awesome! But the manufacturers driver only provides 3 cool effects. And the effects aren't as customizable as I would like them to be :(
 So I wanted to create a Desktop application (JavaFx) that provides an easy framework to create new effects for RGB keyboards of different manufacturers.
 
+### [Download Pre-Release](https://github.com/enoy19/keyboard-light-composer/releases)
+
 ### Features
   * Effects are customizable using properties
-  * Using "ValueStrategies" property values can be obtained using any algorithm (CPU Usage)
+  * Using "ValueStrategies" property values can be obtained using any algorithm (e.g. CPU Usage)
   * You may arrange effects in layers as you wish and group them in effectgroups
 
 ### Planned features
