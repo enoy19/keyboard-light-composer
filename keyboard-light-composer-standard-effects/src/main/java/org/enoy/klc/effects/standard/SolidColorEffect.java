@@ -15,9 +15,6 @@ import javafx.scene.paint.Color;
 @Group("Standard Effects")
 public class SolidColorEffect implements Effect, KlcPropertyContainer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4912455499181262839L;
 	private KlcProperty<KlcColor> color;
 
