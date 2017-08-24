@@ -1,8 +1,8 @@
 package org.enoy.klc.control.utils;
 
-import java.util.List;
-
 import javafx.application.Platform;
+
+import java.util.List;
 
 public class ListItemUtil {
 

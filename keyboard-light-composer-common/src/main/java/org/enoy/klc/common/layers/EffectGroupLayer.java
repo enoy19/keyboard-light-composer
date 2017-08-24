@@ -1,11 +1,11 @@
 package org.enoy.klc.common.layers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.enoy.klc.common.effects.lights.DeviceLightMatrix;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendMode;
 import org.enoy.klc.common.properties.KlcWritableProperty;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EffectGroupLayer extends LayerBase {
 

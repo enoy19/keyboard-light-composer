@@ -1,7 +1,5 @@
 package org.enoy.klc.common.layers;
 
-import java.io.Serializable;
-
 import org.enoy.klc.common.Activatable;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendMode;
 import org.enoy.klc.common.effects.lights.blendmodes.BlendModeNormal;
@@ -11,15 +9,10 @@ import org.enoy.klc.common.properties.KlcProperty;
 import org.enoy.klc.common.properties.KlcPropertyContainer;
 import org.enoy.klc.common.properties.KlcReadOnlyProperty;
 import org.enoy.klc.common.properties.KlcWritableProperty;
-import org.enoy.klc.common.properties.primitive.BooleanKlcProperty;
-import org.enoy.klc.common.properties.primitive.BooleanKlcReadOnlyProperty;
-import org.enoy.klc.common.properties.primitive.FloatKlcProperty;
-import org.enoy.klc.common.properties.primitive.FloatKlcReadOnlyProperty;
-import org.enoy.klc.common.properties.primitive.IntegerKlcProperty;
-import org.enoy.klc.common.properties.primitive.IntegerKlcReadOnlyProperty;
-import org.enoy.klc.common.properties.primitive.StringKlcProperty;
-import org.enoy.klc.common.properties.primitive.StringKlcReadOnlyProperty;
+import org.enoy.klc.common.properties.primitive.*;
 import org.enoy.klc.common.updatables.Dependent;
+
+import java.io.Serializable;
 
 public class ReadOnlyEffectLayerInformation implements KlcPropertyContainer, Dependent, Serializable {
 

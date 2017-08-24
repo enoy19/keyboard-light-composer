@@ -1,8 +1,9 @@
 package org.enoy.klc.app;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.enoy.klc.app.components.KlcApplication;
 import org.enoy.klc.app.components.PropertyValueEditor;
 import org.enoy.klc.app.components.property.editors.PropertyValueEditorFactory;
@@ -10,13 +11,12 @@ import org.enoy.klc.app.components.property.editors.PropertyValueEditorRegister;
 import org.enoy.klc.common.updatables.UpdatableRegister;
 import org.enoy.klc.control.DefaultRenderer;
 import org.enoy.klc.control.effects.LayerRenderer;
+import org.enoy.klc.control.external.ExternalServer;
 import org.enoy.klc.control.registerer.Registerer;
 import org.enoy.klc.control.updater.Updater;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class KeyboardLightComposerApplication extends Application {
 
@@ -49,6 +49,9 @@ public class KeyboardLightComposerApplication extends Application {
 		controller.setUpdater(updater);
 		controller.setRenderer(layerRenderer);
 		Scene scene = new Scene(loader.getRoot());
+
+		// Start Server
+        ExternalServer.startExternalServer();
 
 		scene.getStylesheets().add("fxml/css/style.css");
 		primaryStage.setScene(scene);

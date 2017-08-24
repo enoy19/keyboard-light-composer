@@ -1,8 +1,11 @@
 package org.enoy.klc.app.components.list;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import javafx.scene.control.ListCell;
+import javafx.scene.control.TreeItem;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import org.enoy.klc.app.components.tree.EffectLayerContainer;
 import org.enoy.klc.app.components.tree.LayerBaseContainer;
 import org.enoy.klc.app.components.tree.LayerBaseTreeCell;
@@ -14,12 +17,8 @@ import org.enoy.klc.common.factories.Factory;
 import org.enoy.klc.common.layers.EffectLayer;
 import org.enoy.klc.common.layers.LayerBase;
 
-import javafx.scene.control.ListCell;
-import javafx.scene.control.TreeItem;
-import javafx.scene.input.DataFormat;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EffectFactoryListCell extends ListCell<EffectFactory> {
 

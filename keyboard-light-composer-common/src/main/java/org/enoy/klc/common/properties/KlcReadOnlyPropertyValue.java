@@ -1,12 +1,12 @@
 package org.enoy.klc.common.properties;
 
-import java.io.Serializable;
-
 import org.enoy.klc.common.Activatable;
 import org.enoy.klc.common.Deletable;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
 import org.enoy.klc.common.updatables.Dependent;
 import org.enoy.klc.common.updatables.Updatable;
+
+import java.io.Serializable;
 
 public class KlcReadOnlyPropertyValue<T extends Serializable> implements Deletable, Dependent, Serializable {
 

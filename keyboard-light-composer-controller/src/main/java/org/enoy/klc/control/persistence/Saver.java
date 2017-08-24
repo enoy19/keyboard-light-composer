@@ -1,13 +1,9 @@
 package org.enoy.klc.control.persistence;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-
 import org.enoy.klc.common.layers.LayerBase;
 import org.enoy.klc.common.updatables.UpdatableRegister;
+
+import java.io.*;
 
 public class Saver {
 

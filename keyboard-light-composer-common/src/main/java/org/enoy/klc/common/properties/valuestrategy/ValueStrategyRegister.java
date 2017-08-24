@@ -1,11 +1,11 @@
 package org.enoy.klc.common.properties.valuestrategy;
 
+import org.enoy.klc.common.Register;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.enoy.klc.common.Register;
 
 public class ValueStrategyRegister extends Register<ValueStrategyFactory> {
 

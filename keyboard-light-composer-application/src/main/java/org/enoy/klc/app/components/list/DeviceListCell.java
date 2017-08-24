@@ -1,8 +1,7 @@
 package org.enoy.klc.app.components.list;
 
-import org.enoy.klc.common.device.Device;
-
 import javafx.scene.control.ListCell;
+import org.enoy.klc.common.device.Device;
 
 public class DeviceListCell extends ListCell<Device> {
 

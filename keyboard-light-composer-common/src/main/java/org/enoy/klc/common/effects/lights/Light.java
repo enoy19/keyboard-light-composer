@@ -1,8 +1,7 @@
 package org.enoy.klc.common.effects.lights;
 
-import org.enoy.klc.common.model.KlcColor;
-
 import javafx.scene.paint.Color;
+import org.enoy.klc.common.model.KlcColor;
 
 public class Light {
 
@@ -16,10 +15,10 @@ public class Light {
 	}
 
 	public Light(float red, float green, float blue, float alpha) {
-		this.red = red;
-		this.green = green;
-		this.blue = blue;
-		this.alpha = alpha;
+		setRed(red);
+		setGreen(green);
+		setBlue(blue);
+		setAlpha(alpha);
 	}
 
 	public Light(KlcColor klcColorValue) {
@@ -39,7 +38,7 @@ public class Light {
 	}
 
 	public void setRed(float red) {
-		this.red = red;
+		this.red = clamp(red);
 	}
 
 	public float getGreen() {
@@ -47,7 +46,7 @@ public class Light {
 	}
 
 	public void setGreen(float green) {
-		this.green = green;
+		this.green = clamp(green);
 	}
 
 	public float getBlue() {
@@ -55,7 +54,7 @@ public class Light {
 	}
 
 	public void setBlue(float blue) {
-		this.blue = blue;
+		this.blue = clamp(blue);
 	}
 
 	public float getAlpha() {
@@ -63,7 +62,13 @@ public class Light {
 	}
 
 	public void setAlpha(float alpha) {
-		this.alpha = alpha;
+		this.alpha = clamp(alpha);
+	}
+	
+	private float clamp(float value) {
+		return value > 1
+				? 1 : value < 0
+				? 0 : value;
 	}
 
 	public byte getRedByte() {

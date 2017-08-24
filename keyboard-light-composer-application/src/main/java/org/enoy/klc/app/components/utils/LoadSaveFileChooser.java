@@ -1,16 +1,15 @@
 package org.enoy.klc.app.components.utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Window;
 import org.enoy.klc.common.layers.LayerBase;
 import org.enoy.klc.control.persistence.Loader;
 import org.enoy.klc.control.persistence.Saver;
 
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Window;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class LoadSaveFileChooser {
 

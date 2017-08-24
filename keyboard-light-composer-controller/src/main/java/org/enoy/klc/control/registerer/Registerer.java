@@ -1,10 +1,10 @@
 package org.enoy.klc.control.registerer;
 
-import java.lang.reflect.Modifier;
-import java.util.Set;
-
 import org.enoy.klc.common.Register;
 import org.reflections.Reflections;
+
+import java.lang.reflect.Modifier;
+import java.util.Set;
 
 public class Registerer {
 

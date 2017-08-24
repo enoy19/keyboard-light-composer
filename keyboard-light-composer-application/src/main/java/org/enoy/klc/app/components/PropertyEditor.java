@@ -1,9 +1,14 @@
 package org.enoy.klc.app.components;
 
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import org.enoy.klc.app.components.property.editors.PropertyValueEditorFactory;
 import org.enoy.klc.app.components.property.editors.PropertyValueEditorRegister;
 import org.enoy.klc.app.components.utils.DialogUtil;
@@ -14,15 +19,9 @@ import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategyFactory;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategyRegister;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class PropertyEditor extends HBox implements Initializable {
 

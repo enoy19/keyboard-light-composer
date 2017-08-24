@@ -19,6 +19,9 @@ public class DefaultScaleMode implements ScaleMode {
 	public LightMatrix scale(LightMatrix lightMatrix, int targetWidth,
 			int targetHeight) {
 
+		targetWidth = targetWidth < 0 ? 0 : targetWidth;
+		targetHeight = targetHeight < 0 ? 0 : targetHeight;
+
 		int originalWidth = lightMatrix.getWidth();
 		int originalHeight = lightMatrix.getHeight();
 

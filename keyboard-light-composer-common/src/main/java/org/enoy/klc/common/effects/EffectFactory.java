@@ -1,8 +1,8 @@
 package org.enoy.klc.common.effects;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.enoy.klc.common.factories.Factory;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class EffectFactory extends Factory<Effect> {
 

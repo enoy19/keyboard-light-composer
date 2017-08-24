@@ -1,8 +1,5 @@
 package org.enoy.klc.control.valuestrategies;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-
 import org.enoy.klc.common.Resettable;
 import org.enoy.klc.common.factories.FactoryGenericType;
 import org.enoy.klc.common.factories.Name;
@@ -12,6 +9,9 @@ import org.enoy.klc.common.properties.primitive.FloatKlcProperty;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
 import org.enoy.klc.common.updatables.DependentImpl;
 import org.enoy.klc.common.updatables.DirtyUpdatable;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 @FactoryGenericType(Float.class)
 @Name("Pulser")

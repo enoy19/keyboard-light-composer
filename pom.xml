@@ -6,6 +6,7 @@
 	<version>1.0.2-ALPHA</version>
 	<packaging>pom</packaging>
 	<name>Keyboard Light Composer</name>
+
 	<modules>
 		<module>keyboard-light-composer-common</module>
 		<module>keyboard-light-composer-controller</module>

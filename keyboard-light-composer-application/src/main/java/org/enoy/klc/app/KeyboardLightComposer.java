@@ -1,5 +1,6 @@
 package org.enoy.klc.app;
 
+import javafx.application.Application;
 import org.enoy.klc.common.device.Device;
 import org.enoy.klc.common.device.DeviceRegister;
 import org.enoy.klc.common.effects.Effect;
@@ -18,19 +19,18 @@ import org.enoy.klc.control.PluginClassLoader;
 import org.enoy.klc.control.exceptions.PluginLoadingException;
 import org.enoy.klc.control.registerer.Registerer;
 
-import javafx.application.Application;
-
 public class KeyboardLightComposer {
 
 	public static void main(String[] args) throws ReflectiveOperationException {
 
 		loadPlugins();
 
+		// IntelliJ is not able to comprehend this much Lambda? (as it was before)
 		Registerer.registerObjects(Device.class, DeviceRegister.getInstance());
-		Registerer.registerParsed(Effect.class, EffectFactory::createFactory, EffectsRegister.getInstance());
-		Registerer.registerParsed(ValueStrategy.class, ValueStrategyFactory::createFactory,ValueStrategyRegister.getInstance());
-		Registerer.registerParsed(BlendMode.class, BlendModeFactory::createFactory, BlendModeRegister.getInstance());
-		Registerer.registerParsed(ScaleMode.class, ScaleModeFactory::createFactory, ScaleModeRegister.getInstance());
+		Registerer.registerParsed(Effect.class, c -> EffectFactory.createFactory(c), EffectsRegister.getInstance());
+		Registerer.registerParsed(ValueStrategy.class, c -> ValueStrategyFactory.createFactory(c), ValueStrategyRegister.getInstance());
+		Registerer.registerParsed(BlendMode.class, c -> BlendModeFactory.createFactory(c), BlendModeRegister.getInstance());
+		Registerer.registerParsed(ScaleMode.class, c -> ScaleModeFactory.createFactory(c), ScaleModeRegister.getInstance());
 
 		Application.launch(KeyboardLightComposerApplication.class, args);
 

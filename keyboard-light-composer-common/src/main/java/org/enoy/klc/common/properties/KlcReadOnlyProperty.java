@@ -1,9 +1,9 @@
 package org.enoy.klc.common.properties;
 
-import java.io.Serializable;
-
 import org.enoy.klc.common.Activatable;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
+
+import java.io.Serializable;
 
 public class KlcReadOnlyProperty<T extends Serializable> implements KlcPropertyBase<T> {
 

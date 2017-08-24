@@ -1,10 +1,5 @@
 package org.enoy.klc.app.components.utils;
 
-import java.util.Collection;
-
-import org.enoy.klc.app.components.KlcPropertyContainerEditor;
-import org.enoy.klc.common.properties.KlcPropertyContainer;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -12,6 +7,10 @@ import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Dialog;
 import javafx.stage.Modality;
 import javafx.stage.Window;
+import org.enoy.klc.app.components.KlcPropertyContainerEditor;
+import org.enoy.klc.common.properties.KlcPropertyContainer;
+
+import java.util.Collection;
 
 public class DialogUtil {
 

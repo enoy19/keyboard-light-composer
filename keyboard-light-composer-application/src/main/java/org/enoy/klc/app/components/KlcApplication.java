@@ -1,10 +1,15 @@
 package org.enoy.klc.app.components;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.ResourceBundle;
-
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.TreeItem;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.enoy.klc.app.components.list.DeviceListCell;
 import org.enoy.klc.app.components.tree.LayerBaseContainer;
 import org.enoy.klc.app.components.utils.DialogUtil;
@@ -19,14 +24,10 @@ import org.enoy.klc.common.properties.KlcPropertyContainer;
 import org.enoy.klc.control.effects.LayerRenderer;
 import org.enoy.klc.control.updater.Updater;
 
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.TreeItem;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Window;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.ResourceBundle;
 
 public class KlcApplication implements Initializable {
 
@@ -60,6 +61,8 @@ public class KlcApplication implements Initializable {
 	private LayerRenderer layerRenderer;
 
 	private LoadSaveFileChooser loadSaveFileChooser;
+
+	private Stage externalMonitor;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -114,8 +117,8 @@ public class KlcApplication implements Initializable {
 	private void open() {
 		try {
 			LayerBase layerBase = loadSaveFileChooser.open(getWindow());
-			
-			if(layerBase != null){
+
+			if (layerBase != null) {
 				TreeItem<LayerBaseContainer<?>> rootTreeItem = LayerTreeItemUtil.getTreeItem(layerBase);
 				effectLayersController.setRoot(rootTreeItem);
 			}
@@ -133,6 +136,20 @@ public class KlcApplication implements Initializable {
 			e.printStackTrace();
 			DialogUtil.error(getWindow(), "Save Error", "Error occured while saving", e.getMessage());
 		}
+	}
+
+	@FXML
+	private void showServerMonitor() {
+
+		if (externalMonitor == null) {
+			externalMonitor = ExternalMonitor.getStage(getWindow());
+		}
+
+		if (!externalMonitor.isShowing())
+			externalMonitor.show();
+		else
+			externalMonitor.requestFocus();
+
 	}
 
 	public void setUpdater(Updater updater) {

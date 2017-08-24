@@ -1,10 +1,10 @@
 package org.enoy.klc.app.components;
 
+import javafx.fxml.FXMLLoader;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import javafx.fxml.FXMLLoader;
 
 class FXMLLoaderUtil {
 

@@ -1,8 +1,8 @@
 package org.enoy.klc.common.updatables;
 
-import java.io.Serializable;
-
 import org.enoy.klc.common.Activatable;
+
+import java.io.Serializable;
 
 public interface Dependent extends Serializable {
 	

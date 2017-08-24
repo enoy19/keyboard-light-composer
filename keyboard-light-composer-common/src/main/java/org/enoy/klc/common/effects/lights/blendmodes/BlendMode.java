@@ -1,9 +1,9 @@
 package org.enoy.klc.common.effects.lights.blendmodes;
 
-import java.io.Serializable;
-
 import org.enoy.klc.common.effects.lights.Light;
 import org.enoy.klc.common.effects.lights.LightMatrix;
+
+import java.io.Serializable;
 
 public interface BlendMode extends Serializable {
 

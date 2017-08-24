@@ -1,11 +1,11 @@
 package org.enoy.klc.common.model;
 
+import javafx.scene.paint.Color;
+
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
-import javafx.scene.paint.Color;
 
 // TODO: extends Color?
 public class KlcColor implements Externalizable {

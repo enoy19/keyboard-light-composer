@@ -8,4 +8,9 @@
 	</parent>
 	<artifactId>keyboard-light-composer-common</artifactId>
 	<name>Keyboard Light Composer Common</name>
+
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+	</build>
+
 </project>

@@ -1,9 +1,9 @@
 package org.enoy.klc.common.properties;
 
-import java.io.Serializable;
-
 import org.enoy.klc.common.Deletable;
 import org.enoy.klc.common.updatables.Dependent;
+
+import java.io.Serializable;
 
 public interface KlcPropertyBase<T extends Serializable> extends Deletable, Dependent, Serializable  {
 

@@ -1,10 +1,10 @@
 package org.enoy.klc.common.layers;
 
-import java.io.Serializable;
-
 import org.enoy.klc.common.Activatable;
 import org.enoy.klc.common.Deletable;
 import org.enoy.klc.common.properties.KlcPropertyContainer;
+
+import java.io.Serializable;
 
 public abstract class LayerBase implements RenderableLayer, KlcPropertyContainer, Activatable, Deletable, Serializable {
 

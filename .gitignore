@@ -4,3 +4,7 @@ keyboard-light-composer-device-logitech/lib/logiled.jar
 **/.classpath
 **/target
 /keyboard-light-composer-application/plugins
+plugins
+
+.idea
+*.iml

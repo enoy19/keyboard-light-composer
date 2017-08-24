@@ -1,12 +1,12 @@
 package org.enoy.klc.control.effects;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import org.enoy.klc.common.device.Device;
 import org.enoy.klc.common.layers.RenderableLayer;
 import org.enoy.klc.control.StopPauseLoop;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public abstract class LayerRenderer extends StopPauseLoop {
 

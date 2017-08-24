@@ -1,8 +1,7 @@
 package org.enoy.klc.app.components.tree;
 
-import org.enoy.klc.common.layers.LayerBase;
-
 import javafx.scene.control.TreeItem;
+import org.enoy.klc.common.layers.LayerBase;
 
 public class LayerTreeCellDragboard {
 

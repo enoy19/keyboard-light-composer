@@ -1,11 +1,11 @@
 package org.enoy.klc.control;
 
+import org.enoy.klc.control.exceptions.PluginLoadingException;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-
-import org.enoy.klc.control.exceptions.PluginLoadingException;
 
 public class PluginClassLoader {
 

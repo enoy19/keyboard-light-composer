@@ -1,5 +1,6 @@
 package org.enoy.klc.effects.standard;
 
+import javafx.scene.paint.Color;
 import org.enoy.klc.common.effects.Effect;
 import org.enoy.klc.common.effects.lights.LightMatrix;
 import org.enoy.klc.common.factories.Group;
@@ -8,8 +9,6 @@ import org.enoy.klc.common.model.KlcColor;
 import org.enoy.klc.common.properties.KlcProperty;
 import org.enoy.klc.common.properties.KlcPropertyContainer;
 import org.enoy.klc.common.properties.KlcWritableProperty;
-
-import javafx.scene.paint.Color;
 
 @Name("Solid Color")
 @Group("Standard Effects")

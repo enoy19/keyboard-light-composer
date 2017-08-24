@@ -1,8 +1,8 @@
 package org.enoy.klc.common.effects.lights.scalemodes;
 
-import java.io.Serializable;
-
 import org.enoy.klc.common.effects.lights.LightMatrix;
+
+import java.io.Serializable;
 
 public interface ScaleMode extends Serializable{
 

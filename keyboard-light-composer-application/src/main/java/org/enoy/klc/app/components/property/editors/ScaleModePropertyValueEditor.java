@@ -1,12 +1,11 @@
 package org.enoy.klc.app.components.property.editors;
 
+import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import org.enoy.klc.app.components.PropertyValueEditor;
 import org.enoy.klc.common.effects.lights.scalemodes.ScaleMode;
 import org.enoy.klc.common.effects.lights.scalemodes.ScaleModeFactory;
 import org.enoy.klc.common.effects.lights.scalemodes.ScaleModeRegister;
-
-import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
 
 @PropertyValueEditorTypeClass(ScaleMode.class)
 public class ScaleModePropertyValueEditor extends PropertyValueEditor<ScaleMode> {

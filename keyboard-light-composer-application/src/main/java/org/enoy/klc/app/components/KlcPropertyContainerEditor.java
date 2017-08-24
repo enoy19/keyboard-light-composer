@@ -1,12 +1,11 @@
 package org.enoy.klc.app.components;
 
-import org.enoy.klc.common.properties.KlcPropertyContainer;
-import org.enoy.klc.common.properties.KlcWritableProperty;
-
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import org.enoy.klc.common.properties.KlcPropertyContainer;
+import org.enoy.klc.common.properties.KlcWritableProperty;
 
 public class KlcPropertyContainerEditor extends VBox {
 	

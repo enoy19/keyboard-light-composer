@@ -1,13 +1,13 @@
 package org.enoy.klc.control;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.enoy.klc.common.Activatable;
 import org.enoy.klc.common.device.DeviceInformation;
 import org.enoy.klc.common.effects.lights.DeviceLightMatrix;
 import org.enoy.klc.common.layers.RenderableLayer;
 import org.enoy.klc.control.effects.LayerRenderer;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DefaultRenderer extends LayerRenderer {
 

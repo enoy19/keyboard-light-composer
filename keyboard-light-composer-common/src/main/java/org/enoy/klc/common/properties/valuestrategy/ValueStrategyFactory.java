@@ -1,8 +1,8 @@
 package org.enoy.klc.common.properties.valuestrategy;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.enoy.klc.common.factories.FactoryGeneric;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class ValueStrategyFactory extends FactoryGeneric<ValueStrategy<?>>{
 

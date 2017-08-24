@@ -1,12 +1,11 @@
 package org.enoy.klc.devices;
 
+import com.logitech.gaming.LogiLED;
 import org.enoy.klc.common.device.DeviceImpl;
 import org.enoy.klc.common.device.DeviceInformation;
 import org.enoy.klc.common.effects.lights.DeviceLightMatrix;
 import org.enoy.klc.common.effects.lights.Light;
 import org.enoy.klc.common.effects.lights.LightRow;
-
-import com.logitech.gaming.LogiLED;
 
 public class LogitechDevice extends DeviceImpl {
 

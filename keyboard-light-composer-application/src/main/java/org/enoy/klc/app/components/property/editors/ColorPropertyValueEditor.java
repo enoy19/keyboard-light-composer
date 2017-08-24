@@ -1,10 +1,9 @@
 package org.enoy.klc.app.components.property.editors;
 
-import org.enoy.klc.app.components.PropertyValueEditor;
-import org.enoy.klc.common.model.KlcColor;
-
 import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
+import org.enoy.klc.app.components.PropertyValueEditor;
+import org.enoy.klc.common.model.KlcColor;
 
 @PropertyValueEditorTypeClass(KlcColor.class)
 public class ColorPropertyValueEditor extends PropertyValueEditor<KlcColor>{

@@ -7,6 +7,12 @@
 		<version>1.0.2-ALPHA</version>
 	</parent>
 	<artifactId>keyboard-light-composer-controller</artifactId>
+	<name>Keyboard Light Composer Controller</name>
+
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+	</build>
 
 	<dependencies>
 		<dependency>
@@ -18,5 +24,11 @@
 			<artifactId>reflections</artifactId>
 			<version>0.9.11</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>

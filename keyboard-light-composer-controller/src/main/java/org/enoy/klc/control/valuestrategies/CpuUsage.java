@@ -1,17 +1,16 @@
 package org.enoy.klc.control.valuestrategies;
 
-import java.lang.management.ManagementFactory;
-
-import javax.management.Attribute;
-import javax.management.AttributeList;
-import javax.management.MBeanServer;
-import javax.management.ObjectName;
-
 import org.enoy.klc.common.factories.FactoryGenericType;
 import org.enoy.klc.common.factories.Name;
 import org.enoy.klc.common.properties.valuestrategy.ValueStrategy;
 import org.enoy.klc.common.updatables.DependentImpl;
 import org.enoy.klc.common.updatables.DirtyUpdatable;
+
+import javax.management.Attribute;
+import javax.management.AttributeList;
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
+import java.lang.management.ManagementFactory;
 
 @FactoryGenericType(Float.class)
 @Name("CPU Usage")

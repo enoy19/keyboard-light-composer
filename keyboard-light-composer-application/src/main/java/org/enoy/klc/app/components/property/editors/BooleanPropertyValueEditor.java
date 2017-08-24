@@ -1,9 +1,8 @@
 package org.enoy.klc.app.components.property.editors;
 
-import org.enoy.klc.app.components.PropertyValueEditor;
-
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
+import org.enoy.klc.app.components.PropertyValueEditor;
 
 @PropertyValueEditorTypeClass(Boolean.class)
 public class BooleanPropertyValueEditor extends PropertyValueEditor<Boolean> {

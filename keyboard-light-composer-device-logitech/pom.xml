@@ -7,7 +7,11 @@
 		<version>1.0.2-ALPHA</version>
 	</parent>
 	<artifactId>keyboard-light-composer-device-logitech</artifactId>
-	<name>Device Provider for Logitech Keyboards</name>
+	<name>Keyboard Light Composer Device Provider for Logitech Keyboards</name>
+
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+	</build>
 
 	<dependencies>
 		<dependency>

@@ -1,13 +1,12 @@
 package org.enoy.klc.app.components.property.editors;
 
+import javafx.scene.Node;
+import javafx.scene.control.TextField;
+import org.enoy.klc.app.components.PropertyValueEditor;
+
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
-
-import org.enoy.klc.app.components.PropertyValueEditor;
-
-import javafx.scene.Node;
-import javafx.scene.control.TextField;
 
 public abstract class NumberPropertyValueEditor<T extends Number>
 		extends

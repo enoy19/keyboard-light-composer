@@ -4,7 +4,6 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.VBox?>
-
 <VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enoy.klc.app.components.EffectLayers">
    <children>
       <TreeView fx:id="treeViewLayers" VBox.vgrow="ALWAYS" />

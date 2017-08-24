@@ -1,8 +1,8 @@
 package org.enoy.klc.common.effects.lights.scalemodes;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.enoy.klc.common.factories.Factory;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class ScaleModeFactory extends Factory<ScaleMode> {
 

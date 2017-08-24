@@ -1,12 +1,5 @@
 package org.enoy.klc.app.components;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import org.enoy.klc.app.components.list.EffectFactoryListCell;
-import org.enoy.klc.common.effects.EffectFactory;
-import org.enoy.klc.common.effects.EffectsRegister;
-
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +9,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import org.enoy.klc.app.components.list.EffectFactoryListCell;
+import org.enoy.klc.common.effects.EffectFactory;
+import org.enoy.klc.common.effects.EffectsRegister;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class EffectSelect implements Initializable {
 

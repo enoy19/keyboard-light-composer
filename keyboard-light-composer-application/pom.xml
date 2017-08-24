@@ -7,6 +7,7 @@
 		<version>1.0.2-ALPHA</version>
 	</parent>
 	<artifactId>keyboard-light-composer-application</artifactId>
+	<name>Keyboard Light Composer Application</name>
 
 	<dependencies>
 		<dependency>
@@ -20,7 +21,7 @@
 		<dependency>
 			<groupId>org.enoy</groupId>
 			<artifactId>keyboard-light-composer-device-logitech</artifactId>
-			<scope>provided</scope>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.enoy</groupId>
@@ -31,6 +32,10 @@
 	</dependencies>
 
 	<build>
+
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<resources><resource><directory>src/main/resources</directory></resource></resources>
+
 		<plugins>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>

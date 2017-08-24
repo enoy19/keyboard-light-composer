@@ -1,13 +1,12 @@
 package org.enoy.klc.app.components.utils;
 
+import javafx.scene.control.TreeItem;
 import org.enoy.klc.app.components.tree.LayerBaseContainer;
 import org.enoy.klc.common.effects.Effect;
 import org.enoy.klc.common.layers.EffectGroupLayer;
 import org.enoy.klc.common.layers.EffectLayer;
 import org.enoy.klc.common.layers.LayerBase;
 import org.enoy.klc.common.updatables.Updatable;
-
-import javafx.scene.control.TreeItem;
 
 public class LayerTreeItemListenerUtil {
 

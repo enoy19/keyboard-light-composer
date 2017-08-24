@@ -47,6 +47,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showServerMonitor" text="Server Monitor" />
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
           </Menu>

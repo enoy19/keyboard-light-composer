@@ -1,16 +1,15 @@
 package org.enoy.klc.app.components;
 
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import org.enoy.klc.app.components.list.EffectFactoryListCell;
-import org.enoy.klc.common.effects.EffectFactory;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
+import org.enoy.klc.app.components.list.EffectFactoryListCell;
+import org.enoy.klc.common.effects.EffectFactory;
+
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class EffectGroup extends TitledPane implements Initializable {
 
