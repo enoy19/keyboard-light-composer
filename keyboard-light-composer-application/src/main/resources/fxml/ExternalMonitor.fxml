@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.enoy.klc.app.components.ExternalMonitor">
+   <children>
+      <HBox alignment="CENTER_RIGHT">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Connected Clients:" />
+                  <Label fx:id="labelConnectedClients" text="&lt;Amount&gt;" />
+               </children>
+            </HBox>
+            <ToggleButton fx:id="toggleButtonRefresh" mnemonicParsing="false" selected="true" text="Refresh" />
+         </children>
+      </HBox>
+      <TableView fx:id="table" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="tableColumnScope" editable="false" prefWidth="87.0" text="Scope" />
+          <TableColumn fx:id="tableColumnIdentifier" editable="false" prefWidth="149.0" text="Identifier" />
+            <TableColumn fx:id="tableColumnParameter" editable="false" prefWidth="75.0" text="Parameter" />
+            <TableColumn fx:id="tableColumnType" editable="false" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="tableColumnValue" editable="false" prefWidth="75.0" text="Value" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>
