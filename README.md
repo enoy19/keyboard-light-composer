@@ -9,6 +9,7 @@ So I wanted to create a Desktop application (JavaFx) that provides an easy frame
   * Effects are customizable using properties
   * Using "ValueStrategies" property values can be obtained using any algorithm (e.g. CPU Usage)
   * You may arrange effects in layers as you wish and group them in effectgroups
+  * TCP Server that you can send external information to
 
 ### Planned features
   * Effect layers can be mapped to the keyboard and resized (not yet implemented)
