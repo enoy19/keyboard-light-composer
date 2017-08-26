@@ -1,7 +1,5 @@
 package org.enoy.klc.control.external;
 
-import org.enoy.klc.control.utils.Sleep;
-
 import java.io.IOException;
 import java.net.Socket;
 import java.util.NoSuchElementException;
@@ -11,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class ExternalClient implements Runnable {
 
-    private static final String MSG_REGEX_STRING = "^(\\w+);(\\w+);(\\w+)?;(\\d);([^\\n\\r]+)$";
+    private static final String MSG_REGEX_STRING = "^(\\w+);(\\w+);([^;\\n\\r]+)?;(\\d);([^\\n\\r]+)$";
     private static final Pattern MSG_REGEX = Pattern.compile(MSG_REGEX_STRING);
 
     private Socket socket;
@@ -30,7 +28,7 @@ public class ExternalClient implements Runnable {
 
                     String line = scanner.nextLine();
                     handleMessage(line);
-                    Sleep.sleep(10);
+
                 }
 
             } catch (IOException e) {

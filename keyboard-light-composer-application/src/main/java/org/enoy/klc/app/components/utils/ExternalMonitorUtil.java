@@ -1,6 +1,5 @@
 package org.enoy.klc.app.components.utils;
 
-import org.enoy.klc.control.external.ExternalServer;
 import org.enoy.klc.control.external.ExternalValue;
 import org.enoy.klc.control.external.ExternalValueContainer;
 import org.enoy.klc.control.external.ExternalValueNamespace;
@@ -17,20 +16,22 @@ public class ExternalMonitorUtil {
 		Map<ExternalValueNamespace, Set<ExternalValue<?>>> values = ExternalValueContainer.getInstance().getAll();
 		List<ExternalMonitorObject> objects = new ArrayList<>(values.size());
 
-		values.forEach((ns, s)->{
+		values.forEach((ns, s) -> {
 			final String scope = ns.getScope();
 			final String identifier = ns.getIdentifier();
 
-			s.forEach(v->{
-				ExternalMonitorObject emo = new ExternalMonitorObject();
+			synchronized (s) {
+				s.forEach(v -> {
+					ExternalMonitorObject emo = new ExternalMonitorObject();
 
-				emo.setScope(scope);
-				emo.setIdentifier(identifier);
-				emo.setParameter(v.getParameter());
-				emo.setType(v.getDataType().getDataTypeId());
-				emo.setData(v.getData().toString());
-				objects.add(emo);
-			});
+					emo.setScope(scope);
+					emo.setIdentifier(identifier);
+					emo.setParameter(v.getParameter());
+					emo.setType(v.getDataType().getDataTypeId());
+					emo.setData(v.getData().toString());
+					objects.add(emo);
+				});
+			}
 		});
 
 		return objects;

@@ -60,7 +60,8 @@ public abstract class ExternalValue<T> {
         }),
         LONG(2, Long.class, s -> {
         	return parseNumber(s).longValue();
-        });
+        }),
+        STRING(3, String.class, s->s);
 
         private int dataTypeId;
         private Class<?> type;

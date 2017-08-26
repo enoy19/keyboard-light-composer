@@ -122,6 +122,9 @@ public class ExternalValueContainer {
 			case LONG:
 				value = new ExternalValueLong((Long) data);
 				break;
+			case STRING:
+				value = new ExternalValueString((String) data);
+				break;
 			default:
 				throw new Error("datatype is not registered in external value container");
 		}
