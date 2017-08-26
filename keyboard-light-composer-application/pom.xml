@@ -21,7 +21,6 @@
 		<dependency>
 			<groupId>org.enoy</groupId>
 			<artifactId>keyboard-light-composer-device-logitech</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.enoy</groupId>
