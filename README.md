@@ -1,5 +1,7 @@
 # Keyboard Light Composer
 
+[![Downloads](https://img.shields.io/github/downloads/enoy19/keyboard-light-composer/total.svg)]()
+
 I bought an RGB lighty colory pretty keyboard(y) that looks awesome! But the manufacturers driver only provides 3 cool effects. And the effects aren't as customizable as I would like them to be :(
 So I wanted to create a Desktop application (JavaFx) that provides an easy framework to create new effects for RGB keyboards of different manufacturers.
 
